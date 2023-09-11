@@ -11,8 +11,24 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en">
-			<body className={inter.className}>{children}</body>
+		<html lang="pl">
+			<body className={inter.className}>
+				<section className="sm:py-18 mx-auto flex w-full max-w-2xl flex-grow flex-col px-8 py-12 sm:px-6 lg:max-w-7xl">
+					{children}
+				</section>
+				<footer className="border-t bg-slate-50">
+					<div className="mx-auto max-w-7xl px-6 py-8">
+						<nav className="text-center" aria-label="Footer">
+							<a className="text-sm leading-6 text-blue-700 hover:text-blue-900" href="/terms">
+								Terms
+							</a>
+						</nav>
+						<p className="mt-2 text-center text-xs leading-7 text-slate-700">
+							© 2023 Anna Kijanka
+						</p>
+					</div>
+				</footer>
+			</body>
 		</html>
 	);
 }

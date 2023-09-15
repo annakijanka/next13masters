@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { type Product } from "@/ui/types";
 import { ProductThumbnail } from "@/ui/atoms/ProductThumbnail";
 import { ProductDescription } from "@/ui/atoms/ProductDescription";
@@ -7,12 +8,17 @@ type ProductListItemProps = {
 };
 
 export const ProductListItem = ({ product }: ProductListItemProps) => {
+	const href = {
+		pathname: `/products/${product.id}`,
+	};
 	return (
 		<li>
-			<article>
-				<ProductThumbnail {...product.thumbnail} />
-				<ProductDescription product={product} />
-			</article>
+			<Link href={href}>
+				<article>
+					<ProductThumbnail {...product.thumbnail} />
+					<ProductDescription product={product} />
+				</article>
+			</Link>
 		</li>
 	);
 };

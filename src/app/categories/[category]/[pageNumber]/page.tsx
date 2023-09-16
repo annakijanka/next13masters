@@ -1,3 +1,16 @@
+import { type Metadata } from "next";
+
+export const generateMetadata = async ({
+	params,
+}: {
+	params: { category: string; pageNumber: string };
+}): Promise<Metadata> => {
+	const capitalizedCategory = params.category.charAt(0).toUpperCase() + params.category.slice(1);
+	return {
+		title: `Category ${capitalizedCategory} - Page ${params.pageNumber} | Online Store`,
+	};
+};
+
 export const generateStaticParams = async ({ params }: { params: { category: string } }) => {
 	let result: { pageNumber: string }[] = [];
 

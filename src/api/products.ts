@@ -31,6 +31,7 @@ const productItemToProduct = (product: ProductItem): Product => {
 	return {
 		id: product.id,
 		name: product.title,
+		description: product.description,
 		category: product.category,
 		price: product.price,
 		thumbnail: {

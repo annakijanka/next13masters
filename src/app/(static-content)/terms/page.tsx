@@ -1,3 +1,10 @@
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Terms | Online Store",
+	description: "Our terms, your clarity: Navigate our policies and guidelines effortlessly.",
+};
+
 export default function Terms() {
 	return (
 		<>

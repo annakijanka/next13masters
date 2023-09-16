@@ -8,12 +8,9 @@ type ProductListItemProps = {
 };
 
 export const ProductListItem = ({ product }: ProductListItemProps) => {
-	const href = {
-		pathname: `/products/${product.id}`,
-	};
 	return (
 		<li>
-			<Link href={href}>
+			<Link href={`/products/${product.id}`}>
 				<article>
 					<ProductThumbnail {...product.thumbnail} />
 					<ProductDescription product={product} />

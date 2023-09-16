@@ -1,8 +1,13 @@
 import { Suspense } from "react";
-import { getProductById } from "@/api/products";
+import { getProductById, getProducts } from "@/api/products";
 import { ProductDescription } from "@/ui/atoms/ProductDescription";
 import { ProductThumbnail } from "@/ui/atoms/ProductThumbnail";
 import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
+
+export const generateStaticParams = async () => {
+	const products = await getProducts();
+	return products.map((product) => ({ productId: product.id }));
+};
 
 export default async function Product({ params }: { params: { productId: string } }) {
 	const product = await getProductById(params.productId);

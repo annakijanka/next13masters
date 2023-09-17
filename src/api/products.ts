@@ -38,5 +38,6 @@ const productItemToProduct = (product: ProductItem): Product => {
 			src: product.image,
 			alt: product.title,
 		},
+		longDescription: product.longDescription,
 	};
 };

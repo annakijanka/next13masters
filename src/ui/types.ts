@@ -8,4 +8,5 @@ export type Product = {
 		src: string;
 		alt: string;
 	};
+	longDescription: string;
 };

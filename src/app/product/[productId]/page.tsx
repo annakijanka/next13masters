@@ -1,9 +1,9 @@
 import { Suspense } from "react";
 import { type Metadata } from "next";
 import { getProductById, getProducts } from "@/api/products";
-import { ProductDescription } from "@/ui/atoms/ProductDescription";
 import { ProductThumbnail } from "@/ui/atoms/ProductThumbnail";
 import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
+import { formatCurrency } from "@/utils";
 
 export const generateMetadata = async ({
 	params,
@@ -38,7 +38,22 @@ export default async function Product({ params }: { params: { productId: string 
 						<h1 className="mb-4 text-2xl font-extrabold tracking-tight text-slate-900 md:text-3xl">
 							{product.name}
 						</h1>
-						<ProductDescription product={product} />
+						<div className="mt-4 flex items-center">
+							<div className="font-base small-caps text-lg text-slate-800">
+								{formatCurrency(product.price)}
+							</div>
+						</div>
+						<div className="mt-4 space-y-6">
+							<p className="font-sans text-base text-slate-500">{product.longDescription}</p>
+						</div>
+						<div className="mt-8">
+							<button
+								className="inline-flex h-14 w-full items-center justify-center rounded-md from-[#C17EFD] from-20% via-[#898AF9] to-[#7EC3FD] to-80% px-6 text-base font-medium leading-6 text-slate-900 shadow transition duration-150 ease-in-out enabled:bg-gradient-to-r hover:enabled:brightness-125 disabled:cursor-wait disabled:bg-gray-300"
+								type="button"
+							>
+								Add to cart
+							</button>
+						</div>
 					</div>
 				</div>
 			</article>

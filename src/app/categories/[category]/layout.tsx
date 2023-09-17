@@ -1,11 +1,12 @@
 import { type Metadata } from "next";
+import { capitalizeFirstLetter } from "@/utils";
 
 export const generateMetadata = async ({
 	params,
 }: {
 	params: { category: string };
 }): Promise<Metadata> => {
-	const capitalizedCategory = params.category.charAt(0).toUpperCase() + params.category.slice(1);
+	const capitalizedCategory = capitalizeFirstLetter(params.category);
 	return {
 		title: `Category ${capitalizedCategory} | Online Store`,
 		description: `Shop the finest ${capitalizedCategory} selection online. Unmatched variety, quality, and value await you.`,

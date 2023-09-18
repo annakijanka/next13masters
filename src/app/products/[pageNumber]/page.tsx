@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { type Metadata } from "next";
-import { getProductsByPage } from "@/api/products";
+import { getProductsByPage, getTotalProductCount } from "@/api/products";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { Pagination } from "@/ui/molecules/Pagination";
 
@@ -14,6 +14,14 @@ export const generateMetadata = async ({
 		description:
 			"Browse our wide range of quality products. Find the perfect items you've been looking for.",
 	};
+};
+
+export const generateStaticParams = async () => {
+	const totalCount = await getTotalProductCount();
+	const take = 20;
+	const totalPages = Math.ceil(totalCount / take);
+	const pages = Array.from({ length: totalPages }, (_, index) => (index + 1).toString());
+	return pages.map((page) => ({ pageNumber: page }));
 };
 
 export default async function ProductsPage({ params }: { params: { pageNumber: string } }) {

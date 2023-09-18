@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { type Metadata } from "next";
-import { getProductById, getProducts } from "@/api/products";
+import { getProductById } from "@/api/products";
 import { ProductThumbnail } from "@/ui/atoms/ProductThumbnail";
 import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
 import { formatCurrency } from "@/utils";
@@ -18,11 +18,6 @@ export const generateMetadata = async ({
 			images: product.thumbnail.src,
 		},
 	};
-};
-
-export const generateStaticParams = async () => {
-	const products = await getProducts();
-	return products.map((product) => ({ productId: product.id }));
 };
 
 export default async function Product({ params }: { params: { productId: string } }) {

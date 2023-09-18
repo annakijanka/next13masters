@@ -29,10 +29,7 @@ export const ActiveLink = <T extends Route>({
 
 	return (
 		<Link
-			className={clsx(
-				"flex h-full w-full min-w-[3rem] items-center justify-center border-b-2 px-1 pt-1 text-center text-sm font-medium text-slate-500 hover:border-gray-300 hover:text-slate-700",
-				{ [className || ""]: !isActive, [activeClassName]: isActive },
-			)}
+			className={clsx({ [className || ""]: !isActive, [activeClassName]: isActive })}
 			href={href}
 		>
 			{children}

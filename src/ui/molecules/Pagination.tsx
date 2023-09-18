@@ -9,7 +9,9 @@ export const Pagination = async ({ currentPage }: { currentPage: string }) => {
 	const current = parseInt(currentPage, 10);
 	let pages: (number | string)[] = [];
 
-	if (current <= 7) {
+	if (totalPages <= 11) {
+		pages = Array.from({ length: totalPages }, (_, index) => index + 1);
+	} else if (current <= 7) {
 		pages = [1, 2, 3, 4, 5, 6, 7, 8, "...", totalPages - 2, totalPages - 1, totalPages];
 	} else if (current > 7 && current < totalPages - 6) {
 		pages = [

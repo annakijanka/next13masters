@@ -33,6 +33,8 @@ export const getTotalProductCount = async () => {
 		currentPage += 1;
 	}
 
+	// return totalCount; limiting the amount of products
+	totalCount = 80;
 	return totalCount;
 };
 

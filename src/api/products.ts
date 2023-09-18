@@ -17,24 +17,24 @@ type ProductItem = {
 const API_BASE_URL = "https://naszsklep-api.vercel.app/api/products";
 
 export const getTotalProductCount = async () => {
-	const take = 20;
-	let totalCount = 0;
-	let currentPage = 1;
+	// const take = 20;
+	// let totalCount = 0;
+	// let currentPage = 1;
 
-	while (true) {
-		const res = await fetch(`${API_BASE_URL}?take=${take}&offset=${(currentPage - 1) * take}`);
-		const productData = (await res.json()) as ProductItem[];
+	// while (true) {
+	// 	const res = await fetch(`${API_BASE_URL}?take=${take}&offset=${(currentPage - 1) * take}`);
+	// 	const productData = (await res.json()) as ProductItem[];
 
-		if (productData.length === 0) {
-			break;
-		}
+	// 	if (productData.length === 0) {
+	// 		break;
+	// 	}
 
-		totalCount += productData.length;
-		currentPage += 1;
-	}
+	// 	totalCount += productData.length;
+	// 	currentPage += 1;
+	// }
 
-	// return totalCount; limiting the amount of products
-	totalCount = 80;
+	// return totalCount; limiting the amount of products – retrieve the total count of products directly rather than paginating through all products
+	const totalCount = 80;
 	return totalCount;
 };
 

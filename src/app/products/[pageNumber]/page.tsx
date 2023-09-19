@@ -18,14 +18,15 @@ export const generateMetadata = async ({
 
 export const generateStaticParams = async () => {
 	const totalCount = await getTotalProductCount();
-	const take = 20;
+	const take = 4;
 	const totalPages = Math.ceil(totalCount / take);
 	const pages = Array.from({ length: totalPages }, (_, index) => (index + 1).toString());
 	return pages.map((page) => ({ pageNumber: page }));
 };
 
 export default async function ProductsPage({ params }: { params: { pageNumber: string } }) {
-	const products = await getProductsByPage(params.pageNumber);
+	const take = 4;
+	const products = await getProductsByPage(params.pageNumber, take);
 
 	if (!products || products.length === 0) {
 		return notFound();
@@ -34,7 +35,7 @@ export default async function ProductsPage({ params }: { params: { pageNumber: s
 	return (
 		<>
 			<ProductList products={products} />
-			<Pagination currentPage={params.pageNumber} />
+			<Pagination currentPage={params.pageNumber} perPage={take} />
 		</>
 	);
 }

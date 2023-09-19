@@ -34,11 +34,11 @@ export const getTotalProductCount = async () => {
 	// }
 
 	// return totalCount; limiting the amount of products – retrieve the total count of products directly rather than paginating through all products
-	const totalCount = 80;
+	const totalCount = 16;
 	return totalCount;
 };
 
-export const getProducts = async () => {
+export const getSuggestedProducts = async () => {
 	const res = await fetch(`${API_BASE_URL}?take=20`);
 	const productData = (await res.json()) as ProductItem[];
 	const products = productData.map((product) => productItemToProduct(product));
@@ -51,8 +51,7 @@ export const getProductById = async (id: ProductItem["id"]) => {
 	return productItemToProduct(productData);
 };
 
-export const getProductsByPage = async (page: string) => {
-	const take = 20;
+export const getProductsByPage = async (page: string, take: number) => {
 	const offset = (Number(page) - 1) * take;
 	const res = await fetch(`${API_BASE_URL}?take=${take}&offset=${offset}`);
 	const productData = (await res.json()) as ProductItem[];

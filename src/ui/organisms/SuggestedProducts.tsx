@@ -1,7 +1,7 @@
 import { ProductList } from "./ProductList";
-import { getProducts } from "@/api/products";
+import { getSuggestedProducts } from "@/api/products";
 
 export const SuggestedProducts = async () => {
-	const products = await getProducts();
+	const products = await getSuggestedProducts();
 	return <ProductList products={products.slice(-4)} />;
 };

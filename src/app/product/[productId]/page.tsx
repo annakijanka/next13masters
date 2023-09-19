@@ -39,7 +39,7 @@ export default async function Product({ params }: { params: { productId: string 
 							</div>
 						</div>
 						<div className="mt-4 space-y-6">
-							<p className="font-sans text-base text-slate-500">{product.longDescription}</p>
+							<p className="font-sans text-base text-slate-500">{product.description}</p>
 						</div>
 						<div className="mt-8">
 							<button

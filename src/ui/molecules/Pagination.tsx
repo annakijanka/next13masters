@@ -2,10 +2,15 @@ import { type Route } from "next";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 import { getTotalProductCount } from "@/api/products";
 
-export const Pagination = async ({ currentPage }: { currentPage: string }) => {
+export const Pagination = async ({
+	currentPage,
+	perPage,
+}: {
+	currentPage: string;
+	perPage: number;
+}) => {
 	const totalCount = await getTotalProductCount();
-	const take = 20;
-	const totalPages = Math.ceil(totalCount / take);
+	const totalPages = Math.ceil(totalCount / perPage);
 	const current = parseInt(currentPage, 10);
 	let pages: (number | string)[] = [];
 

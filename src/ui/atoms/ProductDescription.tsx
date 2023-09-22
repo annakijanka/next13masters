@@ -11,10 +11,12 @@ export const ProductDescription = ({
 	return (
 		<div className="mt-2">
 			<div className="flex flex-row justify-between">
-				<h3 className="text-sm font-semibold text-slate-700">{name}</h3>
-				<p className="text-sm text-slate-500">{category}</p>
+				<h3 className="font-semibold text-white">{name}</h3>
+				<p className="text-sm text-white opacity-70">{category}</p>
 			</div>
-			<p className="small-caps text-sm font-medium text-slate-900">{formatCurrency(price)}</p>
+			<p className="small-caps text-sm font-medium text-white opacity-80">
+				{formatCurrency(price)}
+			</p>
 		</div>
 	);
 };

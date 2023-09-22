@@ -54,13 +54,13 @@ export const Pagination = async ({
 	}
 
 	return (
-		<nav className="mt-auto flex items-center justify-center border-t border-slate-200 px-4">
-			<ul className="-mt-px flex">
+		<nav className="mt-auto flex items-center justify-center px-4" aria-label="Pagination">
+			<ul className="inline-flex">
 				{pages.map((page, index) => {
 					if (page === "...") {
 						return (
 							<li key={index}>
-								<span className="inline-flex items-center border-t-2 px-0.5 pt-0.5 text-xs font-medium md:px-4 md:pt-4 md:text-sm">
+								<span className="flex h-10 w-10 items-center justify-center text-sm font-medium text-white">
 									...
 								</span>
 							</li>
@@ -70,8 +70,8 @@ export const Pagination = async ({
 						<li key={page}>
 							<ActiveLink
 								href={`/products/${page}` as Route}
-								activeClassName="inline-flex items-center border-t-2 px-0.5 md:px-4 pt-0.5 md:pt-4 text-xs md:text-sm font-medium border-blue-500 text-blue-600"
-								className="inline-flex items-center border-t-2 px-0.5 pt-0.5 text-xs font-medium md:px-4 md:pt-4 md:text-sm"
+								activeClassName="flex items-center rounded-lg text-sm font-medium justify-center h-10 w-10 text-white bg-heliotrope"
+								className="hover:bg-dodger-blue flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium text-white transition-colors duration-150"
 								exact={true}
 							>
 								{page}

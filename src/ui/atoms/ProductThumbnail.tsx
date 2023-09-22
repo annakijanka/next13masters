@@ -1,12 +1,24 @@
-export const ProductThumbnail = ({ src, alt }: { src: string; alt: string }) => {
+export const ProductThumbnail = ({
+	src,
+	alt,
+	hasAnimation = false,
+}: {
+	src: string;
+	alt: string;
+	hasAnimation?: boolean;
+}) => {
 	return (
-		<div className="rounded-md border bg-slate-50 hover:bg-slate-100">
+		<div
+			className={`relative w-full rounded-lg bg-white pt-[100%]${
+				hasAnimation ? " transition-transform duration-150 hover:scale-[1.02]" : ""
+			}`}
+		>
 			<img
-				className="w-full object-contain object-center p-4 transition-transform hover:scale-105"
+				className="absolute left-1/2 top-1/2 max-h-full max-w-full -translate-x-1/2 -translate-y-1/2 object-contain p-2"
 				src={src}
 				alt={alt}
-				width={320}
-				height={320}
+				width={640}
+				height={640}
 			/>
 		</div>
 	);

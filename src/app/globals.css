@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	:root {
+		--color-port-gore: 28, 33, 74;
+		--color-dodger-blue: 25, 177, 252;
+		--color-heliotrope: 241, 50, 252;
+		--color-purple-heart: 193, 40, 201;
+		--color-daintree: 2, 40, 61;
+	}
+}

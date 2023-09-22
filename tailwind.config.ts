@@ -9,9 +9,12 @@ const config: Config = {
 	darkMode: "class",
 	theme: {
 		extend: {
-			backgroundImage: {
-				"gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-				"gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+			colors: {
+				"port-gore": "rgba(var(--color-port-gore), <alpha-value>)",
+				"dodger-blue": "rgba(var(--color-dodger-blue), <alpha-value>)",
+				heliotrope: "rgba(var(--color-heliotrope), <alpha-value>)",
+				"purple-heart": "rgba(var(--color-purple-heart), <alpha-value>)",
+				daintree: "rgba(var(--color-daintree), <alpha-value>)",
 			},
 		},
 	},

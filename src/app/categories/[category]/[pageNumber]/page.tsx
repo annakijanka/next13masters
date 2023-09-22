@@ -1,5 +1,9 @@
 import { type Metadata } from "next";
+import { notFound } from "next/navigation";
 import { capitalizeFirstLetter } from "@/utils";
+import { getProductsByPage } from "@/api/products";
+import { ProductList } from "@/ui/organisms/ProductList";
+import { Pagination } from "@/ui/molecules/Pagination";
 
 export const generateMetadata = async ({
 	params,
@@ -9,33 +13,36 @@ export const generateMetadata = async ({
 	const capitalizedCategory = capitalizeFirstLetter(params.category);
 	return {
 		title: `Category ${capitalizedCategory} - Page ${params.pageNumber} | Online Store`,
+		description: `Shop the finest ${capitalizedCategory} selection online. Unmatched variety, quality, and value await you.`,
 	};
 };
 
 export const generateStaticParams = async ({ params }: { params: { category: string } }) => {
 	let result: { pageNumber: string }[] = [];
 
-	if (params.category === "dresses") {
+	if (params.category === "mugs") {
 		result = [{ pageNumber: "1" }];
-	} else if (params.category === "jackets") {
-		result = [{ pageNumber: "2" }];
-	} else if (params.category === "shoes") {
-		result = [{ pageNumber: "3" }];
+	} else if (params.category === "bowls") {
+		result = [{ pageNumber: "1" }];
+	} else if (params.category === "plates") {
+		result = [{ pageNumber: "1" }];
 	}
 
 	return result;
 };
 
-export default async function Category({
-	params,
-}: {
-	params: { category: string; pageNumber: string };
-}) {
+export default async function CategoryPage({ params }: { params: { pageNumber: string } }) {
+	const take = 4;
+	const products = await getProductsByPage(params.pageNumber, take);
+
+	if (!products || products.length === 0) {
+		return notFound();
+	}
+
 	return (
 		<>
-			<h1 className="mb-4 text-2xl font-extrabold tracking-tight text-slate-900 md:text-3xl">
-				{params.pageNumber} strona kategorii {params.category}
-			</h1>
+			<ProductList products={products} />
+			<Pagination currentPage={params.pageNumber} perPage={take} />
 		</>
 	);
 }

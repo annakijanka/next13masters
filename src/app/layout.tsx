@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ActiveLink } from "@/ui/atoms/ActiveLink";
+import { Navbar } from "@/ui/organisms/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,51 +11,52 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+	const currentYear = new Date().getFullYear();
 	return (
-		<html lang="pl">
-			<body className={inter.className}>
-				<header className="sticky top-0 z-20 border-b bg-white bg-opacity-60 backdrop-blur-lg">
-					<div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
-						<div className="flex flex-col justify-between gap-y-4 pb-4 lg:flex-row lg:items-center lg:pb-0">
-							<nav className="-mx-2 flex overflow-x-scroll lg:mx-0 lg:h-16 lg:overflow-x-auto">
-								<ul className="flex h-16 max-w-full space-x-8 whitespace-nowrap lg:px-8">
-									<li className="first:pl-4 last:pr-4 lg:px-0">
-										<ActiveLink
-											className="flex h-full w-full min-w-[3rem] items-center justify-center border-b-2 border-transparent px-1 pt-1 text-center text-sm font-medium text-slate-500 hover:border-gray-300 hover:text-slate-700"
-											activeClassName="flex h-full w-full min-w-[3rem] items-center justify-center border-b-2 px-1 pt-1 text-center text-sm font-medium text-slate-500 hover:border-gray-300 hover:text-slate-700 border-blue-500"
-											href="/"
-											exact={true}
-										>
-											Home
-										</ActiveLink>
-									</li>
-									<li className="first:pl-4 last:pr-4 lg:px-0">
-										<ActiveLink
-											className="flex h-full w-full min-w-[3rem] items-center justify-center border-b-2 border-transparent px-1 pt-1 text-center text-sm font-medium text-slate-500 hover:border-gray-300 hover:text-slate-700"
-											activeClassName="flex h-full w-full min-w-[3rem] items-center justify-center border-b-2 px-1 pt-1 text-center text-sm font-medium text-slate-500 hover:border-gray-300 hover:text-slate-700 border-blue-500"
-											href="/products"
-										>
-											All
-										</ActiveLink>
-									</li>
-								</ul>
-							</nav>
+		<html lang="en">
+			<body className={`${inter.className} flex min-h-screen flex-col bg-port-gore`}>
+				<header className="sticky top-0 z-20 bg-port-gore bg-opacity-95 backdrop-blur">
+					<div className="mx-auto max-w-7xl px-4 lg:px-8">
+						<div className="flex flex-col justify-between lg:flex-row lg:items-center">
+							<Navbar />
 						</div>
 					</div>
 				</header>
-				<section className="sm:py-18 mx-auto flex w-full max-w-2xl flex-grow flex-col px-8 py-12 sm:px-6 lg:max-w-7xl">
+				<section className="sm:py-18 mx-auto flex w-full max-w-2xl flex-grow flex-col px-4 py-12 lg:max-w-7xl lg:px-8">
 					{children}
 				</section>
-				<footer className="border-t bg-slate-50">
-					<div className="mx-auto max-w-7xl px-6 py-8">
-						<nav className="text-center" aria-label="Footer">
-							<a className="text-sm leading-6 text-blue-500 hover:text-blue-700" href="/terms">
-								Terms
-							</a>
+				<footer className="relative">
+					<svg
+						className="absolute bottom-0 left-0 -z-[1] min-w-[1920px] -translate-x-0 fill-dodger-blue sm:left-1/2 sm:-translate-x-1/2"
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 1440 320"
+						preserveAspectRatio="none"
+					>
+						<path d="m0 128 60-16c60-16 180-48 300-16s240 128 360 154.7c120 26.3 240-15.7 360-32 120-15.7 240-5.7 300 0l60 5.3v96H0Z" />
+					</svg>
+					<div className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
+						<nav aria-label="Footer">
+							<h3 className="font-semibold text-port-gore">Legal Information</h3>
+							<ul className="mt-2">
+								<li>
+									<a
+										className="text-sm leading-6 text-port-gore hover:text-white"
+										href="/privacy-policy"
+									>
+										Privacy Policy
+									</a>
+								</li>
+								<li>
+									<a
+										className="text-sm leading-6 text-port-gore hover:text-white"
+										href="/terms-of-service"
+									>
+										Terms of Service
+									</a>
+								</li>
+							</ul>
 						</nav>
-						<p className="mt-2 text-center text-xs leading-7 text-slate-500">
-							© 2023 Anna Kijanka
-						</p>
+						<p className="mt-4 text-sm leading-7 text-port-gore">© {currentYear} Anna Kijanka</p>
 					</div>
 				</footer>
 			</body>

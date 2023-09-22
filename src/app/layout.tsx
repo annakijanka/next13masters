@@ -54,6 +54,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 										Terms of Service
 									</a>
 								</li>
+								<li>
+									<a
+										className="text-sm leading-6 text-port-gore hover:text-white"
+										href="/return-policy"
+									>
+										Return Policy
+									</a>
+								</li>
 							</ul>
 						</nav>
 						<p className="mt-4 text-sm leading-7 text-port-gore">© {currentYear} Anna Kijanka</p>

@@ -41,7 +41,7 @@ export default async function Product({ params }: { params: { productId: string 
 						</div>
 						<div className="mt-8">
 							<button
-								className="from-dodger-blue via-purple-heart to-heliotrope inline-flex h-14 w-full items-center justify-center rounded-lg from-10% via-30% to-90% px-6 text-base font-medium leading-6 text-white transition-transform duration-150 hover:scale-[1.02] enabled:bg-gradient-to-r disabled:cursor-wait disabled:bg-gray-300"
+								className="inline-flex h-14 w-full items-center justify-center rounded-lg from-dodger-blue from-10% via-purple-heart via-30% to-heliotrope to-90% px-6 text-base font-medium leading-6 text-white transition-transform duration-150 hover:scale-[1.02] enabled:bg-gradient-to-r disabled:cursor-wait disabled:bg-gray-300"
 								type="button"
 							>
 								Add to cart
@@ -56,7 +56,7 @@ export default async function Product({ params }: { params: { productId: string 
 						<h2 className="py-8 text-xl font-extrabold leading-7 tracking-tight text-white">
 							Similar products
 						</h2>
-						<SuggestedProducts />
+						<SuggestedProducts category={product.category} />
 					</div>
 				</Suspense>
 			</aside>

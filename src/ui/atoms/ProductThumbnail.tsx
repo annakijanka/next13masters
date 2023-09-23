@@ -7,6 +7,9 @@ export const ProductThumbnail = ({
 	alt: string;
 	hasAnimation?: boolean;
 }) => {
+	if (!src) {
+		src = "/dummy.png";
+	}
 	return (
 		<div
 			className={`relative w-full rounded-lg bg-white pt-[100%]${

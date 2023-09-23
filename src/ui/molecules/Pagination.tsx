@@ -60,7 +60,7 @@ export const Pagination = async ({
 					if (page === "...") {
 						return (
 							<li key={index}>
-								<span className="flex h-10 w-10 items-center justify-center text-sm font-medium text-white">
+								<span className="flex h-6 w-6 items-center justify-center text-sm font-medium text-white sm:h-10 sm:w-10">
 									...
 								</span>
 							</li>
@@ -70,8 +70,8 @@ export const Pagination = async ({
 						<li key={page}>
 							<ActiveLink
 								href={`/products/${page}` as Route}
-								activeClassName="flex items-center rounded-lg text-sm font-medium justify-center h-10 w-10 text-white bg-heliotrope"
-								className="hover:bg-dodger-blue flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium text-white transition-colors duration-150"
+								activeClassName="flex items-center rounded-lg text-sm font-medium justify-center sm:h-10 sm:w-10 h-6 w-6 text-white bg-heliotrope"
+								className="flex h-6 w-6 items-center justify-center rounded-lg text-sm font-medium text-white transition-colors duration-150 hover:bg-dodger-blue sm:h-10 sm:w-10"
 								exact={true}
 							>
 								{page}

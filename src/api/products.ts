@@ -1,75 +1,177 @@
 import { type Product } from "@/ui/types";
 
-type ProductItem = {
-	id: string;
-	title: string;
-	price: number;
-	description: string;
-	category: string;
-	rating: {
-		rate: number;
-		count: number;
-	};
-	image: string;
-	longDescription: string;
+type GraphqlResponse<T> =
+	| { data?: undefined; errors: { message: string }[] }
+	| { data: T; errors?: undefined };
+
+type TotalProductCountGraphqlResponse = {
+	totalProductCount: number;
 };
 
-const API_BASE_URL = "https://naszsklep-api.vercel.app/api/products";
+type RandomProductsByCategoryGraphqlResponse = {
+	randomProductsByCategory: {
+		id: string;
+		name: string;
+		description: string;
+		price: number;
+		image: string;
+		categories: {
+			name: string;
+		};
+	}[];
+};
+
+type ProductGraphqlResponse = {
+	product: {
+		name: string;
+		description: string;
+		price: number;
+		image: string;
+		categories: {
+			name: string;
+		};
+	};
+};
+
+type ProductsGraphqlResponse = {
+	products: {
+		id: string;
+		name: string;
+		description: string;
+		price: number;
+		image: string;
+		categories: {
+			name: string;
+		};
+	}[];
+};
+
+const API_URL = process.env.API_URL;
+
+if (!API_URL) {
+	throw new Error("API_URL is not defined in environment variables.");
+}
 
 export const getTotalProductCount = async () => {
-	// const take = 20;
-	// let totalCount = 0;
-	// let currentPage = 1;
+	const res = await fetch(API_URL, {
+		method: "POST",
+		body: JSON.stringify({
+			query: `query{totalProductCount}`,
+		}),
+		headers: { "Content-Type": "application/json" },
+	});
 
-	// while (true) {
-	// 	const res = await fetch(`${API_BASE_URL}?take=${take}&offset=${(currentPage - 1) * take}`);
-	// 	const productData = (await res.json()) as ProductItem[];
+	const graphqlResponse = (await res.json()) as GraphqlResponse<TotalProductCountGraphqlResponse>;
 
-	// 	if (productData.length === 0) {
-	// 		break;
-	// 	}
+	if (graphqlResponse.errors) {
+		throw new TypeError(graphqlResponse.errors[0].message);
+	}
 
-	// 	totalCount += productData.length;
-	// 	currentPage += 1;
-	// }
-
-	// return totalCount; limiting the amount of products – retrieve the total count of products directly rather than paginating through all products
-	const totalCount = 16;
-	return totalCount;
+	return graphqlResponse.data.totalProductCount;
 };
 
-export const getSuggestedProducts = async () => {
-	const res = await fetch(`${API_BASE_URL}?take=20`);
-	const productData = (await res.json()) as ProductItem[];
-	const products = productData.map((product) => productItemToProduct(product));
+export const getSuggestedProducts = async (category: string) => {
+	const res = await fetch(API_URL, {
+		method: "POST",
+		body: JSON.stringify({
+			query: `query RandomProductsByCategory($category:String!){randomProductsByCategory(categoryName:$category){id name description price image categories{name}}}`,
+			variables: {
+				category: category,
+			},
+		}),
+		headers: { "Content-Type": "application/json" },
+	});
+
+	const graphqlResponse =
+		(await res.json()) as GraphqlResponse<RandomProductsByCategoryGraphqlResponse>;
+
+	if (graphqlResponse.errors) {
+		throw new TypeError(graphqlResponse.errors[0].message);
+	}
+
+	const products = graphqlResponse.data.randomProductsByCategory.map((product) =>
+		ProductsGraphqlResponseToProduct(product),
+	);
+
 	return products;
 };
 
-export const getProductById = async (id: ProductItem["id"]) => {
-	const res = await fetch(`${API_BASE_URL}/${id}`);
-	const productData = (await res.json()) as ProductItem;
-	return productItemToProduct(productData);
+export const getProductById = async (id: string) => {
+	const res = await fetch(API_URL, {
+		method: "POST",
+		body: JSON.stringify({
+			query: `query Product($id:ID!){product(id:$id){name description price image categories{name}}}`,
+			variables: {
+				id: id,
+			},
+		}),
+		headers: { "Content-Type": "application/json" },
+	});
+
+	const graphqlResponse = (await res.json()) as GraphqlResponse<ProductGraphqlResponse>;
+
+	if (graphqlResponse.errors) {
+		throw new TypeError(graphqlResponse.errors[0].message);
+	}
+
+	return ProductGraphqlResponseToProduct(graphqlResponse.data.product);
 };
 
-export const getProductsByPage = async (page: string, take: number) => {
+export const getProductsByPage = async (page: string, take: number): Promise<Product[]> => {
 	const offset = (Number(page) - 1) * take;
-	const res = await fetch(`${API_BASE_URL}?take=${take}&offset=${offset}`);
-	const productData = (await res.json()) as ProductItem[];
-	const products = productData.map((product) => productItemToProduct(product));
+	const res = await fetch(API_URL, {
+		method: "POST",
+		body: JSON.stringify({
+			query: `query{products(first:${take},skip:${offset}){id name description price image categories{name}}}`,
+		}),
+		headers: { "Content-Type": "application/json" },
+	});
+
+	const graphqlResponse = (await res.json()) as GraphqlResponse<ProductsGraphqlResponse>;
+
+	if (graphqlResponse.errors) {
+		throw new TypeError(graphqlResponse.errors[0].message);
+	}
+
+	const products = graphqlResponse.data.products.map((product) =>
+		ProductsGraphqlResponseToProduct(product),
+	);
+
 	return products;
 };
 
-const productItemToProduct = (product: ProductItem): Product => {
+const ProductGraphqlResponseToProduct = (product: ProductGraphqlResponse["product"]): Product => {
+	const categories = Array.isArray(product.categories) ? product.categories : [product.categories];
+	const categoryNames: string[] = categories.map((category: { name: string }) => category.name);
 	return {
-		id: product.id,
-		name: product.title,
+		id: "",
+		name: product.name,
 		description: product.description,
-		category: product.category,
+		category: categoryNames,
 		price: product.price,
 		thumbnail: {
 			src: product.image,
-			alt: product.title,
+			alt: product.name,
 		},
-		longDescription: product.longDescription,
+		longDescription: "",
+	};
+};
+
+const ProductsGraphqlResponseToProduct = (
+	product: ProductsGraphqlResponse["products"][0],
+): Product => {
+	const categories = Array.isArray(product.categories) ? product.categories : [product.categories];
+	const categoryNames: string[] = categories.map((category: { name: string }) => category.name);
+	return {
+		id: product.id,
+		name: product.name,
+		description: product.description,
+		category: categoryNames,
+		price: product.price,
+		thumbnail: {
+			src: product.image,
+			alt: product.name,
+		},
+		longDescription: "",
 	};
 };

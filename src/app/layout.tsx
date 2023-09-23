@@ -13,8 +13,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	const currentYear = new Date().getFullYear();
 	return (
-		<html lang="en">
-			<body className={`${inter.className} flex min-h-screen flex-col bg-port-gore`}>
+		<html className="overflow-x-hidden" lang="en">
+			<body
+				className={`${inter.className} flex min-h-screen flex-col overflow-x-hidden bg-port-gore`}
+			>
 				<header className="sticky top-0 z-20 bg-port-gore bg-opacity-95 backdrop-blur">
 					<div className="mx-auto max-w-7xl px-4 lg:px-8">
 						<div className="flex flex-col justify-between lg:flex-row lg:items-center">

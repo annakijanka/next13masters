@@ -15,7 +15,7 @@ export const Navbar = () => {
 	return (
 		<>
 			<nav className="flex h-12 overflow-x-scroll lg:mx-0 lg:h-16 lg:overflow-x-auto">
-				<div className="flex items-center">
+				<div className="hidden items-center sm:flex">
 					<img src="/logotype.png" alt="Logotype" width="64" height="auto" />
 				</div>
 				<ul className="flex h-12 max-w-full space-x-8 whitespace-nowrap lg:h-16 lg:px-8">

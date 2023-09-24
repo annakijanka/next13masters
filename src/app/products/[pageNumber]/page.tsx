@@ -27,6 +27,7 @@ export const generateStaticParams = async () => {
 export default async function ProductsPage({ params }: { params: { pageNumber: string } }) {
 	const take = 4;
 	const products = await getProductsByPage(params.pageNumber, take);
+	const totalCount = await getTotalProductCount();
 
 	if (!products || products.length === 0) {
 		return notFound();
@@ -35,7 +36,12 @@ export default async function ProductsPage({ params }: { params: { pageNumber: s
 	return (
 		<>
 			<ProductList products={products} />
-			<Pagination currentPage={params.pageNumber} perPage={take} />
+			<Pagination
+				path={"products"}
+				totalCount={totalCount}
+				currentPage={params.pageNumber}
+				perPage={take}
+			/>
 		</>
 	);
 }

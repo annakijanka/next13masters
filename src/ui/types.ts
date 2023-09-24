@@ -10,3 +10,8 @@ export type Product = {
 	};
 	longDescription: string;
 };
+
+export type Category = {
+	id: string;
+	name: string;
+};

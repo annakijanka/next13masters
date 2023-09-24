@@ -1,15 +1,17 @@
 import { type Route } from "next";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
-import { getTotalProductCount } from "@/api/products";
 
 export const Pagination = async ({
 	currentPage,
 	perPage,
+	totalCount,
+	path,
 }: {
 	currentPage: string;
 	perPage: number;
+	totalCount: number;
+	path: string;
 }) => {
-	const totalCount = await getTotalProductCount();
 	const totalPages = Math.ceil(totalCount / perPage);
 	const current = parseInt(currentPage, 10);
 	let pages: (number | string)[] = [];
@@ -69,7 +71,7 @@ export const Pagination = async ({
 					return (
 						<li key={page}>
 							<ActiveLink
-								href={`/products/${page}` as Route}
+								href={`/${path}/${page}` as Route}
 								activeClassName="flex items-center rounded-lg text-sm font-medium justify-center sm:h-10 sm:w-10 h-6 w-6 text-white bg-heliotrope"
 								className="flex h-6 w-6 items-center justify-center rounded-lg text-sm font-medium text-white transition-colors duration-150 hover:bg-dodger-blue sm:h-10 sm:w-10"
 								exact={true}

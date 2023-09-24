@@ -1,4 +1,5 @@
 import { type Product } from "@/ui/types";
+import { capitalizeFirstLetter } from "@/utils";
 
 type GraphqlResponse<T> =
 	| { data?: undefined; errors: { message: string }[] }
@@ -6,6 +7,10 @@ type GraphqlResponse<T> =
 
 type TotalProductCountGraphqlResponse = {
 	totalProductCount: number;
+};
+
+type TotalProductsInCategoryGraphqlResponse = {
+	totalProductsInCategory: number;
 };
 
 type RandomProductsByCategoryGraphqlResponse = {
@@ -70,6 +75,28 @@ export const getTotalProductCount = async () => {
 	return graphqlResponse.data.totalProductCount;
 };
 
+export const getTotalProductsInCategory = async (categoryName: string) => {
+	const res = await fetch(API_URL, {
+		method: "POST",
+		body: JSON.stringify({
+			query: `query GetTotalProductsInCategory($categoryName:String!){totalProductsInCategory(categoryName:$categoryName)}`,
+			variables: {
+				categoryName: capitalizeFirstLetter(categoryName),
+			},
+		}),
+		headers: { "Content-Type": "application/json" },
+	});
+
+	const graphqlResponse =
+		(await res.json()) as GraphqlResponse<TotalProductsInCategoryGraphqlResponse>;
+
+	if (graphqlResponse.errors) {
+		throw new TypeError(graphqlResponse.errors[0].message);
+	}
+
+	return graphqlResponse.data.totalProductsInCategory;
+};
+
 export const getSuggestedProducts = async (category: string) => {
 	const res = await fetch(API_URL, {
 		method: "POST",
@@ -117,12 +144,20 @@ export const getProductById = async (id: string) => {
 	return ProductGraphqlResponseToProduct(graphqlResponse.data.product);
 };
 
-export const getProductsByPage = async (page: string, take: number): Promise<Product[]> => {
+export const getProductsByPage = async (
+	page: string,
+	take: number,
+	categoryName?: string,
+): Promise<Product[]> => {
 	const offset = (Number(page) - 1) * take;
+	let filterCondition = "";
+	if (categoryName) {
+		filterCondition = `,categoryName:"${capitalizeFirstLetter(categoryName)}"`;
+	}
 	const res = await fetch(API_URL, {
 		method: "POST",
 		body: JSON.stringify({
-			query: `query{products(first:${take},skip:${offset}){id name description price image categories{name}}}`,
+			query: `query{products(first:${take},skip:${offset}${filterCondition}){id name description price image categories{name}}}`,
 		}),
 		headers: { "Content-Type": "application/json" },
 	});

@@ -1,9 +1,13 @@
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import { capitalizeFirstLetter } from "@/utils";
-import { getProductsByPage, getTotalProductsInCategory } from "@/api/products";
+import { getProductsByCategorySlug } from "@/api/products";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { Pagination } from "@/ui/molecules/Pagination";
+import { ProductsGetTotalCountByCategorySlugDocument } from "@/gql/graphql";
+import { executeGraphql } from "@/api/graphqlApi";
+
+const first = 4;
 
 export const generateMetadata = async ({
 	params,
@@ -17,30 +21,33 @@ export const generateMetadata = async ({
 	};
 };
 
-export const generateStaticParams = async ({ params }: { params: { category: string } }) => {
-	let result: { pageNumber: string }[] = [];
-
-	if (params.category === "mugs") {
-		result = [{ pageNumber: "1" }];
-	} else if (params.category === "bowls") {
-		result = [{ pageNumber: "1" }];
-	} else if (params.category === "plates") {
-		result = [{ pageNumber: "1" }];
-	}
-
-	return result;
-};
+// export const generateStaticParams = async ({
+// 	params,
+// }: {
+// 	params: { category: string; pageNumber: string };
+// }) => {
+// 	const graphqlResponse = await executeGraphql(ProductsGetTotalCountByCategorySlugDocument, {
+// 		slug: params.category,
+// 	});
+// 	const totalCount = graphqlResponse.productsConnection.aggregate.count;
+// 	const totalPages = Math.ceil(totalCount / first);
+// 	const pages = Array.from({ length: totalPages }, (_, index) => (index + 1).toString());
+// 	return pages.map((page) => ({ pageNumber: page }));
+// };
 
 export default async function CategoryPage({
 	params,
 }: {
 	params: { category: string; pageNumber: string };
 }) {
-	const take = 4;
-	const products = await getProductsByPage(params.pageNumber, take, params.category);
-	const totalCount = await getTotalProductsInCategory(params.category);
+	const skip = (parseInt(params.pageNumber, 10) - 1) * first;
+	const products = await getProductsByCategorySlug(first, skip, params.category);
+	const graphqlResponse = await executeGraphql(ProductsGetTotalCountByCategorySlugDocument, {
+		slug: params.category,
+	});
+	const totalCount = graphqlResponse.productsConnection.aggregate.count;
 
-	if (!products || products.length === 0) {
+	if (!products) {
 		return notFound();
 	}
 
@@ -51,7 +58,7 @@ export default async function CategoryPage({
 				path={`categories/${params.category}`}
 				totalCount={totalCount}
 				currentPage={params.pageNumber}
-				perPage={take}
+				perPage={first}
 			/>
 		</>
 	);

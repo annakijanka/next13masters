@@ -1,8 +1,9 @@
 import { Suspense } from "react";
 import { type Metadata } from "next";
+import { notFound } from "next/navigation";
 import { getProductById } from "@/api/products";
 import { ProductThumbnail } from "@/ui/atoms/ProductThumbnail";
-import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
+import { SimilarProducts } from "@/ui/organisms/SimilarProducts";
 import { formatCurrency } from "@/utils";
 
 export const generateMetadata = async ({
@@ -11,6 +12,11 @@ export const generateMetadata = async ({
 	params: { productId: string };
 }): Promise<Metadata> => {
 	const product = await getProductById(params.productId);
+
+	if (!product) {
+		return notFound();
+	}
+
 	return {
 		title: `Product ${product.name} | Online Store`,
 		description: product.description,
@@ -22,6 +28,11 @@ export const generateMetadata = async ({
 
 export default async function Product({ params }: { params: { productId: string } }) {
 	const product = await getProductById(params.productId);
+
+	if (!product) {
+		return notFound();
+	}
+
 	return (
 		<>
 			<article>
@@ -56,7 +67,7 @@ export default async function Product({ params }: { params: { productId: string 
 						<h2 className="py-8 text-xl font-extrabold leading-7 tracking-tight text-white">
 							Similar products
 						</h2>
-						<SuggestedProducts category={product.category} />
+						<SimilarProducts category={product.category} />
 					</div>
 				</Suspense>
 			</aside>

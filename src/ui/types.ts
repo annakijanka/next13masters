@@ -10,7 +10,8 @@ export type Product = {
 	};
 };
 
-export type Category = {
-	id: string;
-	name: string;
+export type NavLink = {
+	href: string;
+	text: string;
+	exact?: boolean;
 };

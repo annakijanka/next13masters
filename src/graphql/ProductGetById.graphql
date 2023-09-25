@@ -1,5 +1,5 @@
-query ProductsGetList {
-	products(first: 10) {
+query ProductGetById($id: ID!) {
+	product(where: { id: $id }) {
 		id
 		name
 		description

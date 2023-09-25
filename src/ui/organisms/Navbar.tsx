@@ -1,20 +1,21 @@
 import { type Route } from "next";
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
+import { type NavLink } from "../types";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 import { getCategories } from "@/api/categories";
 
 export const Navbar = async () => {
 	const categories = await getCategories();
-	const baseLinks = [
+	const baseLinks: NavLink[] = [
 		{ href: "/", text: "Home", exact: true },
 		{ href: "/products", text: "All" },
 	];
-	const categoryLinks = categories.map((category) => ({
+	const categoryLinks: NavLink[] = categories.map((category) => ({
 		href: `/categories/${category.name.toLowerCase()}`,
 		text: category.name,
 	}));
-	const links = [...baseLinks, ...categoryLinks];
+	const links: NavLink[] = [...baseLinks, ...categoryLinks];
 
 	return (
 		<>

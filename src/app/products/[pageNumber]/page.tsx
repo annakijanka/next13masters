@@ -1,8 +1,14 @@
 import { notFound } from "next/navigation";
 import { type Metadata } from "next";
-import { getProductsList } from "@/api/products";
+import { getProducts } from "@/api/products";
 import { ProductList } from "@/ui/organisms/ProductList";
-// import { Pagination } from "@/ui/molecules/Pagination";
+import { executeGraphql } from "@/api/graphqlApi";
+import { ProductsGetTotalCountDocument } from "@/gql/graphql";
+import { Pagination } from "@/ui/molecules/Pagination";
+
+const graphqlResponse = await executeGraphql(ProductsGetTotalCountDocument, {});
+const totalCount = graphqlResponse.productsConnection.aggregate.count;
+const first = 4;
 
 export const generateMetadata = async ({
 	params,
@@ -16,32 +22,29 @@ export const generateMetadata = async ({
 	};
 };
 
-// export const generateStaticParams = async () => {
-// 	const totalCount = await getTotalProductCount();
-// 	const take = 4;
-// 	const totalPages = Math.ceil(totalCount / take);
-// 	const pages = Array.from({ length: totalPages }, (_, index) => (index + 1).toString());
-// 	return pages.map((page) => ({ pageNumber: page }));
-// };
+export const generateStaticParams = async () => {
+	const totalPages = Math.ceil(totalCount / first);
+	const pages = Array.from({ length: totalPages }, (_, index) => (index + 1).toString());
+	return pages.map((page) => ({ pageNumber: page }));
+};
 
-export default async function ProductsPage(/* { params }: { params: { pageNumber: string } } */) {
-	// const take = 4;
-	const products = await getProductsList();
-	// const totalCount = await getTotalProductCount();
+export default async function ProductsPage({ params }: { params: { pageNumber: string } }) {
+	const skip = (parseInt(params.pageNumber, 10) - 1) * first;
+	const products = await getProducts(first, skip);
 
-	if (!products || products.length === 0) {
+	if (!products) {
 		return notFound();
 	}
 
 	return (
 		<>
 			<ProductList products={products} />
-			{/* <Pagination
+			<Pagination
 				path={"products"}
 				totalCount={totalCount}
 				currentPage={params.pageNumber}
-				perPage={take}
-			/> */}
+				perPage={first}
+			/>
 		</>
 	);
 }

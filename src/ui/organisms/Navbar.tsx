@@ -1,7 +1,7 @@
 import { type Route } from "next";
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
-import { type NavLink } from "../types";
+import { type NavLink } from "@/ui/types";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 import { getCategories } from "@/api/categories";
 

@@ -3,7 +3,7 @@ export const ProductThumbnail = ({
 	alt,
 	hasAnimation = false,
 }: {
-	src: string;
+	src?: string;
 	alt: string;
 	hasAnimation?: boolean;
 }) => {

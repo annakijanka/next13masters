@@ -1,14 +1,5 @@
 query ProductsGet($first: Int!, $skip: Int!) {
 	products(first: $first, skip: $skip) {
-		id
-		name
-		description
-		categories(first: 1) {
-			name
-		}
-		images(first: 1) {
-			url
-		}
-		price
+		...Product
 	}
 }

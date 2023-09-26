@@ -21,7 +21,7 @@ export const generateMetadata = async ({
 		title: `Product ${product.name} | Online Store`,
 		description: product.description,
 		openGraph: {
-			images: product.thumbnail.src,
+			images: product.images[0]?.url,
 		},
 	};
 };
@@ -37,7 +37,7 @@ export default async function Product({ params }: { params: { productId: string 
 		<>
 			<article>
 				<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-					<ProductThumbnail {...product.thumbnail} />
+					<ProductThumbnail src={product.images[0]?.url} alt={product.name} />
 					<div className="px-6">
 						<h1 className="mb-4 text-2xl font-extrabold tracking-tight text-white md:text-3xl">
 							{product.name}
@@ -67,7 +67,7 @@ export default async function Product({ params }: { params: { productId: string 
 						<h2 className="py-8 text-xl font-extrabold leading-7 tracking-tight text-white">
 							Similar products
 						</h2>
-						<SimilarProducts category={product.category} />
+						<SimilarProducts category={product.categories[0]?.name} />
 					</div>
 				</Suspense>
 			</aside>

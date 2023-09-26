@@ -1,14 +1,5 @@
 query ProductsGetSimilar($slug: String!) {
 	products(first: 4, where: { categories_some: { slug: $slug } }) {
-		id
-		name
-		description
-		categories(first: 1) {
-			name
-		}
-		images(first: 1) {
-			url
-		}
-		price
+		...Product
 	}
 }

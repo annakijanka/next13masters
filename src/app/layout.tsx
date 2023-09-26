@@ -1,9 +1,13 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
 import { Navbar } from "@/ui/organisms/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({
+	weight: ["100", "300", "400", "500", "700", "900"],
+	subsets: ["latin"],
+	variable: "--font-roboto",
+});
 
 export const metadata: Metadata = {
 	title: "Homepage | Online Store",
@@ -13,10 +17,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	const currentYear = new Date().getFullYear();
 	return (
-		<html className="overflow-x-hidden" lang="en">
-			<body
-				className={`${inter.className} flex min-h-screen flex-col overflow-x-hidden bg-port-gore`}
-			>
+		<html className={`${roboto.variable} overflow-x-hidden`} lang="en">
+			<body className="flex min-h-screen flex-col overflow-x-hidden bg-port-gore">
 				<header className="sticky top-0 z-20 bg-port-gore bg-opacity-95 backdrop-blur">
 					<div className="mx-auto max-w-7xl px-4 lg:px-8">
 						<div className="flex flex-col justify-between lg:flex-row lg:items-center">

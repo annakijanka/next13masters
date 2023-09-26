@@ -1,6 +1,8 @@
 import { type Route } from "next";
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
+import NextImage from "next/image";
+import Logotype from "pub/logotype.png";
 import { type NavLink } from "@/ui/types";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 import { getCategories } from "@/api/categories";
@@ -21,7 +23,7 @@ export const Navbar = async () => {
 		<>
 			<nav className="flex h-12 overflow-x-scroll lg:mx-0 lg:h-16 lg:overflow-x-auto">
 				<div className="hidden items-center sm:flex">
-					<img src="/logotype.png" alt="Logotype" width="64" height="auto" />
+					<NextImage src={Logotype} alt="Logotype" width="64" height="26" />
 				</div>
 				<ul className="flex h-12 max-w-full space-x-8 whitespace-nowrap lg:h-16 lg:px-8">
 					{links.map((link, index) => (

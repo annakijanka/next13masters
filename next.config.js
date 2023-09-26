@@ -1,5 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "media.graphassets.com",
+			},
+		],
+	},
 	pageExtensions: ["ts", "tsx", "mdx"],
 	experimental: {
 		typedRoutes: true,
@@ -10,11 +18,6 @@ const nextConfig = {
 			{
 				source: "/(products|product)",
 				destination: "/products/1",
-				permanent: true,
-			},
-			{
-				source: "/categories/:category(mugs|bowls|plates)",
-				destination: "/categories/:category/1",
 				permanent: true,
 			},
 		];

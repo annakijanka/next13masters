@@ -16,6 +16,9 @@ const config: Config = {
 				"purple-heart": "rgba(var(--color-purple-heart), <alpha-value>)",
 				daintree: "rgba(var(--color-daintree), <alpha-value>)",
 			},
+			fontFamily: {
+				sans: ["var(--font-roboto)"],
+			},
 		},
 	},
 	plugins: [require("@tailwindcss/typography")],

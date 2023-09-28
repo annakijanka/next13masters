@@ -1,10 +1,11 @@
 import { Suspense } from "react";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { getProductById } from "@/api/products";
 import { ProductThumbnail } from "@/ui/atoms/ProductThumbnail";
-import { SimilarProducts } from "@/ui/organisms/SimilarProducts";
 import { formatCurrency } from "@/utils";
+import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
 
 export const generateMetadata = async ({
 	params,
@@ -42,10 +43,18 @@ export default async function Product({ params }: { params: { productId: string 
 						<h1 className="mb-4 text-2xl font-extrabold tracking-tight text-white md:text-3xl">
 							{product.name}
 						</h1>
-						<div className="mt-4 flex items-center">
+						<div className="mt-4 flex flex-row justify-between">
 							<div className="font-base small-caps text-lg text-white opacity-80">
 								{formatCurrency(product.price)}
 							</div>
+							{product.categories[0] && (
+								<Link
+									className="font-base small-caps text-lg text-white opacity-70"
+									href={`/categories/${product.categories[0].slug}`}
+								>
+									{product.categories[0].name}
+								</Link>
+							)}
 						</div>
 						<div className="mt-4 space-y-6">
 							<p className="font-sans text-base text-white">{product.description}</p>
@@ -62,12 +71,12 @@ export default async function Product({ params }: { params: { productId: string 
 				</div>
 			</article>
 			<aside>
-				<Suspense fallback={"Ładowanie..."}>
-					<div className="py-16">
+				<Suspense fallback={<div className="text-white">Ładowanie...</div>}>
+					<div className="pb-16 pt-8">
 						<h2 className="py-8 text-xl font-extrabold leading-7 tracking-tight text-white">
-							Similar products
+							Top rated
 						</h2>
-						<SimilarProducts category={product.categories[0]?.slug} />
+						<SuggestedProducts />
 					</div>
 				</Suspense>
 			</aside>

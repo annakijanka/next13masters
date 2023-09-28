@@ -6,6 +6,7 @@ import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductsGetTotalCountByCategorySlugDocument } from "@/gql/graphql";
 import { executeGraphql } from "@/api/graphqlApi";
 import { getCategories, getCategoryBySlug } from "@/api/categories";
+import { setAverageRating } from "@/utils";
 
 const first = 4;
 
@@ -73,9 +74,11 @@ export default async function CategoryPage({
 		return notFound();
 	}
 
+	const productsWithAverageRating = setAverageRating(products);
+
 	return (
 		<>
-			<ProductList products={products} />
+			<ProductList products={productsWithAverageRating} />
 			<Pagination
 				path={`categories/${params.category}`}
 				totalCount={totalCount}

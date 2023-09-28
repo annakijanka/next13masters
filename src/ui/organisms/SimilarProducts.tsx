@@ -1,4 +1,5 @@
 import { ProductList } from "./ProductList";
+import { setAverageRating } from "@/utils";
 import { getSimilarProducts } from "@/api/products";
 
 export const SimilarProducts = async ({ category }: { category?: string }) => {
@@ -7,5 +8,7 @@ export const SimilarProducts = async ({ category }: { category?: string }) => {
 	}
 
 	const products = await getSimilarProducts(category);
-	return <ProductList products={products} />;
+	const productsWithAverageRating = setAverageRating(products);
+
+	return <ProductList products={productsWithAverageRating} />;
 };

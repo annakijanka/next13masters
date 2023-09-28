@@ -1,0 +1,5 @@
+query ProductsGetSuggested {
+	products {
+		...Product
+	}
+}

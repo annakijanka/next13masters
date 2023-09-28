@@ -3,6 +3,7 @@ import { type Metadata } from "next";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { getProductsByCollectionSlug } from "@/api/products";
 import { getCollectionBySlug, getCollections } from "@/api/collections";
+import { setAverageRating } from "@/utils";
 
 export const generateMetadata = async ({
 	params,
@@ -38,13 +39,15 @@ export default async function Collection({ params }: { params: { collection: str
 		return notFound();
 	}
 
+	const productsWithAverageRating = setAverageRating(products);
+
 	return (
 		<>
 			<h1 className="mb-4 text-2xl font-extrabold tracking-tight text-white md:text-3xl">
 				{collection.name}
 			</h1>
 			<p className="text-white">{collection.description}</p>
-			<ProductList products={products} />
+			<ProductList products={productsWithAverageRating} />
 		</>
 	);
 }

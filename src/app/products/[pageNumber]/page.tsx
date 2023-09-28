@@ -5,6 +5,7 @@ import { ProductList } from "@/ui/organisms/ProductList";
 import { executeGraphql } from "@/api/graphqlApi";
 import { ProductsGetTotalCountDocument } from "@/gql/graphql";
 import { Pagination } from "@/ui/molecules/Pagination";
+import { setAverageRating } from "@/utils";
 
 const graphqlResponse = await executeGraphql(ProductsGetTotalCountDocument, {});
 const totalCount = graphqlResponse.productsConnection.aggregate.count;
@@ -36,9 +37,11 @@ export default async function ProductsPage({ params }: { params: { pageNumber: s
 		return notFound();
 	}
 
+	const productsWithAverageRating = setAverageRating(products);
+
 	return (
 		<>
-			<ProductList products={products} />
+			<ProductList products={productsWithAverageRating} />
 			<Pagination
 				path={"products"}
 				totalCount={totalCount}

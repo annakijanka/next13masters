@@ -1,10 +1,11 @@
 import Link from "next/link";
+import { type ProductAverageRating } from "../types";
 import { ProductThumbnail } from "@/ui/atoms/ProductThumbnail";
 import { ProductDescription } from "@/ui/atoms/ProductDescription";
 import { type ProductFragment } from "@/gql/graphql";
 
 type ProductListItemProps = {
-	product: ProductFragment;
+	product: ProductFragment | ProductAverageRating;
 };
 
 export const ProductListItem = ({ product }: ProductListItemProps) => {

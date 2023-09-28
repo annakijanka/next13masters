@@ -2,6 +2,7 @@ import { executeGraphql } from "./graphqlApi";
 import {
 	ProductGetByIdDocument,
 	ProductsGetByCategorySlugDocument,
+	ProductsGetByCollectionSlugDocument,
 	ProductsGetDocument,
 	ProductsGetSimilarDocument,
 } from "@/gql/graphql";
@@ -30,6 +31,14 @@ export const getSimilarProducts = async (categorySlug: string) => {
 	const graphqlResponse = await executeGraphql(ProductsGetSimilarDocument, { slug: categorySlug });
 
 	return graphqlResponse.products;
+};
+
+export const getProductsByCollectionSlug = async (collectionSlug: string) => {
+	const graphqlResponse = await executeGraphql(ProductsGetByCollectionSlugDocument, {
+		slug: collectionSlug,
+	});
+
+	return graphqlResponse.collections[0]?.products;
 };
 
 export const getProductById = async (productId: string) => {

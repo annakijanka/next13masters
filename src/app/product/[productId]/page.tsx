@@ -67,7 +67,7 @@ export default async function Product({ params }: { params: { productId: string 
 						<h2 className="py-8 text-xl font-extrabold leading-7 tracking-tight text-white">
 							Similar products
 						</h2>
-						<SimilarProducts category={product.categories[0]?.name} />
+						<SimilarProducts category={product.categories[0]?.slug} />
 					</div>
 				</Suspense>
 			</aside>

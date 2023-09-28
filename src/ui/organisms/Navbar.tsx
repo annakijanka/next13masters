@@ -14,7 +14,7 @@ export const Navbar = async () => {
 		{ href: "/products", text: "All" },
 	];
 	const categoryLinks: NavLink[] = categories.map((category) => ({
-		href: `/categories/${category.name.toLowerCase()}`,
+		href: `/categories/${category.slug}`,
 		text: category.name,
 	}));
 	const links: NavLink[] = [...baseLinks, ...categoryLinks];

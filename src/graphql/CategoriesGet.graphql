@@ -1,5 +1,5 @@
 query CategoriesGet {
 	categories {
-		name
+		...Category
 	}
 }

@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 						</div>
 					</div>
 				</header>
-				<section className="sm:py-18 mx-auto flex w-full max-w-2xl flex-grow flex-col px-4 py-12 lg:max-w-7xl lg:px-8">
+				<section className="mx-auto flex w-full max-w-2xl flex-grow flex-col px-4 py-8 sm:py-12 lg:max-w-7xl lg:px-8">
 					{children}
 				</section>
 				<footer className="relative">

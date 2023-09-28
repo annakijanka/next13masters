@@ -1,12 +1,16 @@
 import { executeGraphql } from "./graphqlApi";
-import { CategoriesGetDocument } from "@/gql/graphql";
+import { CategoriesGetDocument, CategoryGetBySlugDocument } from "@/gql/graphql";
 
 export const getCategories = async () => {
 	const graphqlResponse = await executeGraphql(CategoriesGetDocument, {});
 
-	return graphqlResponse.categories.map((category) => {
-		return {
-			name: category.name,
-		};
+	return graphqlResponse.categories;
+};
+
+export const getCategoryBySlug = async (categorySlug: string) => {
+	const graphqlResponse = await executeGraphql(CategoryGetBySlugDocument, {
+		slug: categorySlug,
 	});
+
+	return graphqlResponse.categories[0];
 };

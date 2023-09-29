@@ -1,7 +1,8 @@
 import "./globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Route } from "next";
 import { Roboto } from "next/font/google";
 import { Navbar } from "@/ui/organisms/Navbar";
+import { ActiveLink } from "@/ui/atoms/ActiveLink";
 
 const roboto = Roboto({
 	weight: ["100", "300", "400", "500", "700", "900"],
@@ -51,28 +52,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 							<h3 className="font-semibold text-pampas">Legal Information</h3>
 							<ul className="mt-2">
 								<li>
-									<a
+									<ActiveLink
 										className="text-sm leading-6 text-pampas hover:text-viking"
-										href="/privacy-policy"
+										activeClassName="text-sm leading-6 text-viking"
+										href={`/privacy-policy` as Route}
 									>
 										Privacy Policy
-									</a>
+									</ActiveLink>
 								</li>
 								<li>
-									<a
+									<ActiveLink
 										className="text-sm leading-6 text-pampas hover:text-viking"
-										href="/terms-of-service"
+										activeClassName="text-sm leading-6 text-viking"
+										href={`/terms-of-service` as Route}
 									>
 										Terms of Service
-									</a>
+									</ActiveLink>
 								</li>
 								<li>
-									<a
+									<ActiveLink
 										className="text-sm leading-6 text-pampas hover:text-viking"
-										href="/return-policy"
+										activeClassName="text-sm leading-6 text-viking"
+										href={`/return-policy` as Route}
 									>
 										Return Policy
-									</a>
+									</ActiveLink>
 								</li>
 							</ul>
 						</nav>

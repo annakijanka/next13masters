@@ -1,23 +1,23 @@
 import { type Metadata } from "next";
 import { type ComponentType } from "react";
 import { notFound } from "next/navigation";
-import { capitalizeFirstLetter } from "@/utils";
+import { slugToTitle } from "@/utils";
 
 export const generateMetadata = async ({
 	params,
 }: {
 	params: { filename: string };
 }): Promise<Metadata> => {
-	const capitalizedFilename = capitalizeFirstLetter(params.filename);
+	const title = slugToTitle(params.filename);
 	let description =
 		"Discover great deals at our online store. Shop now for quality products and unbeatable prices.";
 
-	if (capitalizedFilename === "Terms") {
+	if (params.filename === "terms-of-service") {
 		description = "Our terms, your clarity: Navigate our policies and guidelines effortlessly.";
 	}
 
 	return {
-		title: `${capitalizedFilename} | Online Store`,
+		title: `${title} | Online Store`,
 		description: description,
 	};
 };

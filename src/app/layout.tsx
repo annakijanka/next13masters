@@ -18,20 +18,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	const currentYear = new Date().getFullYear();
 	return (
 		<html className={`${roboto.variable} overflow-x-hidden`} lang="en">
-			<body className="flex min-h-screen flex-col overflow-x-hidden bg-port-gore">
-				<header className="sticky top-0 z-20 bg-port-gore bg-opacity-95 backdrop-blur">
+			<body className="flex min-h-screen flex-col overflow-x-hidden bg-pampas">
+				<header>
+					<svg
+						className="fill-bridal-heath absolute left-0 top-0 -z-[1] min-w-[1920px] -translate-x-0 sm:left-1/2 sm:-translate-x-1/2"
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 1440 320"
+						preserveAspectRatio="none"
+					>
+						<path d="m0 58 60 3.5c60 3.5 180 10.5 300 8s240-14.5 360-11S960 81 1080 87.8c120 6.9 240 1.5 300-1.1l60-2.7V0H0Z" />
+					</svg>
 					<div className="mx-auto max-w-7xl px-4 lg:px-8">
 						<div className="flex flex-col justify-between lg:flex-row lg:items-center">
 							<Navbar />
 						</div>
 					</div>
 				</header>
-				<section className="mx-auto flex w-full max-w-2xl flex-grow flex-col px-4 py-8 sm:py-12 lg:max-w-7xl lg:px-8">
+				<section className="mx-auto flex w-full max-w-2xl flex-grow flex-col px-4 py-8 sm:py-20 lg:max-w-7xl lg:px-8">
 					{children}
 				</section>
 				<footer className="relative">
 					<svg
-						className="absolute bottom-0 left-0 -z-[1] min-w-[1920px] -translate-x-0 fill-dodger-blue sm:left-1/2 sm:-translate-x-1/2"
+						className="absolute bottom-0 left-0 -z-[1] min-w-[1920px] -translate-x-0 fill-gun-powder sm:left-1/2 sm:-translate-x-1/2"
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 1440 320"
 						preserveAspectRatio="none"
@@ -40,11 +48,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					</svg>
 					<div className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
 						<nav aria-label="Footer">
-							<h3 className="font-semibold text-port-gore">Legal Information</h3>
+							<h3 className="font-semibold text-pampas">Legal Information</h3>
 							<ul className="mt-2">
 								<li>
 									<a
-										className="text-sm leading-6 text-port-gore hover:text-white"
+										className="text-sm leading-6 text-pampas hover:text-viking"
 										href="/privacy-policy"
 									>
 										Privacy Policy
@@ -52,7 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 								</li>
 								<li>
 									<a
-										className="text-sm leading-6 text-port-gore hover:text-white"
+										className="text-sm leading-6 text-pampas hover:text-viking"
 										href="/terms-of-service"
 									>
 										Terms of Service
@@ -60,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 								</li>
 								<li>
 									<a
-										className="text-sm leading-6 text-port-gore hover:text-white"
+										className="text-sm leading-6 text-pampas hover:text-viking"
 										href="/return-policy"
 									>
 										Return Policy
@@ -68,7 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 								</li>
 							</ul>
 						</nav>
-						<p className="mt-4 text-sm leading-7 text-port-gore">© {currentYear} Anna Kijanka</p>
+						<p className="mt-4 text-sm leading-7 text-pampas">© {currentYear} Anna Kijanka</p>
 					</div>
 				</footer>
 			</body>

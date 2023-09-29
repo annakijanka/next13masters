@@ -8,7 +8,7 @@ export const CollectionDescription = ({ collection: { name } }: CollectionDescri
 	return (
 		<div className="mt-2">
 			<div className="flex flex-row justify-between">
-				<h3 className="font-semibold text-white">{name}</h3>
+				<h3 className="text-steel-gray font-semibold">{name}</h3>
 			</div>
 		</div>
 	);

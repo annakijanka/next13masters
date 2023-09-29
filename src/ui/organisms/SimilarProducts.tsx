@@ -4,7 +4,7 @@ import { getSimilarProducts } from "@/api/products";
 
 export const SimilarProducts = async ({ category }: { category?: string }) => {
 	if (!category) {
-		return <p className="font-sans text-base text-white">No similar products.</p>;
+		return <p className="text-steel-gray font-sans text-base">No similar products.</p>;
 	}
 
 	const products = await getSimilarProducts(category);

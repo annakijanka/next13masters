@@ -11,9 +11,9 @@ export default async function Home() {
 				<CollectionsList collections={collections} />
 			</section>
 			<aside>
-				<Suspense fallback={<div className="text-white">Ładowanie...</div>}>
-					<div className="pb-16 pt-8">
-						<h2 className="py-8 text-xl font-extrabold leading-7 tracking-tight text-white">
+				<Suspense fallback={<div className="text-steel-gray">Ładowanie...</div>}>
+					<div className="pb-16">
+						<h2 className="text-steel-gray py-8 text-xl font-extrabold leading-7 tracking-tight">
 							Top rated
 						</h2>
 						<SuggestedProducts />

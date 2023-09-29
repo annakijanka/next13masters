@@ -23,7 +23,13 @@ export const Navbar = async () => {
 		<>
 			<nav className="flex h-12 overflow-x-scroll lg:mx-0 lg:h-16 lg:overflow-x-auto">
 				<div className="hidden items-center sm:flex">
-					<NextImage src={Logotype} alt="Logotype" width="64" height="26" />
+					<NextImage
+						className="transition-transform duration-150 hover:rotate-12"
+						src={Logotype}
+						alt="Logotype"
+						width="32"
+						height="32"
+					/>
 				</div>
 				<ul className="flex h-12 max-w-full space-x-8 whitespace-nowrap lg:h-16 lg:px-8">
 					{links.map((link, index) => (
@@ -34,8 +40,8 @@ export const Navbar = async () => {
 							}lg:px-0`}
 						>
 							<ActiveLink
-								className="flex h-full w-full min-w-[3rem] items-center justify-center border-b-4 border-transparent px-1 pt-1 text-center text-sm font-medium text-white hover:border-dodger-blue"
-								activeClassName="flex h-full w-full min-w-[3rem] items-center justify-center border-b-4 px-1 pt-1 text-center text-sm font-medium text-white hover:border-dodger-blue border-heliotrope"
+								className="text-steel-gray flex h-full w-full min-w-[3rem] items-center justify-center border-b-4 border-transparent px-1 pt-1 text-center text-sm font-medium hover:border-medium-carmine"
+								activeClassName="flex h-full w-full min-w-[3rem] items-center justify-center border-b-4 px-1 pt-1 text-center text-sm font-medium text-steel-gray hover:border-medium-carmine border-viking"
 								href={link.href as Route}
 								exact={link.exact}
 							>
@@ -49,7 +55,7 @@ export const Navbar = async () => {
 				<div className="ml-auto h-12 lg:ml-4 lg:h-16">
 					<Link
 						href="/cart"
-						className="flex h-full w-16 items-center justify-center border-b-4 border-transparent px-2 text-center text-sm font-medium text-white hover:border-dodger-blue"
+						className="text-steel-gray flex h-full w-16 items-center justify-center border-b-4 border-transparent px-2 text-center text-sm font-medium hover:border-medium-carmine"
 					>
 						<ShoppingCart />
 						<div className="w-4">

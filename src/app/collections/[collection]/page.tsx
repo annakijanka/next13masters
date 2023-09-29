@@ -43,10 +43,10 @@ export default async function Collection({ params }: { params: { collection: str
 
 	return (
 		<>
-			<h1 className="mb-4 text-2xl font-extrabold tracking-tight text-white md:text-3xl">
+			<h1 className="text-steel-gray mb-4 text-2xl font-extrabold tracking-tight md:text-3xl">
 				{collection.name}
 			</h1>
-			<p className="text-white">{collection.description}</p>
+			<p className="text-steel-gray">{collection.description}</p>
 			<ProductList products={productsWithAverageRating} />
 		</>
 	);

@@ -16,12 +16,12 @@ export const ProductThumbnail = ({
 	}
 	return (
 		<div
-			className={`relative w-full rounded-lg bg-white pt-[100%]${
+			className={`bg-bridal-heath relative w-full overflow-hidden rounded-lg shadow-md pt-[100%]${
 				hasAnimation ? " transition-transform duration-150 hover:scale-[1.02]" : ""
 			}`}
 		>
 			<NextImage
-				className="absolute left-1/2 top-1/2 max-h-full max-w-full -translate-x-1/2 -translate-y-1/2 object-contain p-2"
+				className="absolute left-1/2 top-1/2 max-h-full max-w-full -translate-x-1/2 -translate-y-1/2 object-contain"
 				src={src}
 				alt={alt}
 				width={640}

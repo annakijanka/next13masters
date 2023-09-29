@@ -4,10 +4,12 @@
 
 @layer base {
 	:root {
-		--color-port-gore: 28, 33, 74;
-		--color-dodger-blue: 25, 177, 252;
-		--color-heliotrope: 241, 50, 252;
-		--color-purple-heart: 193, 40, 201;
-		--color-daintree: 2, 40, 61;
+		--color-pampas: 242, 239, 234;
+		--color-bridal-heath: 255, 252, 247;
+		--color-gun-powder: 64, 61, 88;
+		--color-steel-gray: 37, 35, 51;
+		--color-viking: 102, 215, 209;
+		--color-medium-carmine: 165, 75, 51;
+		--color-chenin: 219, 213, 110;
 	}
 }

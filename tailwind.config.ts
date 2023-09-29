@@ -10,11 +10,13 @@ const config: Config = {
 	theme: {
 		extend: {
 			colors: {
-				"port-gore": "rgba(var(--color-port-gore), <alpha-value>)",
-				"dodger-blue": "rgba(var(--color-dodger-blue), <alpha-value>)",
-				heliotrope: "rgba(var(--color-heliotrope), <alpha-value>)",
-				"purple-heart": "rgba(var(--color-purple-heart), <alpha-value>)",
-				daintree: "rgba(var(--color-daintree), <alpha-value>)",
+				pampas: "rgba(var(--color-pampas), <alpha-value>)",
+				"bridal-heath": "rgba(var(--color-bridal-heath), <alpha-value>)",
+				"gun-powder": "rgba(var(--color-gun-powder), <alpha-value>)",
+				"steel-gray": "rgba(var(--color-steel-gray), <alpha-value>)",
+				viking: "rgba(var(--color-viking), <alpha-value>)",
+				"medium-carmine": "rgba(var(--color-medium-carmine), <alpha-value>)",
+				chenin: "rgba(var(--color-chenin), <alpha-value>)",
 			},
 			fontFamily: {
 				sans: ["var(--font-roboto)"],

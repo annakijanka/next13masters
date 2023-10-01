@@ -10806,6 +10806,11 @@ export type ProductsGetTotalCountByCategorySlugQueryVariables = Exact<{
 
 export type ProductsGetTotalCountByCategorySlugQuery = { productsConnection: { aggregate: { count: number } } };
 
+export type VariantsGetProductQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type VariantsGetProductQuery = { productSizeColorVariants: Array<{ color: ProductColor, size: ProductSize, product?: { id: string } | null }> };
+
 export type VariantsGetProductColorQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -11091,6 +11096,17 @@ export const ProductsGetTotalCountByCategorySlugDocument = new TypedDocumentStri
   }
 }
     `) as unknown as TypedDocumentString<ProductsGetTotalCountByCategorySlugQuery, ProductsGetTotalCountByCategorySlugQueryVariables>;
+export const VariantsGetProductDocument = new TypedDocumentString(`
+    query VariantsGetProduct {
+  productSizeColorVariants {
+    color
+    size
+    product {
+      id
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<VariantsGetProductQuery, VariantsGetProductQueryVariables>;
 export const VariantsGetProductColorDocument = new TypedDocumentString(`
     query VariantsGetProductColor {
   productColorVariants {

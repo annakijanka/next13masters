@@ -32,6 +32,7 @@ const documents = {
     "query ProductsGetSuggested {\n  products {\n    ...Product\n  }\n}": types.ProductsGetSuggestedDocument,
     "query ProductsGetTotalCount {\n  productsConnection {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetTotalCountDocument,
     "query ProductsGetTotalCountByCategorySlug($slug: String!) {\n  productsConnection(where: {categories_some: {slug: $slug}}) {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetTotalCountByCategorySlugDocument,
+    "query VariantsGetProduct {\n  productSizeColorVariants {\n    color\n    size\n    product {\n      id\n    }\n  }\n}": types.VariantsGetProductDocument,
     "query VariantsGetProductColor {\n  productColorVariants {\n    ...ProductColorVariant\n  }\n}": types.VariantsGetProductColorDocument,
     "query VariantsGetProductSize {\n  productSizeVariants {\n    size\n    product {\n      id\n    }\n  }\n}": types.VariantsGetProductSizeDocument,
 };
@@ -108,6 +109,10 @@ export function graphql(source: "query ProductsGetTotalCount {\n  productsConnec
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query ProductsGetTotalCountByCategorySlug($slug: String!) {\n  productsConnection(where: {categories_some: {slug: $slug}}) {\n    aggregate {\n      count\n    }\n  }\n}"): typeof import('./graphql').ProductsGetTotalCountByCategorySlugDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query VariantsGetProduct {\n  productSizeColorVariants {\n    color\n    size\n    product {\n      id\n    }\n  }\n}"): typeof import('./graphql').VariantsGetProductDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

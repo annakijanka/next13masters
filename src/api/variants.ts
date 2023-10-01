@@ -1,5 +1,9 @@
 import { executeGraphql } from "./graphqlApi";
-import { VariantsGetProductColorDocument, VariantsGetProductSizeDocument } from "@/gql/graphql";
+import {
+	VariantsGetProductColorDocument,
+	VariantsGetProductDocument,
+	VariantsGetProductSizeDocument,
+} from "@/gql/graphql";
 
 export const getProductColorVariants = async () => {
 	const graphqlResponse = await executeGraphql(VariantsGetProductColorDocument, {});
@@ -11,4 +15,10 @@ export const getProductSizeVariants = async () => {
 	const graphqlResponse = await executeGraphql(VariantsGetProductSizeDocument, {});
 
 	return graphqlResponse.productSizeVariants;
+};
+
+export const getProductVariants = async () => {
+	const graphqlResponse = await executeGraphql(VariantsGetProductDocument, {});
+
+	return graphqlResponse.productSizeColorVariants;
 };

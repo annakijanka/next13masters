@@ -6,7 +6,7 @@ import { getProductById } from "@/api/products";
 import { ProductThumbnail } from "@/ui/atoms/ProductThumbnail";
 import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
 import { ProductVariants } from "@/ui/molecules/ProductVariants";
-import { getColorVariants, getSizeVariants } from "@/helpers";
+import { getColorAndSizeVariants, getColorVariants, getSizeVariants } from "@/helpers";
 import { formatCurrency } from "@/utils";
 
 export const generateMetadata = async ({
@@ -31,8 +31,19 @@ export const generateMetadata = async ({
 
 export default async function Product({ params }: { params: { productId: string } }) {
 	const product = await getProductById(params.productId);
-	const colorsForTargetProduct = await getColorVariants(params.productId);
-	const sizesForTargetProduct = await getSizeVariants(params.productId);
+	const { colors: combinedColors, sizes: combinedSizes } = await getColorAndSizeVariants(
+		params.productId,
+	);
+
+	let colorsForTargetProduct, sizesForTargetProduct;
+
+	if (combinedColors.length > 0 && combinedSizes.length > 0) {
+		colorsForTargetProduct = combinedColors;
+		sizesForTargetProduct = combinedSizes;
+	} else {
+		colorsForTargetProduct = await getColorVariants(params.productId);
+		sizesForTargetProduct = await getSizeVariants(params.productId);
+	}
 
 	if (!product) {
 		return notFound();

@@ -1,4 +1,8 @@
-import { getProductColorVariants, getProductSizeVariants } from "@/api/variants";
+import {
+	getProductColorVariants,
+	getProductSizeVariants,
+	getProductVariants,
+} from "@/api/variants";
 import { type ProductFragment } from "@/gql/graphql";
 import { type ProductAverageRating } from "@/ui/types";
 
@@ -15,14 +19,33 @@ export const setAverageRating = (products: ProductFragment[]): ProductAverageRat
 
 export const getColorVariants = async (productId: string): Promise<string[]> => {
 	const variants = await getProductColorVariants();
-	return variants
-		.filter((variant) => variant.product?.id === productId)
-		.map((variant) => variant.color.toLowerCase());
+	return [
+		...new Set(
+			variants
+				.filter((variant) => variant.product?.id === productId)
+				.map((variant) => variant.color.toLowerCase()),
+		),
+	];
 };
 
 export const getSizeVariants = async (productId: string): Promise<string[]> => {
 	const variants = await getProductSizeVariants();
-	return variants
-		.filter((variant) => variant.product?.id === productId)
-		.map((variant) => variant.size.toLowerCase());
+	return [
+		...new Set(
+			variants
+				.filter((variant) => variant.product?.id === productId)
+				.map((variant) => variant.size.toLowerCase()),
+		),
+	];
+};
+
+export const getColorAndSizeVariants = async (
+	productId: string,
+): Promise<{ colors: string[]; sizes: string[] }> => {
+	const variants = await getProductVariants();
+	const filteredVariants = variants.filter((variant) => variant.product?.id === productId);
+	return {
+		colors: [...new Set(filteredVariants.map((variant) => variant.color.toLowerCase()))],
+		sizes: [...new Set(filteredVariants.map((variant) => variant.size.toLowerCase()))],
+	};
 };

@@ -6,7 +6,7 @@ import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductsGetTotalCountByCategorySlugDocument } from "@/gql/graphql";
 import { executeGraphql } from "@/api/graphqlApi";
 import { getCategories, getCategoryBySlug } from "@/api/categories";
-import { setAverageRating } from "@/utils";
+import { setAverageRating } from "@/helpers";
 
 const first = 4;
 

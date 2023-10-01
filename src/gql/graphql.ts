@@ -10743,6 +10743,8 @@ export type CollectionsGetQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type CollectionsGetQuery = { collections: Array<{ id: string, name: string, description?: string | null, slug: string, image: { url: string } }> };
 
+export type ProductColorVariantFragment = { color: ProductColor, product?: { id: string } | null };
+
 export type ProductDetailsFragment = { id: string, name: string, description: string, price: number, categories: Array<{ name: string, slug: string }>, images: Array<{ url: string }> };
 
 export type ProductFragment = { id: string, name: string, price: number, categories: Array<{ name: string, slug: string }>, images: Array<{ url: string }>, reviews: Array<{ rating: number }> };
@@ -10753,6 +10755,8 @@ export type ProductGetByIdQueryVariables = Exact<{
 
 
 export type ProductGetByIdQuery = { product?: { id: string, name: string, description: string, price: number, categories: Array<{ name: string, slug: string }>, images: Array<{ url: string }> } | null };
+
+export type ProductSizeVariantFragment = { size: ProductSize, product?: { id: string } | null };
 
 export type ProductsGetQueryVariables = Exact<{
   first: Scalars['Int']['input'];
@@ -10807,6 +10811,11 @@ export type VariantsGetProductColorQueryVariables = Exact<{ [key: string]: never
 
 export type VariantsGetProductColorQuery = { productColorVariants: Array<{ color: ProductColor, product?: { id: string } | null }> };
 
+export type VariantsGetProductSizeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type VariantsGetProductSizeQuery = { productSizeVariants: Array<{ size: ProductSize, product?: { id: string } | null }> };
+
 export class TypedDocumentString<TResult, TVariables>
   extends String
   implements DocumentTypeDecoration<TResult, TVariables>
@@ -10838,6 +10847,14 @@ export const CollectionFragmentDoc = new TypedDocumentString(`
   slug
 }
     `, {"fragmentName":"Collection"}) as unknown as TypedDocumentString<CollectionFragment, unknown>;
+export const ProductColorVariantFragmentDoc = new TypedDocumentString(`
+    fragment ProductColorVariant on ProductColorVariant {
+  color
+  product {
+    id
+  }
+}
+    `, {"fragmentName":"ProductColorVariant"}) as unknown as TypedDocumentString<ProductColorVariantFragment, unknown>;
 export const ProductDetailsFragmentDoc = new TypedDocumentString(`
     fragment ProductDetails on Product {
   id
@@ -10870,6 +10887,14 @@ export const ProductFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"Product"}) as unknown as TypedDocumentString<ProductFragment, unknown>;
+export const ProductSizeVariantFragmentDoc = new TypedDocumentString(`
+    fragment ProductSizeVariant on ProductSizeVariant {
+  size
+  product {
+    id
+  }
+}
+    `, {"fragmentName":"ProductSizeVariant"}) as unknown as TypedDocumentString<ProductSizeVariantFragment, unknown>;
 export const CategoriesGetDocument = new TypedDocumentString(`
     query CategoriesGet {
   categories {
@@ -11069,10 +11094,22 @@ export const ProductsGetTotalCountByCategorySlugDocument = new TypedDocumentStri
 export const VariantsGetProductColorDocument = new TypedDocumentString(`
     query VariantsGetProductColor {
   productColorVariants {
-    color
+    ...ProductColorVariant
+  }
+}
+    fragment ProductColorVariant on ProductColorVariant {
+  color
+  product {
+    id
+  }
+}`) as unknown as TypedDocumentString<VariantsGetProductColorQuery, VariantsGetProductColorQueryVariables>;
+export const VariantsGetProductSizeDocument = new TypedDocumentString(`
+    query VariantsGetProductSize {
+  productSizeVariants {
+    size
     product {
       id
     }
   }
 }
-    `) as unknown as TypedDocumentString<VariantsGetProductColorQuery, VariantsGetProductColorQueryVariables>;
+    `) as unknown as TypedDocumentString<VariantsGetProductSizeQuery, VariantsGetProductSizeQueryVariables>;

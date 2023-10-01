@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 
-export const ProductColorVariants = ({
+export const ProductSizeVariants = ({
 	variantsForTargetProduct,
 	selectedVariant,
 }: {
@@ -12,7 +12,7 @@ export const ProductColorVariants = ({
 	const searchParams = useSearchParams();
 	return (
 		<div>
-			<h3 className="font-semibold text-steel-gray">Color Variants</h3>
+			<h3 className="font-semibold text-steel-gray">Size Variants</h3>
 			<div>
 				{variantsForTargetProduct.map((variant) => (
 					<Link
@@ -20,24 +20,26 @@ export const ProductColorVariants = ({
 						key={variant}
 						href={{
 							pathname: pathname,
-							query: { ...Object.fromEntries(searchParams), color: variant },
+							query: { ...Object.fromEntries(searchParams), size: variant },
 						}}
 					>
 						<label>
 							<input
 								type="radio"
-								name="color"
+								name="size"
 								value={variant}
 								checked={selectedVariant === variant}
 								className="sr-only"
 							/>
 							<span
-								className="block h-6 w-6 cursor-pointer rounded-full border-2"
+								className="mr-1 inline-block cursor-pointer rounded bg-bridal-heath px-2 py-1 text-xs font-semibold uppercase text-steel-gray last:mr-0"
 								style={{
-									borderColor: selectedVariant === variant ? "rgb(242, 239, 234)" : variant,
-									backgroundColor: variant,
+									backgroundColor: selectedVariant === variant ? "rgb(64, 61, 88)" : "",
+									color: selectedVariant === variant ? "rgb(255, 252, 247)" : "",
 								}}
-							></span>
+							>
+								{variant}
+							</span>
 						</label>
 					</Link>
 				))}

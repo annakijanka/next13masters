@@ -4,10 +4,10 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getProductById } from "@/api/products";
 import { ProductThumbnail } from "@/ui/atoms/ProductThumbnail";
-import { formatCurrency } from "@/utils";
 import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
-import { ProductColorVariants } from "@/ui/molecules/ProductColorVariants";
-import { getProductColorVariants } from "@/api/variants";
+import { ProductVariants } from "@/ui/molecules/ProductVariants";
+import { getColorVariants, getSizeVariants } from "@/helpers";
+import { formatCurrency } from "@/utils";
 
 export const generateMetadata = async ({
 	params,
@@ -31,10 +31,8 @@ export const generateMetadata = async ({
 
 export default async function Product({ params }: { params: { productId: string } }) {
 	const product = await getProductById(params.productId);
-	const productColorVariants = await getProductColorVariants();
-	const colorsForTargetProduct = productColorVariants
-		.filter((variant) => variant.product?.id === params.productId)
-		.map((variant) => variant.color.toLowerCase());
+	const colorsForTargetProduct = await getColorVariants(params.productId);
+	const sizesForTargetProduct = await getSizeVariants(params.productId);
 
 	if (!product) {
 		return notFound();
@@ -50,7 +48,7 @@ export default async function Product({ params }: { params: { productId: string 
 							{product.name}
 						</h1>
 						<div className="mt-4 flex flex-row justify-between">
-							<div className="font-base small-caps text-lg text-steel-gray opacity-80">
+							<div className="text-xl font-extrabold leading-7 tracking-tight text-steel-gray opacity-80">
 								{formatCurrency(product.price)}
 							</div>
 							{product.categories[0] && (
@@ -68,7 +66,16 @@ export default async function Product({ params }: { params: { productId: string 
 						<div className="mt-4 space-y-6">
 							<div className="grid grid-cols-2 gap-8">
 								{colorsForTargetProduct.length > 0 && (
-									<ProductColorVariants colorsForTargetProduct={colorsForTargetProduct} />
+									<ProductVariants
+										variantsForTargetProduct={colorsForTargetProduct}
+										variantType="color"
+									/>
+								)}
+								{sizesForTargetProduct.length > 0 && (
+									<ProductVariants
+										variantsForTargetProduct={sizesForTargetProduct}
+										variantType="size"
+									/>
 								)}
 							</div>
 						</div>

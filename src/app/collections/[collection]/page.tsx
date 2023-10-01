@@ -3,7 +3,7 @@ import { type Metadata } from "next";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { getProductsByCollectionSlug } from "@/api/products";
 import { getCollectionBySlug, getCollections } from "@/api/collections";
-import { setAverageRating } from "@/utils";
+import { setAverageRating } from "@/helpers";
 
 export const generateMetadata = async ({
 	params,
@@ -43,7 +43,7 @@ export default async function Collection({ params }: { params: { collection: str
 
 	return (
 		<>
-			<h1 className="text-steel-gray mb-4 text-2xl font-extrabold tracking-tight md:text-3xl">
+			<h1 className="mb-4 text-2xl font-extrabold tracking-tight text-steel-gray md:text-3xl">
 				{collection.name}
 			</h1>
 			<p className="text-steel-gray">{collection.description}</p>

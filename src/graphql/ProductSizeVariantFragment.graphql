@@ -1,0 +1,6 @@
+fragment ProductSizeVariant on ProductSizeVariant {
+	size
+	product {
+		id
+	}
+}

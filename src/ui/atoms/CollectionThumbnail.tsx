@@ -17,7 +17,7 @@ export const CollectionThumbnail = ({
 	return (
 		<div
 			className={`w-full overflow-hidden rounded-lg shadow-md bg-bridal-heath${
-				hasAnimation ? " transition-transform duration-150 hover:scale-[1.02]" : ""
+				hasAnimation ? " transition-transform duration-300 hover:scale-[1.02]" : ""
 			}`}
 		>
 			<NextImage className="max-h-full max-w-full" src={src} alt={alt} width={640} height={432} />

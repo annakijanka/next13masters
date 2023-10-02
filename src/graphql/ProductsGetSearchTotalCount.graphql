@@ -1,0 +1,11 @@
+query ProductsGetSearchTotalCount($searchTerm: String) {
+	productsConnection(
+		where: {
+			OR: [{ name_contains: $searchTerm }, { categories_some: { name_contains: $searchTerm } }]
+		}
+	) {
+		aggregate {
+			count
+		}
+	}
+}

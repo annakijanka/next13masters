@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import { type Route } from "next";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export const ActiveLink = <T extends Route>({
 	className,
@@ -19,12 +19,15 @@ export const ActiveLink = <T extends Route>({
 	children: React.ReactNode;
 }) => {
 	const pathname = usePathname();
+	const searchParams = useSearchParams();
+	const searchTerm = searchParams.get("query");
+	const fullRoute = `${pathname}${searchTerm ? "?query=" + searchTerm : ""}`;
 	let isActive = false;
 
 	if (exact) {
-		isActive = pathname === href;
+		isActive = fullRoute === href;
 	} else {
-		isActive = pathname.startsWith(href);
+		isActive = fullRoute.startsWith(href);
 	}
 
 	return (

@@ -10782,6 +10782,22 @@ export type ProductsGetByCollectionSlugQueryVariables = Exact<{
 
 export type ProductsGetByCollectionSlugQuery = { collections: Array<{ products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string, slug: string }>, images: Array<{ url: string }>, reviews: Array<{ rating: number }> }> }> };
 
+export type ProductsGetSearchQueryVariables = Exact<{
+  first: Scalars['Int']['input'];
+  skip: Scalars['Int']['input'];
+  searchTerm?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type ProductsGetSearchQuery = { products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string, slug: string }>, images: Array<{ url: string }>, reviews: Array<{ rating: number }> }> };
+
+export type ProductsGetSearchTotalCountQueryVariables = Exact<{
+  searchTerm?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type ProductsGetSearchTotalCountQuery = { productsConnection: { aggregate: { count: number } } };
+
 export type ProductsGetSimilarQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
@@ -11036,6 +11052,42 @@ export const ProductsGetByCollectionSlugDocument = new TypedDocumentString(`
     rating
   }
 }`) as unknown as TypedDocumentString<ProductsGetByCollectionSlugQuery, ProductsGetByCollectionSlugQueryVariables>;
+export const ProductsGetSearchDocument = new TypedDocumentString(`
+    query ProductsGetSearch($first: Int!, $skip: Int!, $searchTerm: String) {
+  products(
+    first: $first
+    skip: $skip
+    where: {OR: [{name_contains: $searchTerm}, {categories_some: {name_contains: $searchTerm}}]}
+  ) {
+    ...Product
+  }
+}
+    fragment Product on Product {
+  id
+  name
+  categories(first: 1) {
+    name
+    slug
+  }
+  images(first: 1) {
+    url
+  }
+  price
+  reviews {
+    rating
+  }
+}`) as unknown as TypedDocumentString<ProductsGetSearchQuery, ProductsGetSearchQueryVariables>;
+export const ProductsGetSearchTotalCountDocument = new TypedDocumentString(`
+    query ProductsGetSearchTotalCount($searchTerm: String) {
+  productsConnection(
+    where: {OR: [{name_contains: $searchTerm}, {categories_some: {name_contains: $searchTerm}}]}
+  ) {
+    aggregate {
+      count
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<ProductsGetSearchTotalCountQuery, ProductsGetSearchTotalCountQueryVariables>;
 export const ProductsGetSimilarDocument = new TypedDocumentString(`
     query ProductsGetSimilar($slug: String!) {
   products(first: 4, where: {categories_some: {slug: $slug}}) {

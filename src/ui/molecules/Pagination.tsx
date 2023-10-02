@@ -6,11 +6,13 @@ export const Pagination = async ({
 	perPage,
 	totalCount,
 	path,
+	query = "",
 }: {
 	currentPage: string;
 	perPage: number;
 	totalCount: number;
 	path: string;
+	query?: string;
 }) => {
 	const totalPages = Math.ceil(totalCount / perPage);
 	const current = parseInt(currentPage, 10);
@@ -62,7 +64,7 @@ export const Pagination = async ({
 					if (page === "...") {
 						return (
 							<li key={index}>
-								<span className="text-steel-gray flex h-6 w-6 items-center justify-center text-sm font-medium sm:h-10 sm:w-10">
+								<span className="flex h-6 w-6 items-center justify-center text-sm font-medium text-steel-gray sm:h-10 sm:w-10">
 									...
 								</span>
 							</li>
@@ -71,9 +73,9 @@ export const Pagination = async ({
 					return (
 						<li key={page}>
 							<ActiveLink
-								href={`/${path}/${page}` as Route}
+								href={`/${path}/${page}${query}` as Route}
 								activeClassName="flex items-center rounded-lg text-sm font-medium justify-center sm:h-10 sm:w-10 h-8 w-8 text-white bg-viking"
-								className="text-steel-gray flex h-8 w-8 items-center justify-center rounded-lg text-sm font-medium transition-colors duration-150 hover:bg-gun-powder hover:text-white sm:h-10 sm:w-10"
+								className="flex h-8 w-8 items-center justify-center rounded-lg text-sm font-medium text-steel-gray transition-colors duration-300 hover:bg-gun-powder hover:text-white sm:h-10 sm:w-10"
 								exact={true}
 							>
 								{page}

@@ -92,7 +92,7 @@ export default async function Product({ params }: { params: { productId: string 
 						</div>
 						<div className="mt-8">
 							<button
-								className="inline-flex h-14 w-full items-center justify-center rounded-lg from-gun-powder from-10% via-viking via-30% to-medium-carmine to-90% px-6 text-base font-medium leading-6 text-steel-gray transition-transform duration-150 hover:scale-[1.02] enabled:bg-gradient-to-r disabled:cursor-wait disabled:bg-gray-300"
+								className="inline-flex h-14 w-full items-center justify-center rounded-lg from-gun-powder from-10% via-medium-carmine via-50% to-viking to-90% px-6 text-base font-bold leading-6 text-bridal-heath transition-transform duration-300 hover:scale-[1.02] enabled:bg-gradient-to-r disabled:cursor-wait disabled:bg-gray-300"
 								type="button"
 							>
 								Add to cart

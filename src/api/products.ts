@@ -4,6 +4,8 @@ import {
 	ProductsGetByCategorySlugDocument,
 	ProductsGetByCollectionSlugDocument,
 	ProductsGetDocument,
+	ProductsGetSearchDocument,
+	ProductsGetSearchTotalCountDocument,
 	ProductsGetSimilarDocument,
 	ProductsGetSuggestedDocument,
 } from "@/gql/graphql";
@@ -52,4 +54,22 @@ export const getProductById = async (productId: string) => {
 	const graphqlResponse = await executeGraphql(ProductGetByIdDocument, { id: productId });
 
 	return graphqlResponse.product;
+};
+
+export const getSearchProducts = async (first: number, skip: number, searchTerm: string) => {
+	const graphqlResponse = await executeGraphql(ProductsGetSearchDocument, {
+		first: first,
+		skip: skip,
+		searchTerm: searchTerm,
+	});
+
+	return graphqlResponse.products;
+};
+
+export const getProductsSearchTotalCount = async (searchTerm: string) => {
+	const graphqlResponse = await executeGraphql(ProductsGetSearchTotalCountDocument, {
+		searchTerm: searchTerm,
+	});
+
+	return graphqlResponse.productsConnection.aggregate.count;
 };

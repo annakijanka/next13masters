@@ -20,9 +20,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html className={`${roboto.variable} overflow-x-hidden`} lang="en">
 			<body className="flex min-h-screen flex-col overflow-x-hidden bg-pampas">
-				<header>
+				<header className="bg-bridal-heath pb-2 lg:bg-transparent lg:pb-0">
 					<svg
-						className="fill-bridal-heath absolute left-0 top-0 -z-[1] min-w-[1920px] -translate-x-0 sm:left-1/2 sm:-translate-x-1/2"
+						className="absolute left-0 top-0 -z-[1] hidden min-w-[1920px] -translate-x-0 fill-bridal-heath sm:left-1/2 sm:-translate-x-1/2 lg:block"
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 1440 320"
 						preserveAspectRatio="none"

@@ -16,8 +16,8 @@ export const ProductThumbnail = ({
 	}
 	return (
 		<div
-			className={`bg-bridal-heath relative w-full overflow-hidden rounded-lg shadow-md pt-[100%]${
-				hasAnimation ? " transition-transform duration-150 hover:scale-[1.02]" : ""
+			className={`relative w-full overflow-hidden rounded-lg bg-bridal-heath shadow-md pt-[100%]${
+				hasAnimation ? " transition-transform duration-300 hover:scale-[1.02]" : ""
 			}`}
 		>
 			<NextImage

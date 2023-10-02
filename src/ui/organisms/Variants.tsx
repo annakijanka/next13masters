@@ -15,15 +15,13 @@ export const Variants = async ({ productId }: { productId: string }) => {
 	}
 
 	return (
-		<div className="mt-4 space-y-6">
-			<div className="grid grid-cols-2 gap-8">
-				{colorsForTargetProduct.length > 0 && (
-					<ProductVariants variantsForTargetProduct={colorsForTargetProduct} variantType="color" />
-				)}
-				{sizesForTargetProduct.length > 0 && (
-					<ProductVariants variantsForTargetProduct={sizesForTargetProduct} variantType="size" />
-				)}
-			</div>
-		</div>
+		<>
+			{colorsForTargetProduct.length > 0 && (
+				<ProductVariants variantsForTargetProduct={colorsForTargetProduct} variantType="color" />
+			)}
+			{sizesForTargetProduct.length > 0 && (
+				<ProductVariants variantsForTargetProduct={sizesForTargetProduct} variantType="size" />
+			)}
+		</>
 	);
 };

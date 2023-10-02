@@ -62,7 +62,11 @@ export default async function Product({ params }: { params: { productId: string 
 							<p className="font-sans text-base text-steel-gray">{product.description}</p>
 						</div>
 						<Suspense fallback={<Loading />}>
-							<Variants productId={params.productId} />
+							<div className="mt-4 space-y-6">
+								<div className="grid grid-cols-2 gap-8">
+									<Variants productId={params.productId} />
+								</div>
+							</div>
 						</Suspense>
 						<div className="mt-8">
 							<button
@@ -75,16 +79,16 @@ export default async function Product({ params }: { params: { productId: string 
 					</div>
 				</div>
 			</article>
-			<aside>
-				<Suspense fallback={<Loading />}>
+			<Suspense fallback={<Loading />}>
+				<aside>
 					<div className="pb-16 pt-8">
 						<h2 className="py-8 text-xl font-extrabold leading-7 tracking-tight text-steel-gray">
 							Top rated
 						</h2>
 						<SuggestedProducts />
 					</div>
-				</Suspense>
-			</aside>
+				</aside>
+			</Suspense>
 		</>
 	);
 }

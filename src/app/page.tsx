@@ -4,6 +4,7 @@ import { CollectionsList } from "@/ui/organisms/CollectionsList";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { getSuggestedProducts } from "@/api/products";
 import { setAverageRating } from "@/helpers";
+import { Loading } from "@/ui/atoms/Loading";
 
 export default async function Home() {
 	const collections = await getCollections();
@@ -20,13 +21,13 @@ export default async function Home() {
 			<section>
 				<CollectionsList collections={collections} />
 			</section>
-			<aside>
-				<Suspense fallback={<div className="text-steel-gray">Ładowanie...</div>}>
+			<Suspense fallback={<Loading />}>
+				<aside>
 					<div className="pb-16">
 						<ProductList products={productsWithAverageRating} />
 					</div>
-				</Suspense>
-			</aside>
+				</aside>
+			</Suspense>
 		</>
 	);
 }

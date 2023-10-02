@@ -13,7 +13,13 @@ export const ProductListItem = ({ product }: ProductListItemProps) => {
 		<li>
 			<Link href={`/product/${product.id}`}>
 				<article>
-					<ProductThumbnail src={product.images[0]?.url} alt={product.name} hasAnimation={true} />
+					<ProductThumbnail
+						src={product.images[0]?.url}
+						alt={product.name}
+						hasAnimation={true}
+						width={420}
+						height={420}
+					/>
 					<ProductDescription product={product} />
 				</article>
 			</Link>

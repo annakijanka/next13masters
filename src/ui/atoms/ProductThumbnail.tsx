@@ -6,10 +6,14 @@ export const ProductThumbnail = ({
 	src,
 	alt,
 	hasAnimation = false,
+	width = 640,
+	height = 640,
 }: {
 	src?: string | StaticImport;
 	alt: string;
 	hasAnimation?: boolean;
+	width?: number;
+	height?: number;
 }) => {
 	if (!src) {
 		src = Dummy;
@@ -24,8 +28,8 @@ export const ProductThumbnail = ({
 				className="absolute left-1/2 top-1/2 max-h-full max-w-full -translate-x-1/2 -translate-y-1/2 object-contain"
 				src={src}
 				alt={alt}
-				width={640}
-				height={640}
+				width={width}
+				height={height}
 			/>
 		</div>
 	);

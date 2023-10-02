@@ -22,7 +22,7 @@ export const generateMetadata = async ({
 	}
 
 	return {
-		title: `Category ${category.name} - Page ${params.pageNumber} | Online Store`,
+		title: `${category.name} Category - Page ${params.pageNumber} | Online Store`,
 		description: `Shop the finest ${category.name} selection online. Unmatched variety, quality, and value await you.`,
 	};
 };
@@ -78,6 +78,9 @@ export default async function CategoryPage({
 
 	return (
 		<>
+			<h1 className="mb-4 text-2xl font-extrabold tracking-tight text-steel-gray md:text-3xl">
+				{`${products[0]?.categories[0]?.name}`}
+			</h1>
 			<ProductList products={productsWithAverageRating} />
 			<Pagination
 				path={`categories/${params.category}`}

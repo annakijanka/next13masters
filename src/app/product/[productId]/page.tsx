@@ -21,7 +21,7 @@ export const generateMetadata = async ({
 	}
 
 	return {
-		title: `Product ${product.name} | Online Store`,
+		title: `${product.name} Product | Online Store`,
 		description: product.description,
 		openGraph: {
 			images: product.images[0]?.url,

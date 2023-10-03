@@ -1,5 +1,8 @@
 query VariantsGetProductColor {
 	productColorVariants {
-		...ProductColorVariant
+		color
+		product {
+			id
+		}
 	}
 }

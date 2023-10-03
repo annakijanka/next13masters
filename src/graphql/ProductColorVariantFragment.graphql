@@ -1,6 +1,0 @@
-fragment ProductColorVariant on ProductColorVariant {
-	color
-	product {
-		id
-	}
-}

@@ -1,8 +1,9 @@
 import { type Metadata } from "next";
-import { getProductsSearchTotalCount, getSearchProducts } from "@/api/products";
-import { ProductList } from "@/ui/organisms/ProductList";
+import { Suspense } from "react";
+import { getProductsSearchTotalCount } from "@/api/products";
 import { Pagination } from "@/ui/molecules/Pagination";
-import { setAverageRating } from "@/helpers";
+import { SearchProductList } from "@/ui/organisms/SearchProductList";
+import { Loading } from "@/ui/atoms/Loading";
 
 export const generateMetadata = async ({
 	params,
@@ -26,31 +27,24 @@ export default async function SearchPage({
 	searchParams: { query: string };
 }) {
 	const first = 4;
-	const skip = (parseInt(params.pageNumber, 10) - 1) * first;
 	const searchTerm = searchParams.query || "";
-	const products = await getSearchProducts(first, skip, searchTerm);
 	const totalCount = await getProductsSearchTotalCount(searchTerm);
-	const productsWithAverageRating = setAverageRating(products);
 
 	return (
 		<>
 			<h1 className="mb-4 text-2xl font-extrabold tracking-tight text-steel-gray md:text-3xl">
 				{`Search "${searchParams.query}"`}
 			</h1>
-			{productsWithAverageRating.length > 0 && searchTerm !== "" ? (
-				<>
-					<ProductList products={productsWithAverageRating} />
-					<Pagination
-						path={"search"}
-						totalCount={totalCount}
-						currentPage={params.pageNumber}
-						perPage={first}
-						query={`?query=${searchTerm}`}
-					/>
-				</>
-			) : (
-				<p>No products found for the search term.</p>
-			)}
+			<Suspense fallback={<Loading />}>
+				<SearchProductList pageNumber={params.pageNumber} first={first} searchTerm={searchTerm} />
+			</Suspense>
+			<Pagination
+				path={"search"}
+				totalCount={totalCount}
+				currentPage={params.pageNumber}
+				perPage={first}
+				query={`?query=${searchTerm}`}
+			/>
 		</>
 	);
 }

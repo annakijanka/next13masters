@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import { type Metadata } from "next";
-import { ProductList } from "@/ui/organisms/ProductList";
-import { getProductsByCollectionSlug } from "@/api/products";
+import { Suspense } from "react";
 import { getCollectionBySlug, getCollections } from "@/api/collections";
-import { setAverageRating } from "@/helpers";
+import { CollectionProductList } from "@/ui/organisms/CollectionProductList";
+import { Loading } from "@/ui/atoms/Loading";
 
 export const generateMetadata = async ({
 	params,
@@ -32,14 +32,11 @@ export const generateStaticParams = async () => {
 };
 
 export default async function Collection({ params }: { params: { collection: string } }) {
-	const products = await getProductsByCollectionSlug(params.collection);
 	const collection = await getCollectionBySlug(params.collection);
 
-	if (!products || !collection) {
+	if (!collection) {
 		return notFound();
 	}
-
-	const productsWithAverageRating = setAverageRating(products);
 
 	return (
 		<>
@@ -47,7 +44,9 @@ export default async function Collection({ params }: { params: { collection: str
 				{collection.name}
 			</h1>
 			<p className="text-steel-gray">{collection.description}</p>
-			<ProductList products={productsWithAverageRating} />
+			<Suspense fallback={<Loading />}>
+				<CollectionProductList collection={params.collection} />
+			</Suspense>
 		</>
 	);
 }

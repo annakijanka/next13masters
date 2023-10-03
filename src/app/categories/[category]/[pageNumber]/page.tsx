@@ -1,14 +1,12 @@
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getProductsByCategorySlug } from "@/api/products";
-import { ProductList } from "@/ui/organisms/ProductList";
+import { Suspense } from "react";
 import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductsGetTotalCountByCategorySlugDocument } from "@/gql/graphql";
 import { executeGraphql } from "@/api/graphqlApi";
 import { getCategories, getCategoryBySlug } from "@/api/categories";
-import { setAverageRating } from "@/helpers";
-
-const first = 4;
+import { CategoryProductList } from "@/ui/organisms/CategoryProductList";
+import { Loading } from "@/ui/atoms/Loading";
 
 export const generateMetadata = async ({
 	params,
@@ -63,25 +61,25 @@ export default async function CategoryPage({
 }: {
 	params: { category: string; pageNumber: string };
 }) {
-	const skip = (parseInt(params.pageNumber, 10) - 1) * first;
-	const products = await getProductsByCategorySlug(first, skip, params.category);
+	const category = await getCategoryBySlug(params.category);
 	const graphqlResponse = await executeGraphql(ProductsGetTotalCountByCategorySlugDocument, {
 		slug: params.category,
 	});
 	const totalCount = graphqlResponse.productsConnection.aggregate.count;
-
-	if (!products) {
-		return notFound();
-	}
-
-	const productsWithAverageRating = setAverageRating(products);
+	const first = 4;
 
 	return (
 		<>
 			<h1 className="mb-4 text-2xl font-extrabold tracking-tight text-steel-gray md:text-3xl">
-				{`${products[0]?.categories[0]?.name}`}
+				{category?.name}
 			</h1>
-			<ProductList products={productsWithAverageRating} />
+			<Suspense fallback={<Loading />}>
+				<CategoryProductList
+					pageNumber={params.pageNumber}
+					first={first}
+					category={params.category}
+				/>
+			</Suspense>
 			<Pagination
 				path={`categories/${params.category}`}
 				totalCount={totalCount}

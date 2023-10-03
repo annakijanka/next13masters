@@ -1,7 +1,8 @@
 import { CollectionListItem } from "@/ui/molecules/CollectionListItem";
-import { type CollectionFragment } from "@/gql/graphql";
+import { getCollections } from "@/api/collections";
 
-export const CollectionsList = ({ collections }: { collections: CollectionFragment[] }) => {
+export const CollectionList = async () => {
+	const collections = await getCollections();
 	return (
 		<>
 			<h1 className="sr-only">Collections</h1>

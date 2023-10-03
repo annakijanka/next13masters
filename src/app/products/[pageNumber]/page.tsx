@@ -1,11 +1,10 @@
-import { notFound } from "next/navigation";
 import { type Metadata } from "next";
-import { getProducts } from "@/api/products";
+import { Suspense } from "react";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { executeGraphql } from "@/api/graphqlApi";
 import { ProductsGetTotalCountDocument } from "@/gql/graphql";
 import { Pagination } from "@/ui/molecules/Pagination";
-import { setAverageRating } from "@/helpers";
+import { Loading } from "@/ui/atoms/Loading";
 
 const graphqlResponse = await executeGraphql(ProductsGetTotalCountDocument, {});
 const totalCount = graphqlResponse.productsConnection.aggregate.count;
@@ -30,18 +29,11 @@ export const generateStaticParams = async () => {
 };
 
 export default async function ProductsPage({ params }: { params: { pageNumber: string } }) {
-	const skip = (parseInt(params.pageNumber, 10) - 1) * first;
-	const products = await getProducts(first, skip);
-
-	if (!products) {
-		return notFound();
-	}
-
-	const productsWithAverageRating = setAverageRating(products);
-
 	return (
 		<>
-			<ProductList products={productsWithAverageRating} />
+			<Suspense fallback={<Loading />}>
+				<ProductList pageNumber={params.pageNumber} first={first} />
+			</Suspense>
 			<Pagination
 				path={"products"}
 				totalCount={totalCount}

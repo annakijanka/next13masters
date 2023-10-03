@@ -1,13 +1,12 @@
-import { getProducts } from "@/api/products";
+import { getSimilarProducts } from "@/api/products";
 import { setAverageRating } from "@/helpers";
 import { ProductListItem } from "@/ui/molecules/ProductListItem";
 
-export const ProductList = async ({ pageNumber, first }: { pageNumber: string; first: number }) => {
-	const skip = (parseInt(pageNumber, 10) - 1) * first;
-	const products = await getProducts(first, skip);
+export const SimilarProductList = async ({ category }: { category: string }) => {
+	const products = await getSimilarProducts(category);
 
 	if (!products) {
-		return;
+		return <p className="font-sans text-base text-steel-gray">No similar products.</p>;
 	}
 
 	const productsWithAverageRating = setAverageRating(products);

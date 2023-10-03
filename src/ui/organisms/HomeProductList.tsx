@@ -1,16 +1,15 @@
-import { getProducts } from "@/api/products";
+import { getSuggestedProducts } from "@/api/products";
 import { setAverageRating } from "@/helpers";
 import { ProductListItem } from "@/ui/molecules/ProductListItem";
 
-export const ProductList = async ({ pageNumber, first }: { pageNumber: string; first: number }) => {
-	const skip = (parseInt(pageNumber, 10) - 1) * first;
-	const products = await getProducts(first, skip);
+export const HomeProductList = async () => {
+	const products = await getSuggestedProducts();
 
 	if (!products) {
 		return;
 	}
 
-	const productsWithAverageRating = setAverageRating(products);
+	const productsWithAverageRating = setAverageRating(products).slice(0, 4);
 
 	return (
 		<ul

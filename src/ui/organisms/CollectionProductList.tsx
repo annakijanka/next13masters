@@ -1,10 +1,9 @@
-import { getProducts } from "@/api/products";
+import { getProductsByCollectionSlug } from "@/api/products";
 import { setAverageRating } from "@/helpers";
 import { ProductListItem } from "@/ui/molecules/ProductListItem";
 
-export const ProductList = async ({ pageNumber, first }: { pageNumber: string; first: number }) => {
-	const skip = (parseInt(pageNumber, 10) - 1) * first;
-	const products = await getProducts(first, skip);
+export const CollectionProductList = async ({ collection }: { collection: string }) => {
+	const products = await getProductsByCollectionSlug(collection);
 
 	if (!products) {
 		return;

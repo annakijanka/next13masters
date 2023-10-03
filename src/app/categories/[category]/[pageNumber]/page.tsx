@@ -61,12 +61,17 @@ export default async function CategoryPage({
 }: {
 	params: { category: string; pageNumber: string };
 }) {
-	const category = await getCategoryBySlug(params.category);
 	const graphqlResponse = await executeGraphql(ProductsGetTotalCountByCategorySlugDocument, {
 		slug: params.category,
 	});
 	const totalCount = graphqlResponse.productsConnection.aggregate.count;
 	const first = 4;
+
+	if (Math.ceil(totalCount / first) < parseInt(params.pageNumber, 10)) {
+		return notFound();
+	}
+
+	const category = await getCategoryBySlug(params.category);
 
 	return (
 		<>

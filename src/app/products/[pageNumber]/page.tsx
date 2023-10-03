@@ -1,5 +1,6 @@
 import { type Metadata } from "next";
 import { Suspense } from "react";
+import { notFound } from "next/navigation";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { executeGraphql } from "@/api/graphqlApi";
 import { ProductsGetTotalCountDocument } from "@/gql/graphql";
@@ -9,6 +10,7 @@ import { Loading } from "@/ui/atoms/Loading";
 const graphqlResponse = await executeGraphql(ProductsGetTotalCountDocument, {});
 const totalCount = graphqlResponse.productsConnection.aggregate.count;
 const first = 4;
+const totalPages = Math.ceil(totalCount / first);
 
 export const generateMetadata = async ({
 	params,
@@ -23,12 +25,15 @@ export const generateMetadata = async ({
 };
 
 export const generateStaticParams = async () => {
-	const totalPages = Math.ceil(totalCount / first);
 	const pages = Array.from({ length: totalPages }, (_, index) => (index + 1).toString());
 	return pages.map((page) => ({ pageNumber: page }));
 };
 
 export default async function ProductsPage({ params }: { params: { pageNumber: string } }) {
+	if (totalPages < parseInt(params.pageNumber, 10)) {
+		return notFound();
+	}
+
 	return (
 		<>
 			<Suspense fallback={<Loading />}>

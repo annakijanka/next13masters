@@ -16,6 +16,11 @@ export const Pagination = async ({
 }) => {
 	const totalPages = Math.ceil(totalCount / perPage);
 	const current = parseInt(currentPage, 10);
+
+	if (totalPages < current) {
+		return;
+	}
+
 	let pages: (number | string)[] = [];
 
 	if (totalPages <= 11) {

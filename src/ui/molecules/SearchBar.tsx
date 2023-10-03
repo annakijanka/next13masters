@@ -14,13 +14,13 @@ export const SearchBar = () => {
 			clearTimeout(timerRef.current);
 		}
 		timerRef.current = window.setTimeout(() => {
-			router.push(`/search?query=${e.target.value}`);
+			router.push(`/search?query=${encodeURIComponent(e.target.value)}`);
 		}, 500);
 	};
 
 	const handleSearch = (e: FormEvent) => {
 		e.preventDefault();
-		router.push(`/search?query=${query}`);
+		router.push(`/search?query=${encodeURIComponent(query)}`);
 	};
 
 	return (

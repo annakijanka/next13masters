@@ -44,7 +44,7 @@ export default async function SearchPage({
 					totalCount={totalCount}
 					currentPage={params.pageNumber}
 					perPage={first}
-					query={`?query=${searchTerm}`}
+					query={`?query=${encodeURIComponent(searchTerm)}`}
 				/>
 			) : null}
 		</>

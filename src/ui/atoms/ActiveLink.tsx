@@ -21,7 +21,7 @@ export const ActiveLink = <T extends Route>({
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
 	const searchTerm = searchParams.get("query");
-	const fullRoute = `${pathname}${searchTerm ? "?query=" + searchTerm : ""}`;
+	const fullRoute = `${pathname}${searchTerm ? "?query=" + encodeURIComponent(searchTerm) : ""}`;
 	let isActive = false;
 
 	if (exact) {

@@ -3,7 +3,7 @@ import { type NavLink } from "@/ui/types";
 import { getCategories } from "@/api/categories";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 
-export const CategoryList = async () => {
+export const CategoryLinks = async () => {
 	const categories = await getCategories();
 	const baseLinks: NavLink[] = [
 		{ href: "/", text: "Home", exact: true },

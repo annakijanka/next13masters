@@ -3,7 +3,7 @@ import { Loading } from "@/ui/atoms/Loading";
 import { HomeProductList } from "@/ui/organisms/HomeProductList";
 import { CollectionList } from "@/ui/organisms/CollectionList";
 
-export default async function Home() {
+export default function Home() {
 	return (
 		<>
 			<section>

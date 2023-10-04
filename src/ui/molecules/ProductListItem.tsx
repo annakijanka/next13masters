@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { type ProductAverageRating } from "../types";
+import { type ProductAverageRating } from "@/ui/types";
 import { ProductThumbnail } from "@/ui/atoms/ProductThumbnail";
 import { ProductDescription } from "@/ui/atoms/ProductDescription";
 import { type ProductFragment } from "@/gql/graphql";

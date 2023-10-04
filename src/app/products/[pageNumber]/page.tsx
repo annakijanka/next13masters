@@ -29,7 +29,7 @@ export const generateStaticParams = async () => {
 	return pages.map((page) => ({ pageNumber: page }));
 };
 
-export default async function ProductsPage({ params }: { params: { pageNumber: string } }) {
+export default function ProductsPage({ params }: { params: { pageNumber: string } }) {
 	if (totalPages < parseInt(params.pageNumber, 10)) {
 		return notFound();
 	}
@@ -38,13 +38,13 @@ export default async function ProductsPage({ params }: { params: { pageNumber: s
 		<>
 			<Suspense fallback={<Loading />}>
 				<ProductList pageNumber={params.pageNumber} first={first} />
+				<Pagination
+					path={"products"}
+					totalCount={totalCount}
+					currentPage={params.pageNumber}
+					perPage={first}
+				/>
 			</Suspense>
-			<Pagination
-				path={"products"}
-				totalCount={totalCount}
-				currentPage={params.pageNumber}
-				perPage={first}
-			/>
 		</>
 	);
 }

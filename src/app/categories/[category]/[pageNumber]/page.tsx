@@ -84,13 +84,13 @@ export default async function CategoryPage({
 					first={first}
 					category={params.category}
 				/>
+				<Pagination
+					path={`categories/${params.category}`}
+					totalCount={totalCount}
+					currentPage={params.pageNumber}
+					perPage={first}
+				/>
 			</Suspense>
-			<Pagination
-				path={`categories/${params.category}`}
-				totalCount={totalCount}
-				currentPage={params.pageNumber}
-				perPage={first}
-			/>
 		</>
 	);
 }

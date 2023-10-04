@@ -1,8 +1,10 @@
 import "./globals.css";
-import type { Metadata, Route } from "next";
+import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
+import { Suspense } from "react";
 import { Navbar } from "@/ui/organisms/Navbar";
-import { ActiveLink } from "@/ui/atoms/ActiveLink";
+import { FooterLinks } from "@/ui/molecules/FooterLinks";
+import { Loading } from "@/ui/atoms/Loading";
 
 const roboto = Roboto({
 	weight: ["100", "300", "400", "500", "700", "900"],
@@ -11,6 +13,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
+	metadataBase: new URL("https://media.graphassets.com"),
 	title: "Homepage | Online Store",
 	description: "Welcome to your one-stop shop for quality and savings.",
 };
@@ -50,35 +53,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					<div className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
 						<nav aria-label="Footer">
 							<h3 className="font-semibold text-pampas">Legal Information</h3>
-							<ul className="mt-2">
-								<li>
-									<ActiveLink
-										className="text-sm leading-6 text-pampas hover:text-viking"
-										activeClassName="text-sm leading-6 text-viking"
-										href={`/privacy-policy` as Route}
-									>
-										Privacy Policy
-									</ActiveLink>
-								</li>
-								<li>
-									<ActiveLink
-										className="text-sm leading-6 text-pampas hover:text-viking"
-										activeClassName="text-sm leading-6 text-viking"
-										href={`/terms-of-service` as Route}
-									>
-										Terms of Service
-									</ActiveLink>
-								</li>
-								<li>
-									<ActiveLink
-										className="text-sm leading-6 text-pampas hover:text-viking"
-										activeClassName="text-sm leading-6 text-viking"
-										href={`/return-policy` as Route}
-									>
-										Return Policy
-									</ActiveLink>
-								</li>
-							</ul>
+							<Suspense fallback={<Loading />}>
+								<FooterLinks />
+							</Suspense>
 						</nav>
 						<p className="mt-4 text-sm leading-7 text-pampas">© {currentYear} Anna Kijanka</p>
 					</div>

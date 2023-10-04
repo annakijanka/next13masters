@@ -37,16 +37,16 @@ export default async function SearchPage({
 			</h1>
 			<Suspense fallback={<Loading />}>
 				<SearchProductList pageNumber={params.pageNumber} first={first} searchTerm={searchTerm} />
+				{searchTerm !== undefined && searchTerm !== "" ? (
+					<Pagination
+						path={"search"}
+						totalCount={totalCount}
+						currentPage={params.pageNumber}
+						perPage={first}
+						query={`?query=${encodeURIComponent(searchTerm)}`}
+					/>
+				) : null}
 			</Suspense>
-			{searchTerm !== undefined && searchTerm !== "" ? (
-				<Pagination
-					path={"search"}
-					totalCount={totalCount}
-					currentPage={params.pageNumber}
-					perPage={first}
-					query={`?query=${encodeURIComponent(searchTerm)}`}
-				/>
-			) : null}
 		</>
 	);
 }

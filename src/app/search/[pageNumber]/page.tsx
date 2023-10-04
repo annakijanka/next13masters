@@ -1,9 +1,8 @@
 import { type Metadata } from "next";
 import { Suspense } from "react";
-import { getProductsSearchTotalCount } from "@/api/products";
-import { Pagination } from "@/ui/molecules/Pagination";
 import { SearchProductList } from "@/ui/organisms/SearchProductList";
 import { Loading } from "@/ui/atoms/Loading";
+import { SearchPagination } from "@/ui/organisms/SearchPagination";
 
 export const generateMetadata = async ({
 	params,
@@ -28,8 +27,6 @@ export default async function SearchPage({
 }) {
 	const first = 4;
 	const searchTerm = searchParams.query || "";
-	const totalCount = await getProductsSearchTotalCount(searchTerm);
-
 	return (
 		<>
 			<h1 className="mb-4 text-2xl font-extrabold tracking-tight text-steel-gray md:text-3xl">
@@ -38,13 +35,7 @@ export default async function SearchPage({
 			<Suspense fallback={<Loading />}>
 				<SearchProductList pageNumber={params.pageNumber} first={first} searchTerm={searchTerm} />
 				{searchTerm !== undefined && searchTerm !== "" ? (
-					<Pagination
-						path={"search"}
-						totalCount={totalCount}
-						currentPage={params.pageNumber}
-						perPage={first}
-						query={`?query=${encodeURIComponent(searchTerm)}`}
-					/>
+					<SearchPagination pageNumber={params.pageNumber} first={first} searchTerm={searchTerm} />
 				) : null}
 			</Suspense>
 		</>

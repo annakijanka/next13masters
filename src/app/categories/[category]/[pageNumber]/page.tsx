@@ -1,12 +1,10 @@
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { Pagination } from "@/ui/molecules/Pagination";
-import { ProductsGetTotalCountByCategorySlugDocument } from "@/gql/graphql";
-import { executeGraphql } from "@/api/graphqlApi";
 import { getCategories, getCategoryBySlug } from "@/api/categories";
 import { CategoryProductList } from "@/ui/organisms/CategoryProductList";
 import { Loading } from "@/ui/atoms/Loading";
+import { CategoryPagination } from "@/ui/organisms/CategoryPagination";
 
 export const generateMetadata = async ({
 	params,
@@ -61,18 +59,8 @@ export default async function CategoryPage({
 }: {
 	params: { category: string; pageNumber: string };
 }) {
-	const graphqlResponse = await executeGraphql(ProductsGetTotalCountByCategorySlugDocument, {
-		slug: params.category,
-	});
-	const totalCount = graphqlResponse.productsConnection.aggregate.count;
 	const first = 4;
-
-	if (Math.ceil(totalCount / first) < parseInt(params.pageNumber, 10)) {
-		return notFound();
-	}
-
 	const category = await getCategoryBySlug(params.category);
-
 	return (
 		<>
 			<h1 className="mb-4 text-2xl font-extrabold tracking-tight text-steel-gray md:text-3xl">
@@ -84,11 +72,10 @@ export default async function CategoryPage({
 					first={first}
 					category={params.category}
 				/>
-				<Pagination
-					path={`categories/${params.category}`}
-					totalCount={totalCount}
-					currentPage={params.pageNumber}
-					perPage={first}
+				<CategoryPagination
+					pageNumber={params.pageNumber}
+					first={first}
+					category={params.category}
 				/>
 			</Suspense>
 		</>

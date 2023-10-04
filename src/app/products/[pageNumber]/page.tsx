@@ -25,8 +25,8 @@ export default function ProductsPage({ params }: { params: { pageNumber: string 
 	const first = 4;
 	return (
 		<>
+			<ProductList pageNumber={params.pageNumber} first={first} />
 			<Suspense fallback={<Loading />}>
-				<ProductList pageNumber={params.pageNumber} first={first} />
 				<ProductsPagination pageNumber={params.pageNumber} first={first} />
 			</Suspense>
 		</>

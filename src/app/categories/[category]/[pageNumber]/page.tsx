@@ -66,12 +66,12 @@ export default async function CategoryPage({
 			<h1 className="mb-4 text-2xl font-extrabold tracking-tight text-steel-gray md:text-3xl">
 				{category?.name}
 			</h1>
+			<CategoryProductList
+				pageNumber={params.pageNumber}
+				first={first}
+				category={params.category}
+			/>
 			<Suspense fallback={<Loading />}>
-				<CategoryProductList
-					pageNumber={params.pageNumber}
-					first={first}
-					category={params.category}
-				/>
 				<CategoryPagination
 					pageNumber={params.pageNumber}
 					first={first}

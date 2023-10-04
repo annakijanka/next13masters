@@ -1,9 +1,7 @@
 import { notFound } from "next/navigation";
 import { type Metadata } from "next";
-import { Suspense } from "react";
 import { getCollectionBySlug, getCollections } from "@/api/collections";
 import { CollectionProductList } from "@/ui/organisms/CollectionProductList";
-import { Loading } from "@/ui/atoms/Loading";
 
 export const generateMetadata = async ({
 	params,
@@ -44,9 +42,7 @@ export default async function Collection({ params }: { params: { collection: str
 				{collection.name}
 			</h1>
 			<p className="text-steel-gray">{collection.description}</p>
-			<Suspense fallback={<Loading />}>
-				<CollectionProductList collection={params.collection} />
-			</Suspense>
+			<CollectionProductList collection={params.collection} />
 		</>
 	);
 }

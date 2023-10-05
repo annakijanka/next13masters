@@ -6,8 +6,8 @@ export const FooterLinks = () => {
 		<ul className="mt-2">
 			<li>
 				<ActiveLink
-					className="text-sm leading-6 text-pampas hover:text-viking"
-					activeClassName="text-sm leading-6 text-viking"
+					className="hover:text-java text-sm leading-6 text-pampas"
+					activeClassName="text-sm leading-6 text-java"
 					href={`/privacy-policy` as Route}
 				>
 					Privacy Policy
@@ -15,8 +15,8 @@ export const FooterLinks = () => {
 			</li>
 			<li>
 				<ActiveLink
-					className="text-sm leading-6 text-pampas hover:text-viking"
-					activeClassName="text-sm leading-6 text-viking"
+					className="hover:text-java text-sm leading-6 text-pampas"
+					activeClassName="text-sm leading-6 text-java"
 					href={`/terms-of-service` as Route}
 				>
 					Terms of Service
@@ -24,8 +24,8 @@ export const FooterLinks = () => {
 			</li>
 			<li>
 				<ActiveLink
-					className="text-sm leading-6 text-pampas hover:text-viking"
-					activeClassName="text-sm leading-6 text-viking"
+					className="hover:text-java text-sm leading-6 text-pampas"
+					activeClassName="text-sm leading-6 text-java"
 					href={`/return-policy` as Route}
 				>
 					Return Policy

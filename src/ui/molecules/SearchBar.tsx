@@ -33,7 +33,7 @@ export const SearchBar = () => {
 				placeholder="Search..."
 			/>
 			<button
-				className="h-10 rounded-lg bg-gun-powder px-4 text-base font-bold leading-4 text-bridal-heath transition-transform duration-300 hover:scale-[1.02]"
+				className="h-10 rounded-lg bg-gun-powder px-4 text-base font-bold leading-4 text-bridal-heath transition-transform duration-300 hover:scale-[1.04]"
 				type="submit"
 			>
 				Search

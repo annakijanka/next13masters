@@ -17,7 +17,7 @@ export const generateMetadata = async ({
 };
 
 export const generateStaticParams = async () => {
-	const pages = Array.from({ length: 4 }, (_, index) => (index + 1).toString());
+	const pages = Array.from({ length: 3 }, (_, index) => (index + 1).toString());
 	return pages.map((page) => ({ pageNumber: page }));
 };
 

@@ -79,7 +79,7 @@ export const Pagination = async ({
 						<li key={page}>
 							<ActiveLink
 								href={`/${path}/${page}${query}` as Route}
-								activeClassName="flex items-center rounded-lg text-sm font-medium justify-center sm:h-10 sm:w-10 h-8 w-8 text-white bg-viking"
+								activeClassName="flex items-center rounded-lg text-sm font-medium justify-center sm:h-10 sm:w-10 h-8 w-8 text-white bg-java"
 								className="flex h-8 w-8 items-center justify-center rounded-lg text-sm font-medium text-steel-gray transition-colors duration-300 hover:bg-gun-powder hover:text-white sm:h-10 sm:w-10"
 								exact={true}
 							>

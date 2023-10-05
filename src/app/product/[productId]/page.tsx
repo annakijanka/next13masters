@@ -36,6 +36,11 @@ export default async function Product({ params }: { params: { productId: string 
 		return notFound();
 	}
 
+	async function addProductToCartAction(formData: FormData) {
+		"use server";
+		console.log(formData);
+	}
+
 	return (
 		<>
 			<article>
@@ -51,7 +56,7 @@ export default async function Product({ params }: { params: { productId: string 
 							</div>
 							{product.categories[0] && (
 								<Link
-									className="font-base small-caps text-lg text-steel-gray opacity-70 hover:text-medium-carmine hover:opacity-100"
+									className="font-base small-caps hover:text-brick-red text-lg text-steel-gray opacity-70 hover:opacity-100"
 									href={`/categories/${product.categories[0].slug}`}
 								>
 									{product.categories[0].name}
@@ -69,12 +74,15 @@ export default async function Product({ params }: { params: { productId: string 
 							</div>
 						</Suspense>
 						<div className="mt-8">
-							<button
-								className="inline-flex h-14 w-full items-center justify-center rounded-lg from-gun-powder from-10% via-medium-carmine via-50% to-viking to-90% px-6 text-base font-bold leading-6 text-bridal-heath transition-transform duration-300 hover:scale-[1.02] enabled:bg-gradient-to-r disabled:cursor-wait disabled:bg-gray-300"
-								type="button"
-							>
-								Add to cart
-							</button>
+							<form action={addProductToCartAction}>
+								<input type="text" name="productId" value={product.id} hidden />
+								<button
+									className="via-brick-red to-java inline-flex h-14 w-full items-center justify-center rounded-lg from-gun-powder from-10% via-50% to-90% px-6 text-base font-bold leading-6 text-bridal-heath transition-transform duration-300 hover:scale-[1.04] enabled:bg-gradient-to-r disabled:cursor-wait disabled:bg-gray-300"
+									type="submit"
+								>
+									Add to cart
+								</button>
+							</form>
 						</div>
 					</div>
 				</div>

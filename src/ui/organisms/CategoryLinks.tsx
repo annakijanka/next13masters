@@ -25,8 +25,8 @@ export const CategoryLinks = async () => {
 					}lg:px-0`}
 				>
 					<ActiveLink
-						className="flex h-full w-full min-w-[3rem] items-center justify-center border-b-4 border-transparent px-1 pt-1 text-center text-sm font-medium text-steel-gray hover:border-medium-carmine"
-						activeClassName="flex h-full w-full min-w-[3rem] items-center justify-center border-b-4 px-1 pt-1 text-center text-sm font-medium text-steel-gray hover:border-medium-carmine border-viking"
+						className="hover:border-brick-red flex h-full w-full min-w-[3rem] items-center justify-center border-b-4 border-transparent px-1 pt-1 text-center text-sm font-medium text-steel-gray"
+						activeClassName="flex h-full w-full min-w-[3rem] items-center justify-center border-b-4 px-1 pt-1 text-center text-sm font-medium text-steel-gray hover:border-brick-red border-java"
 						href={link.href as Route}
 						exact={link.exact}
 					>

@@ -14,8 +14,8 @@ const config: Config = {
 				"bridal-heath": "rgba(var(--color-bridal-heath), <alpha-value>)",
 				"gun-powder": "rgba(var(--color-gun-powder), <alpha-value>)",
 				"steel-gray": "rgba(var(--color-steel-gray), <alpha-value>)",
-				viking: "rgba(var(--color-viking), <alpha-value>)",
-				"medium-carmine": "rgba(var(--color-medium-carmine), <alpha-value>)",
+				java: "rgba(var(--color-java), <alpha-value>)",
+				"brick-red": "rgba(var(--color-brick-red), <alpha-value>)",
 				chenin: "rgba(var(--color-chenin), <alpha-value>)",
 			},
 			fontFamily: {

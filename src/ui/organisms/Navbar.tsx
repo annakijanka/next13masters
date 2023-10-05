@@ -31,7 +31,7 @@ export const Navbar = async () => {
 				<div className="ml-auto h-12 lg:ml-4 lg:h-16">
 					<Link
 						href="/cart"
-						className="flex h-full w-16 items-center justify-center border-b-4 border-transparent px-2 text-center text-sm font-medium text-steel-gray hover:border-medium-carmine"
+						className="hover:border-brick-red flex h-full w-16 items-center justify-center border-b-4 border-transparent px-2 text-center text-sm font-medium text-steel-gray"
 					>
 						<ShoppingCart />
 						<div className="w-4">

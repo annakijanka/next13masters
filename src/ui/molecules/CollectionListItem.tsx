@@ -13,7 +13,7 @@ export const CollectionListItem = ({ collection }: CollectionListItemProps) => {
 			<Link href={`/collections/${collection.slug}`}>
 				<article>
 					<CollectionThumbnail
-						src={collection.image.url}
+						src={collection.image?.url}
 						alt={collection.name}
 						hasAnimation={true}
 					/>

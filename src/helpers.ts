@@ -8,8 +8,11 @@ import { type ProductAverageRating } from "@/ui/types";
 
 export const setAverageRating = (products: ProductFragment[]): ProductAverageRating[] => {
 	return products.map((product) => {
-		const totalRating = product.reviews.reduce((acc, review) => acc + review.rating, 0);
-		const averageRating = product.reviews.length ? totalRating / product.reviews.length : 0;
+		const validReviews = product.reviews.filter(
+			(review) => review.rating !== null && review.rating !== undefined,
+		);
+		const totalRating = validReviews.reduce((acc, review) => acc + review.rating!, 0);
+		const averageRating = validReviews.length ? totalRating / validReviews.length : 0;
 		return {
 			...product,
 			averageRating,

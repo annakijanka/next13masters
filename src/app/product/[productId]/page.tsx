@@ -2,15 +2,14 @@ import { Suspense } from "react";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { cookies } from "next/headers";
 import { getProductById } from "@/api/products";
 import { ProductThumbnail } from "@/ui/atoms/ProductThumbnail";
 import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
 import { formatCurrency } from "@/utils";
 import { Loading } from "@/ui/atoms/Loading";
 import { Variants } from "@/ui/organisms/Variants";
-import { addCartItem, createCart, getCartById } from "@/api/orders";
-import { type OrderFragment } from "@/gql/graphql";
+import { AddToCartButton } from "@/ui/atoms/AddToCartButton";
+import { addProductToCart, getOrCreateCart } from "@/helpers";
 
 export const generateMetadata = async ({
 	params,
@@ -80,12 +79,7 @@ export default async function Product({ params }: { params: { productId: string 
 						<div className="mt-8">
 							<form action={addProductToCartAction}>
 								<input type="text" name="productId" value={product.id} hidden />
-								<button
-									className="inline-flex h-14 w-full items-center justify-center rounded-lg from-gun-powder from-10% via-brick-red via-50% to-java to-90% px-6 text-base font-bold leading-6 text-bridal-heath transition-transform duration-300 hover:scale-[1.04] enabled:bg-gradient-to-r disabled:cursor-wait disabled:bg-gray-300"
-									type="submit"
-								>
-									Add to cart
-								</button>
+								<AddToCartButton />
 							</form>
 						</div>
 					</div>
@@ -103,34 +97,4 @@ export default async function Product({ params }: { params: { productId: string 
 			</Suspense>
 		</>
 	);
-}
-
-async function getOrCreateCart(): Promise<OrderFragment> {
-	const cartId = cookies().get("cartId")?.value;
-	if (cartId) {
-		const cart = await getCartById(cartId);
-		if (cart) {
-			return cart;
-		}
-	}
-
-	const newCart = await createCart();
-	if (!newCart) {
-		throw new Error("Failed to create cart");
-	}
-	cookies().set("cartId", newCart.id, {
-		expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 2),
-		httpOnly: true,
-		sameSite: "lax",
-	});
-	return newCart;
-}
-
-async function addProductToCart(cartId: string, productId: string) {
-	const product = await getProductById(productId);
-	if (!product) {
-		throw new Error(`Product with id ${productId} not found`);
-	}
-
-	await addCartItem(product.price, cartId, productId);
 }

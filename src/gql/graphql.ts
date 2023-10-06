@@ -10733,14 +10733,14 @@ export type CartAddItemMutation = { createOrderItem?: { id: string } | null };
 export type CartCreateMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CartCreateMutation = { createOrder?: { id: string } | null };
+export type CartCreateMutation = { createOrder?: { id: string, orderItems: Array<{ id: string, quantity: number, total: number, product?: { id: string, name: string, price: number } | null }> } | null };
 
 export type CartGetByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type CartGetByIdQuery = { order?: { id: string } | null };
+export type CartGetByIdQuery = { order?: { id: string, orderItems: Array<{ id: string, quantity: number, total: number, product?: { id: string, name: string, price: number } | null }> } | null };
 
 export type CategoriesGetQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -10770,7 +10770,7 @@ export type CollectionsGetQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type CollectionsGetQuery = { collections: Array<{ id: string, name: string, description?: string | null, slug: string, image?: { url: string } | null }> };
 
-export type OrderFragment = { id: string };
+export type OrderFragment = { id: string, orderItems: Array<{ id: string, quantity: number, total: number, product?: { id: string, name: string, price: number } | null }> };
 
 export type ProductDetailsFragment = { id: string, name: string, description: string, price: number, categories: Array<{ name: string, slug: string }>, images: Array<{ url: string }> };
 
@@ -10896,6 +10896,16 @@ export const CollectionFragmentDoc = new TypedDocumentString(`
 export const OrderFragmentDoc = new TypedDocumentString(`
     fragment Order on Order {
   id
+  orderItems {
+    id
+    quantity
+    total
+    product {
+      id
+      name
+      price
+    }
+  }
 }
     `, {"fragmentName":"Order"}) as unknown as TypedDocumentString<OrderFragment, unknown>;
 export const ProductDetailsFragmentDoc = new TypedDocumentString(`
@@ -10947,6 +10957,16 @@ export const CartCreateDocument = new TypedDocumentString(`
 }
     fragment Order on Order {
   id
+  orderItems {
+    id
+    quantity
+    total
+    product {
+      id
+      name
+      price
+    }
+  }
 }`) as unknown as TypedDocumentString<CartCreateMutation, CartCreateMutationVariables>;
 export const CartGetByIdDocument = new TypedDocumentString(`
     query CartGetById($id: ID!) {
@@ -10956,6 +10976,16 @@ export const CartGetByIdDocument = new TypedDocumentString(`
 }
     fragment Order on Order {
   id
+  orderItems {
+    id
+    quantity
+    total
+    product {
+      id
+      name
+      price
+    }
+  }
 }`) as unknown as TypedDocumentString<CartGetByIdQuery, CartGetByIdQueryVariables>;
 export const CategoriesGetDocument = new TypedDocumentString(`
     query CategoriesGet {

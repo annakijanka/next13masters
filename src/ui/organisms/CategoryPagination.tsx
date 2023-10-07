@@ -11,8 +11,11 @@ export const CategoryPagination = async ({
 	first: number;
 	category: string;
 }) => {
-	const graphqlResponse = await executeGraphql(ProductsGetTotalCountByCategorySlugDocument, {
-		slug: category,
+	const graphqlResponse = await executeGraphql({
+		query: ProductsGetTotalCountByCategorySlugDocument,
+		variables: {
+			slug: category,
+		},
 	});
 	const totalCount = graphqlResponse.productsConnection.aggregate.count;
 	return (

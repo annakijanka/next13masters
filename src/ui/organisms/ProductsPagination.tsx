@@ -9,7 +9,10 @@ export const ProductsPagination = async ({
 	pageNumber: string;
 	first: number;
 }) => {
-	const graphqlResponse = await executeGraphql(ProductsGetTotalCountDocument, {});
+	const graphqlResponse = await executeGraphql({
+		query: ProductsGetTotalCountDocument,
+		variables: undefined,
+	});
 	const totalCount = graphqlResponse.productsConnection.aggregate.count;
 	return (
 		<Pagination

@@ -10,17 +10,30 @@ type GraphqlResponse<T> =
 	| { data?: undefined; errors: { message: string }[] }
 	| { data: T; errors?: undefined };
 
-export const executeGraphql = async <TResult, TVariables>(
-	query: TypedDocumentString<TResult, TVariables>,
-	variables: TVariables,
-): Promise<TResult> => {
+export const executeGraphql = async <TResult, TVariables>({
+	query,
+	variables,
+	cache,
+	next,
+	headers,
+}: {
+	query: TypedDocumentString<TResult, TVariables>;
+	cache?: RequestCache;
+	headers?: HeadersInit;
+	next?: NextFetchRequestConfig | undefined;
+} & (TVariables extends { [key: string]: never }
+	? { variables?: never }
+	: { variables: TVariables })): Promise<TResult> => {
 	const res = await fetch(API_URL, {
 		method: "POST",
 		body: JSON.stringify({
 			query,
 			variables,
 		}),
+		cache,
+		next,
 		headers: {
+			...headers,
 			"Content-Type": "application/json",
 			Authorization: `Bearer ${process.env.PERMANENT_AUTH_TOKEN}`,
 		},

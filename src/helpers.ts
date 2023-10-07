@@ -82,6 +82,7 @@ export const getCartByIdFromCookies = async () => {
 			return cart;
 		}
 	}
+	return null;
 };
 
 export const addProductToCart = async (cartId: string, productId: string) => {

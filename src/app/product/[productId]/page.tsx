@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { revalidateTag } from "next/cache";
 import { getProductById } from "@/api/products";
 import { ProductThumbnail } from "@/ui/atoms/ProductThumbnail";
 import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
@@ -42,6 +43,7 @@ export default async function Product({ params }: { params: { productId: string 
 		"use server";
 		const cart = await getOrCreateCart();
 		await addProductToCart(cart.id, params.productId);
+		revalidateTag("cart");
 	}
 
 	return (

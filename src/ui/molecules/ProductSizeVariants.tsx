@@ -30,6 +30,7 @@ export const ProductSizeVariants = ({
 								value={variant}
 								checked={selectedVariant === variant}
 								className="sr-only"
+								readOnly
 							/>
 							<span
 								className="mr-1 inline-block cursor-pointer rounded bg-bridal-heath px-2 py-1 text-xs font-semibold uppercase text-steel-gray last:mr-0"

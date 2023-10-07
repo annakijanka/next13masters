@@ -30,6 +30,7 @@ export const ProductColorVariants = ({
 								value={variant}
 								checked={selectedVariant === variant}
 								className="sr-only"
+								readOnly
 							/>
 							<span
 								className="block h-6 w-6 cursor-pointer rounded-full border-2"

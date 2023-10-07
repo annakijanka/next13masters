@@ -78,7 +78,7 @@ export default async function Product({ params }: { params: { productId: string 
 						</Suspense>
 						<div className="mt-8">
 							<form action={addProductToCartAction}>
-								<input type="text" name="productId" value={product.id} hidden />
+								<input type="text" name="productId" value={product.id} hidden readOnly />
 								<AddToCartButton />
 							</form>
 						</div>

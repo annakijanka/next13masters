@@ -69,7 +69,7 @@ export const Pagination = async ({
 					if (page === "...") {
 						return (
 							<li key={index}>
-								<span className="flex h-6 w-6 items-center justify-center text-sm font-medium text-steel-gray sm:h-10 sm:w-10">
+								<span className="flex h-8 w-8 items-center justify-center text-sm font-medium text-steel-gray sm:h-10 sm:w-10">
 									...
 								</span>
 							</li>

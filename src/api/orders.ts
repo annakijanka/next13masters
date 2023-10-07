@@ -1,5 +1,12 @@
+"use server";
+
 import { executeGraphql } from "./graphqlApi";
-import { CartAddItemDocument, CartCreateDocument, CartGetByIdDocument } from "@/gql/graphql";
+import {
+	CartAddItemDocument,
+	CartCreateDocument,
+	CartGetByIdDocument,
+	CartItemChangeQuantityDocument,
+} from "@/gql/graphql";
 
 export const getCartById = async (cartId: string) => {
 	const graphqlResponse = await executeGraphql(CartGetByIdDocument, {
@@ -19,4 +26,13 @@ export const addCartItem = async (total: number, orderId: string, productId: str
 	const graphqlResponse = await executeGraphql(CartAddItemDocument, { total, orderId, productId });
 
 	return graphqlResponse.createOrderItem;
+};
+
+export const changeCartItemQuantity = async (itemId: string, quantity: number) => {
+	const graphqlResponse = await executeGraphql(CartItemChangeQuantityDocument, {
+		itemId,
+		quantity,
+	});
+
+	return graphqlResponse.updateOrderItem;
 };

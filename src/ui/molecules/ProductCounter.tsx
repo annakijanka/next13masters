@@ -1,16 +1,35 @@
 "use client";
 
-import { useState } from "react";
+import { experimental_useOptimistic as useOptimistic } from "react";
 import { Input } from "@/ui/atoms/Input";
 import { Button } from "@/ui/atoms/Button";
+import { changeCartItemQuantity } from "@/api/orders";
 
-export const ProductCounter = ({ quantity }: { quantity: number }) => {
-	const [count, setCount] = useState(quantity);
+export const ProductCounter = ({ itemId, quantity }: { itemId: string; quantity: number }) => {
+	const [optimisticQuantity, setOptimisticQuantity] = useOptimistic(
+		quantity,
+		(_state, newQuantity: number) => newQuantity,
+	);
+
 	return (
-		<div>
-			<Button onClick={() => setCount(count + 1)}>+</Button>
-			<Input value={count} />
-			<Button onClick={() => setCount(count - 1)}>-</Button>
-		</div>
+		<form>
+			<Button
+				formAction={async () => {
+					setOptimisticQuantity(optimisticQuantity + 1);
+					await changeCartItemQuantity(itemId, optimisticQuantity + 1);
+				}}
+			>
+				+
+			</Button>
+			<Input value={optimisticQuantity} />
+			<Button
+				formAction={async () => {
+					setOptimisticQuantity(optimisticQuantity - 1);
+					await changeCartItemQuantity(itemId, optimisticQuantity - 1);
+				}}
+			>
+				-
+			</Button>
+		</form>
 	);
 };

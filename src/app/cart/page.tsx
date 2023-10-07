@@ -39,7 +39,7 @@ export default async function Cart() {
 											{item.product.name}
 										</td>
 										<td className="border-gun-powder/12.5 border-b p-4 text-gun-powder">
-											<ProductCounter quantity={item.quantity} />
+											<ProductCounter itemId={item.id} quantity={item.quantity} />
 										</td>
 										<td className="border-gun-powder/12.5 border-b p-4 text-gun-powder">
 											{formatCurrency(item.product.price)}

@@ -10742,6 +10742,14 @@ export type CartGetByIdQueryVariables = Exact<{
 
 export type CartGetByIdQuery = { order?: { id: string, orderItems: Array<{ id: string, quantity: number, total: number, product?: { id: string, name: string, price: number } | null }> } | null };
 
+export type CartItemChangeQuantityMutationVariables = Exact<{
+  itemId: Scalars['ID']['input'];
+  quantity: Scalars['Int']['input'];
+}>;
+
+
+export type CartItemChangeQuantityMutation = { updateOrderItem?: { id: string } | null };
+
 export type CategoriesGetQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -10987,6 +10995,13 @@ export const CartGetByIdDocument = new TypedDocumentString(`
     }
   }
 }`) as unknown as TypedDocumentString<CartGetByIdQuery, CartGetByIdQueryVariables>;
+export const CartItemChangeQuantityDocument = new TypedDocumentString(`
+    mutation CartItemChangeQuantity($itemId: ID!, $quantity: Int!) {
+  updateOrderItem(where: {id: $itemId}, data: {quantity: $quantity}) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<CartItemChangeQuantityMutation, CartItemChangeQuantityMutationVariables>;
 export const CategoriesGetDocument = new TypedDocumentString(`
     query CategoriesGet {
   categories {

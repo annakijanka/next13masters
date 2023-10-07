@@ -8,6 +8,9 @@ fragment Order on Order {
 			id
 			name
 			price
+			images {
+				url
+			}
 		}
 	}
 }

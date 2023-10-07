@@ -6,6 +6,7 @@ import {
 	CartCreateDocument,
 	CartGetByIdDocument,
 	CartItemChangeQuantityDocument,
+	CartRemoveItemDocument,
 } from "@/gql/graphql";
 
 export const getCartById = async (cartId: string) => {
@@ -35,6 +36,15 @@ export const addCartItem = async (total: number, orderId: string, productId: str
 	});
 
 	return graphqlResponse.createOrderItem;
+};
+
+export const removeCartItem = async (productId: string) => {
+	const graphqlResponse = await executeGraphql({
+		query: CartRemoveItemDocument,
+		variables: { productId },
+	});
+
+	return graphqlResponse.deleteOrderItem;
 };
 
 export const changeCartItemQuantity = async (itemId: string, quantity: number) => {

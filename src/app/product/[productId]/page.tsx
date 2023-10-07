@@ -61,7 +61,7 @@ export default async function Product({ params }: { params: { productId: string 
 							</div>
 							{product.categories[0] && (
 								<Link
-									className="font-base small-caps text-lg text-steel-gray opacity-70 hover:text-brick-red hover:opacity-100"
+									className="font-base small-caps text-base font-medium text-steel-gray opacity-70 hover:text-brick-red hover:opacity-100"
 									href={`/categories/${product.categories[0].slug}`}
 								>
 									{product.categories[0].name}

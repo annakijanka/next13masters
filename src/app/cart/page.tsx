@@ -3,6 +3,7 @@ import NextImage from "next/image";
 import { getCartByIdFromCookies } from "@/helpers";
 import { ProductCounter } from "@/ui/molecules/ProductCounter";
 import { formatCurrency } from "@/utils";
+import { RemoveButton } from "@/ui/atoms/RemoveButton";
 
 export default async function Cart() {
 	const cart = await getCartByIdFromCookies();
@@ -32,6 +33,7 @@ export default async function Cart() {
 							<th className="border-b border-gun-powder/25 px-3 py-2 pb-3 pt-0 text-left font-medium sm:px-4 sm:py-3">
 								Price
 							</th>
+							<th className="border-b border-gun-powder/25"></th>
 						</tr>
 					</thead>
 					<tbody className="bg-bridal-heath text-base text-steel-gray sm:text-lg">
@@ -58,6 +60,9 @@ export default async function Cart() {
 										</td>
 										<td className="border-gun-powder/12.5 border-b px-3 py-2 sm:px-4 sm:py-3">
 											{formatCurrency(item.product.price)}
+										</td>
+										<td className="border-gun-powder/12.5 border-b px-3 py-2 sm:px-4 sm:py-3">
+											<RemoveButton itemId={item.id} />
 										</td>
 									</tr>
 								),

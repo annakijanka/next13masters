@@ -1,9 +1,9 @@
+import { Loader } from "lucide-react";
+
 export const Loading = () => {
 	return (
-		<div className="flex gap-1 opacity-25" aria-busy="true">
-			<div className="h-2 w-2 animate-pulse rounded-full bg-gun-powder bg-opacity-25"></div>
-			<div className="h-2 w-2 animate-pulse rounded-full bg-gun-powder bg-opacity-25"></div>
-			<div className="h-2 w-2 animate-pulse rounded-full bg-gun-powder bg-opacity-25"></div>
+		<div className="animate-spin" aria-busy="true">
+			<Loader strokeWidth={2.5} />
 		</div>
 	);
 };

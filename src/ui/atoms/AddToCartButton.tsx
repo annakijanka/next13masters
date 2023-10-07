@@ -1,6 +1,7 @@
 "use client";
 
 import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import { Loading } from "./Loading";
 
 export const AddToCartButton = () => {
 	const status = useFormStatus();
@@ -10,7 +11,14 @@ export const AddToCartButton = () => {
 			type="submit"
 			disabled={status.pending}
 		>
-			{status.pending ? "Processing..." : "Add to cart"}
+			{status.pending ? (
+				<>
+					<Loading />
+					<span className="ml-1">Processing...</span>
+				</>
+			) : (
+				"Add to cart"
+			)}
 		</button>
 	);
 };

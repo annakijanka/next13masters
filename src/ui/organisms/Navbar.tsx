@@ -1,11 +1,9 @@
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import NextImage from "next/image";
-import { Suspense } from "react";
 import { CategoryLinks } from "./CategoryLinks";
 import { SearchBar } from "@/ui/molecules/SearchBar";
 import Logotype from "pub/logotype.png";
-import { Loading } from "@/ui/atoms/Loading";
 import { getCartByIdFromCookies } from "@/helpers";
 
 export const Navbar = async () => {
@@ -23,9 +21,7 @@ export const Navbar = async () => {
 						height="32"
 					/>
 				</div>
-				<Suspense fallback={<Loading />}>
-					<CategoryLinks />
-				</Suspense>
+				<CategoryLinks />
 			</nav>
 			<div className="flex h-12 flex-1 items-center lg:ml-6 lg:h-16 lg:justify-end">
 				<div className="w-full max-w-lg lg:max-w-xs">

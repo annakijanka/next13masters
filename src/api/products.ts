@@ -14,6 +14,9 @@ export const getProducts = async (first: number, skip: number) => {
 	const graphqlResponse = await executeGraphql({
 		query: ProductsGetDocument,
 		variables: { first: first, skip: skip },
+		next: {
+			revalidate: 60 * 60 * 24,
+		},
 	});
 
 	return graphqlResponse.products;
@@ -31,6 +34,9 @@ export const getProductsByCategorySlug = async (
 			skip: skip,
 			slug: categorySlug,
 		},
+		next: {
+			revalidate: 60 * 60 * 24,
+		},
 	});
 
 	return graphqlResponse.categories[0]?.products;
@@ -40,6 +46,9 @@ export const getSimilarProducts = async (categorySlug: string) => {
 	const graphqlResponse = await executeGraphql({
 		query: ProductsGetSimilarDocument,
 		variables: { slug: categorySlug },
+		next: {
+			revalidate: 60 * 60 * 24,
+		},
 	});
 
 	return graphqlResponse.products;
@@ -49,6 +58,9 @@ export const getSuggestedProducts = async () => {
 	const graphqlResponse = await executeGraphql({
 		query: ProductsGetSuggestedDocument,
 		variables: undefined,
+		next: {
+			revalidate: 60 * 60 * 24,
+		},
 	});
 
 	return graphqlResponse.products;
@@ -60,6 +72,9 @@ export const getProductsByCollectionSlug = async (collectionSlug: string) => {
 		variables: {
 			slug: collectionSlug,
 		},
+		next: {
+			revalidate: 60 * 60 * 24,
+		},
 	});
 
 	return graphqlResponse.collections[0]?.products;
@@ -69,6 +84,9 @@ export const getProductById = async (productId: string) => {
 	const graphqlResponse = await executeGraphql({
 		query: ProductGetByIdDocument,
 		variables: { id: productId },
+		next: {
+			revalidate: 1,
+		},
 	});
 
 	return graphqlResponse.product;
@@ -82,6 +100,7 @@ export const getSearchProducts = async (first: number, skip: number, searchTerm:
 			skip: skip,
 			searchTerm: searchTerm,
 		},
+		cache: "no-store",
 	});
 
 	return graphqlResponse.products;
@@ -93,6 +112,7 @@ export const getProductsSearchTotalCount = async (searchTerm: string) => {
 		variables: {
 			searchTerm: searchTerm,
 		},
+		cache: "no-store",
 	});
 
 	return graphqlResponse.productsConnection.aggregate.count;

@@ -9,6 +9,9 @@ export const getProductColorVariants = async () => {
 	const graphqlResponse = await executeGraphql({
 		query: VariantsGetProductColorDocument,
 		variables: undefined,
+		next: {
+			revalidate: 1,
+		},
 	});
 
 	return graphqlResponse.productColorVariants;
@@ -18,6 +21,9 @@ export const getProductSizeVariants = async () => {
 	const graphqlResponse = await executeGraphql({
 		query: VariantsGetProductSizeDocument,
 		variables: undefined,
+		next: {
+			revalidate: 1,
+		},
 	});
 
 	return graphqlResponse.productSizeVariants;
@@ -27,6 +33,9 @@ export const getProductVariants = async () => {
 	const graphqlResponse = await executeGraphql({
 		query: VariantsGetProductDocument,
 		variables: undefined,
+		next: {
+			revalidate: 1,
+		},
 	});
 
 	return graphqlResponse.productSizeColorVariants;

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { type Metadata } from "next";
-import { getCollectionBySlug, getCollections } from "@/api/collections";
+import { getCollectionBySlug } from "@/api/collections";
 import { CollectionProductList } from "@/ui/organisms/CollectionProductList";
 
 export const generateMetadata = async ({
@@ -23,11 +23,11 @@ export const generateMetadata = async ({
 	};
 };
 
-export const generateStaticParams = async () => {
-	const collections = await getCollections();
+// export const generateStaticParams = async () => {
+// 	const collections = await getCollections();
 
-	return collections.map((collection) => ({ collection: collection.slug }));
-};
+// 	return collections.map((collection) => ({ collection: collection.slug }));
+// };
 
 export default async function Collection({ params }: { params: { collection: string } }) {
 	const collection = await getCollectionBySlug(params.collection);

@@ -12,6 +12,9 @@ export const ProductsPagination = async ({
 	const graphqlResponse = await executeGraphql({
 		query: ProductsGetTotalCountDocument,
 		variables: undefined,
+		next: {
+			revalidate: 60 * 60 * 24,
+		},
 	});
 	const totalCount = graphqlResponse.productsConnection.aggregate.count;
 	return (

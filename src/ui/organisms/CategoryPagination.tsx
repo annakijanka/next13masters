@@ -16,6 +16,9 @@ export const CategoryPagination = async ({
 		variables: {
 			slug: category,
 		},
+		next: {
+			revalidate: 60 * 60 * 24,
+		},
 	});
 	const totalCount = graphqlResponse.productsConnection.aggregate.count;
 	return (

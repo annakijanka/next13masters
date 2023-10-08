@@ -3,6 +3,8 @@ import { type ComponentType } from "react";
 import { notFound } from "next/navigation";
 import { slugToTitle } from "@/utils";
 
+export const revalidate = 86400;
+
 export const generateMetadata = async ({
 	params,
 }: {

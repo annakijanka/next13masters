@@ -1,7 +1,7 @@
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { getCategories, getCategoryBySlug } from "@/api/categories";
+import { getCategoryBySlug } from "@/api/categories";
 import { CategoryProductList } from "@/ui/organisms/CategoryProductList";
 import { Loading } from "@/ui/atoms/Loading";
 import { CategoryPagination } from "@/ui/organisms/CategoryPagination";
@@ -43,16 +43,16 @@ export const generateMetadata = async ({
 // 	return Promise.all(pages);
 // };
 
-export const generateStaticParams = async () => {
-	const categories = await getCategories();
+// export const generateStaticParams = async () => {
+// 	const categories = await getCategories();
 
-	const pages = categories.map((category) => ({
-		category: category.slug,
-		pageNumber: "1",
-	}));
+// 	const pages = categories.map((category) => ({
+// 		category: category.slug,
+// 		pageNumber: "1",
+// 	}));
 
-	return pages;
-};
+// 	return pages;
+// };
 
 export default async function CategoryPage({
 	params,

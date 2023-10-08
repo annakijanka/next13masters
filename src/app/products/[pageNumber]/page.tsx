@@ -16,10 +16,10 @@ export const generateMetadata = async ({
 	};
 };
 
-export const generateStaticParams = async () => {
-	const pages = Array.from({ length: 3 }, (_, index) => (index + 1).toString());
-	return pages.map((page) => ({ pageNumber: page }));
-};
+// export const generateStaticParams = async () => {
+// 	const pages = Array.from({ length: 3 }, (_, index) => (index + 1).toString());
+// 	return pages.map((page) => ({ pageNumber: page }));
+// };
 
 export default function ProductsPage({ params }: { params: { pageNumber: string } }) {
 	const first = 4;

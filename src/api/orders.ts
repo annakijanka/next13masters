@@ -24,7 +24,11 @@ export const getCartById = async (cartId: string) => {
 };
 
 export const createCart = async () => {
-	const graphqlResponse = await executeGraphql({ query: CartCreateDocument, variables: undefined });
+	const graphqlResponse = await executeGraphql({
+		query: CartCreateDocument,
+		variables: undefined,
+		cache: "no-store",
+	});
 
 	return graphqlResponse.createOrder;
 };
@@ -33,6 +37,7 @@ export const addCartItem = async (total: number, orderId: string, productId: str
 	const graphqlResponse = await executeGraphql({
 		query: CartAddItemDocument,
 		variables: { total, orderId, productId },
+		cache: "no-store",
 	});
 
 	return graphqlResponse.createOrderItem;
@@ -42,6 +47,7 @@ export const removeCartItem = async (productId: string) => {
 	const graphqlResponse = await executeGraphql({
 		query: CartRemoveItemDocument,
 		variables: { productId },
+		cache: "no-store",
 	});
 
 	return graphqlResponse.deleteOrderItem;
@@ -54,6 +60,7 @@ export const changeCartItemQuantity = async (itemId: string, quantity: number) =
 			itemId,
 			quantity,
 		},
+		cache: "no-store",
 	});
 
 	return graphqlResponse.updateOrderItem;

@@ -2,8 +2,8 @@ import { Loader } from "lucide-react";
 
 export const Loading = () => {
 	return (
-		<div className="animate-spin" aria-busy="true">
-			<Loader strokeWidth={2.5} />
+		<div aria-busy="true">
+			<Loader className="animate-spin" strokeWidth={2.5} />
 		</div>
 	);
 };

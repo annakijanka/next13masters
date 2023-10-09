@@ -13,7 +13,7 @@ const roboto = Roboto({
 	variable: "--font-roboto",
 });
 
-export default function Error({
+export default function GlobalError({
 	error,
 	reset,
 }: {

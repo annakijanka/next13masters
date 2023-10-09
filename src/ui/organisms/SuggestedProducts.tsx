@@ -1,6 +1,6 @@
 import { ProductListItem } from "@/ui/molecules/ProductListItem";
 import { getSuggestedProducts } from "@/api/products";
-import { setAverageRating } from "@/helpers";
+import { setAverageRating } from "@/product";
 
 export const SuggestedProducts = async () => {
 	const products = await getSuggestedProducts();

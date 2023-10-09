@@ -3,7 +3,7 @@
 import { X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
-import { removeCartItem } from "@/api/orders";
+import { removeCartItem } from "@/api/cart";
 
 export const RemoveButton = ({ itemId }: { itemId: string }) => {
 	const router = useRouter();

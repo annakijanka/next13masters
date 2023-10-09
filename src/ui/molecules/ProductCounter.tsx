@@ -3,7 +3,7 @@
 import { experimental_useOptimistic as useOptimistic } from "react";
 import { Input } from "@/ui/atoms/Input";
 import { Button } from "@/ui/atoms/Button";
-import { changeCartItemQuantity } from "@/api/orders";
+import { changeCartItemQuantity } from "@/api/cart";
 
 export const ProductCounter = ({ itemId, quantity }: { itemId: string; quantity: number }) => {
 	const [optimisticQuantity, setOptimisticQuantity] = useOptimistic(

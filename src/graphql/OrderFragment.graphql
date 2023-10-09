@@ -7,6 +7,7 @@ fragment Order on Order {
 		product {
 			id
 			name
+			description
 			price
 			images {
 				url

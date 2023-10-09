@@ -1,4 +1,4 @@
-import { getColorAndSizeVariants, getColorVariants, getSizeVariants } from "@/helpers";
+import { getColorAndSizeVariants, getColorVariants, getSizeVariants } from "@/product";
 import { ProductVariants } from "@/ui/molecules/ProductVariants";
 
 export const Variants = async ({ productId }: { productId: string }) => {

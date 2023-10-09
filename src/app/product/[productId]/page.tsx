@@ -10,7 +10,7 @@ import { formatCurrency } from "@/utils";
 import { Loading } from "@/ui/atoms/Loading";
 import { Variants } from "@/ui/organisms/Variants";
 import { AddToCartButton } from "@/ui/atoms/AddToCartButton";
-import { addProductToCart, getOrCreateCart } from "@/helpers";
+import { addProductToCart, getOrCreateCart } from "@/cartUtils";
 
 export const generateMetadata = async ({
 	params,

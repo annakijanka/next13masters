@@ -1,9 +1,10 @@
 import { redirect } from "next/navigation";
 import NextImage from "next/image";
-import { getCartByIdFromCookies } from "@/helpers";
 import { ProductCounter } from "@/ui/molecules/ProductCounter";
 import { formatCurrency } from "@/utils";
 import { RemoveButton } from "@/ui/atoms/RemoveButton";
+import { CheckoutButton } from "@/ui/atoms/CheckoutButton";
+import { getCartByIdFromCookies, handleStripePaymentAction } from "@/cartUtils";
 
 export default async function Cart() {
 	const cart = await getCartByIdFromCookies();
@@ -69,6 +70,11 @@ export default async function Cart() {
 						)}
 					</tbody>
 				</table>
+				<div className="mt-6 grid grid-cols-2 gap-4">
+					<form action={handleStripePaymentAction}>
+						<CheckoutButton />
+					</form>
+				</div>
 			</div>
 		</>
 	);

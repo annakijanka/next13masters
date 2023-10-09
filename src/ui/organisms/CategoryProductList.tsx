@@ -1,5 +1,5 @@
 import { getProductsByCategorySlug } from "@/api/products";
-import { setAverageRating } from "@/helpers";
+import { setAverageRating } from "@/product";
 import { ProductListItem } from "@/ui/molecules/ProductListItem";
 
 export const CategoryProductList = async ({

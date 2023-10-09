@@ -1,7 +1,7 @@
 import { type Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Payment cancelled | Online Store",
+	title: "Payment Cancelled | Online Store",
 };
 
 export default async function CartCancelled() {

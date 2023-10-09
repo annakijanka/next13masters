@@ -1,5 +1,10 @@
 import Stripe from "stripe";
+import { type Metadata } from "next";
 import { formatCurrency } from "@/utils";
+
+export const metadata: Metadata = {
+	title: "Payment Successful | Online Store",
+};
 
 export default async function CartSuccess({
 	searchParams,

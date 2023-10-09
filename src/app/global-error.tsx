@@ -1,11 +1,11 @@
-import "./globals.css";
-import type { Metadata } from "next";
+"use client";
+
 import { Roboto } from "next/font/google";
-import { Suspense } from "react";
-import { Navbar } from "@/ui/organisms/Navbar";
-import { FooterLinks } from "@/ui/molecules/FooterLinks";
-import { Loading } from "@/ui/atoms/Loading";
+import { useEffect } from "react";
+import NextImage from "next/image";
+import Link from "next/link";
 import { currentYear } from "@/utils";
+import Logotype from "pub/logotype.png";
 
 const roboto = Roboto({
 	weight: ["100", "300", "400", "500", "700", "900"],
@@ -13,13 +13,17 @@ const roboto = Roboto({
 	variable: "--font-roboto",
 });
 
-export const metadata: Metadata = {
-	metadataBase: new URL("https://media.graphassets.com"),
-	title: "Home | Online Store",
-	description: "Welcome to your one-stop shop for quality and savings.",
-};
+export default function Error({
+	error,
+	reset,
+}: {
+	error: Error & { digest?: string };
+	reset: () => void;
+}) {
+	useEffect(() => {
+		console.error(error);
+	}, [error]);
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html className={`${roboto.variable} overflow-x-hidden`} lang="en">
 			<body className="flex min-h-screen flex-col overflow-x-hidden bg-pampas">
@@ -34,12 +38,42 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					</svg>
 					<div className="mx-auto max-w-7xl px-4 lg:px-8">
 						<div className="flex flex-col justify-between lg:flex-row lg:items-center">
-							<Navbar />
+							<nav className="flex h-12 overflow-x-scroll lg:mx-0 lg:h-16 lg:overflow-x-auto">
+								<div className="hidden items-center sm:flex">
+									<NextImage
+										className="transition-transform duration-300 hover:rotate-12"
+										src={Logotype}
+										alt="Logotype"
+										width="32"
+										height="32"
+									/>
+								</div>
+								<ul className="flex h-12 max-w-full space-x-8 whitespace-nowrap lg:h-16 lg:px-8">
+									<li className="pl-4 lg:px-0">
+										<Link
+											className="flex h-full w-full min-w-[3rem] items-center justify-center border-b-4 border-transparent px-1 pt-1 text-center text-sm font-medium text-steel-gray hover:border-brick-red"
+											href="/"
+										>
+											Home
+										</Link>
+									</li>
+								</ul>
+							</nav>
 						</div>
 					</div>
 				</header>
 				<section className="mx-auto flex w-full max-w-2xl flex-grow flex-col px-4 py-8 sm:py-20 lg:max-w-7xl lg:px-8">
-					{children}
+					<div className="mx-auto w-full max-w-3xl">
+						<h1 className="mb-4 text-2xl font-extrabold tracking-tight text-steel-gray md:text-3xl">
+							Something went wrong!
+						</h1>
+						<button
+							className="inline-flex h-14 w-auto items-center justify-center rounded-lg from-gun-powder from-10% via-brick-red via-50% to-java to-90% px-6 text-base font-bold leading-6 text-bridal-heath transition-transform duration-300 hover:scale-[1.04] enabled:bg-gradient-to-r disabled:cursor-wait disabled:bg-gun-powder disabled:bg-opacity-25"
+							onClick={() => reset()}
+						>
+							Try again
+						</button>
+					</div>
 				</section>
 				<footer className="relative">
 					<svg
@@ -51,12 +85,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 						<path d="m0 128 60-16c60-16 180-48 300-16s240 128 360 154.7c120 26.3 240-15.7 360-32 120-15.7 240-5.7 300 0l60 5.3v96H0Z" />
 					</svg>
 					<div className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
-						<nav aria-label="Footer">
-							<h3 className="font-semibold text-pampas">Legal Information</h3>
-							<Suspense fallback={<Loading />}>
-								<FooterLinks />
-							</Suspense>
-						</nav>
 						<p className="mt-4 text-sm leading-7 text-pampas">© {currentYear()} Anna Kijanka</p>
 					</div>
 				</footer>

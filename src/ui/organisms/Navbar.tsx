@@ -4,7 +4,7 @@ import NextImage from "next/image";
 import { CategoryLinks } from "./CategoryLinks";
 import { SearchBar } from "@/ui/molecules/SearchBar";
 import Logotype from "pub/logotype.png";
-import { getCartByIdFromCookies } from "@/cartUtils";
+import { getCartByIdFromCookies } from "@/api/cartUtils";
 
 export const Navbar = async () => {
 	const cart = await getCartByIdFromCookies();

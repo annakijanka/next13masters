@@ -1,5 +1,5 @@
+import { setAverageRating } from "@/api/product";
 import { getProductsByCollectionSlug } from "@/api/products";
-import { setAverageRating } from "@/product";
 import { ProductListItem } from "@/ui/molecules/ProductListItem";
 
 export const CollectionProductList = async ({ collection }: { collection: string }) => {

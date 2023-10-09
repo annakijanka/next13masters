@@ -4,7 +4,7 @@ import { ProductCounter } from "@/ui/molecules/ProductCounter";
 import { formatCurrency } from "@/utils";
 import { RemoveButton } from "@/ui/atoms/RemoveButton";
 import { CheckoutButton } from "@/ui/atoms/CheckoutButton";
-import { getCartByIdFromCookies, handleStripePaymentAction } from "@/cartUtils";
+import { getCartByIdFromCookies, handleStripePaymentAction } from "@/api/cartUtils";
 
 export default async function Cart() {
 	const cart = await getCartByIdFromCookies();

@@ -1,9 +1,9 @@
 import { cookies } from "next/headers";
 import Stripe from "stripe";
 import { redirect } from "next/navigation";
-import { type OrderFragment } from "./gql/graphql";
 import { addCartItem, createCart, getCartById } from "@/api/cart";
 import { getProductById } from "@/api/products";
+import { type OrderFragment } from "@/gql/graphql";
 
 export const getOrCreateCart = async (): Promise<OrderFragment> => {
 	const cart = await getCartByIdFromCookies();

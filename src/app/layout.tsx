@@ -14,7 +14,6 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-	metadataBase: new URL("https://media.graphassets.com"),
 	title: "Home | Online Store",
 	description: "Welcome to your one-stop shop for quality and savings.",
 };

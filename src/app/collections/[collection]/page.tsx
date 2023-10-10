@@ -23,12 +23,6 @@ export const generateMetadata = async ({
 	};
 };
 
-// export const generateStaticParams = async () => {
-// 	const collections = await getCollections();
-
-// 	return collections.map((collection) => ({ collection: collection.slug }));
-// };
-
 export default async function Collection({ params }: { params: { collection: string } }) {
 	const collection = await getCollectionBySlug(params.collection);
 

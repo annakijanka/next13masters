@@ -26,7 +26,7 @@ export const SearchBar = () => {
 	return (
 		<form onSubmit={handleSearch}>
 			<input
-				className="mr-2 h-10 appearance-none rounded-lg border-2 border-pampas bg-pampas px-4 text-base leading-4 text-steel-gray placeholder-steel-gray placeholder-opacity-50 shadow-none transition duration-300 focus:shadow-md focus:outline-none"
+				className="mr-2 h-10 w-36 appearance-none rounded-lg border-2 border-pampas bg-pampas px-4 text-base leading-4 text-steel-gray placeholder-steel-gray placeholder-opacity-50 shadow-none transition duration-300 focus:shadow-md focus:outline-none sm:w-auto"
 				type="search"
 				value={query}
 				onChange={handleInputChange}

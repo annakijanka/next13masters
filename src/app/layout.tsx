@@ -18,7 +18,13 @@ export const metadata: Metadata = {
 	description: "Welcome to your one-stop shop for quality and savings.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+	children,
+	modal,
+}: {
+	children: React.ReactNode;
+	modal: React.ReactNode;
+}) {
 	return (
 		<html className={`${roboto.variable} overflow-x-hidden`} lang="en">
 			<body className="flex min-h-screen flex-col overflow-x-hidden bg-pampas">
@@ -40,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				<section className="mx-auto flex w-full max-w-2xl flex-grow flex-col px-4 py-8 sm:py-20 lg:max-w-7xl lg:px-8">
 					{children}
 				</section>
-				<footer className="relative">
+				<footer className="relative mt-20 sm:mt-0">
 					<svg
 						className="absolute bottom-0 left-0 -z-[1] min-w-[1920px] -translate-x-0 fill-gun-powder sm:left-1/2 sm:-translate-x-1/2"
 						xmlns="http://www.w3.org/2000/svg"
@@ -59,6 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 						<p className="mt-4 text-sm leading-7 text-pampas">© {currentYear()} Anna Kijanka</p>
 					</div>
 				</footer>
+				{modal}
 			</body>
 		</html>
 	);

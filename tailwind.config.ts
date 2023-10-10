@@ -21,6 +21,15 @@ const config: Config = {
 			fontFamily: {
 				sans: ["var(--font-roboto)"],
 			},
+			keyframes: {
+				slide: {
+					"0%": { transform: "translateX(100%)" },
+					"100%": { transform: "translateX(0)" },
+				},
+			},
+			animation: {
+				slide: "slide .3s ease-in-out forwards",
+			},
 		},
 	},
 	plugins: [require("@tailwindcss/typography")],

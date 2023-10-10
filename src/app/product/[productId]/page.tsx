@@ -86,7 +86,7 @@ export default async function Product({ params }: { params: { productId: string 
 			</article>
 			<Suspense fallback={<Loading />}>
 				<aside>
-					<div className="pb-16 pt-8">
+					<div className="pb-4 pt-8 sm:pb-16">
 						<h2 className="py-8 text-xl font-extrabold leading-7 tracking-tight text-steel-gray">
 							Top rated
 						</h2>

@@ -11,7 +11,7 @@ export default function Home() {
 			</section>
 			<Suspense fallback={<Loading />}>
 				<aside>
-					<div className="pb-16">
+					<div className="pb-4 sm:pb-16">
 						<HomeProductList />
 					</div>
 				</aside>

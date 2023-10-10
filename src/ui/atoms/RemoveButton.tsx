@@ -1,12 +1,12 @@
 "use client";
 
 import { X } from "lucide-react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { removeCartItem } from "@/api/cart";
 
 export const RemoveButton = ({ itemId }: { itemId: string }) => {
-	const router = useRouter();
+	// const router = useRouter();
 	const [isPending, startTransition] = useTransition();
 	return (
 		<button
@@ -15,7 +15,8 @@ export const RemoveButton = ({ itemId }: { itemId: string }) => {
 			onClick={() =>
 				startTransition(async () => {
 					await removeCartItem(itemId);
-					router.refresh();
+					// router.refresh();
+					window.location.reload();
 				})
 			}
 			aria-label="Remove"

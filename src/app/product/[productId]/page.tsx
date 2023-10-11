@@ -11,6 +11,7 @@ import { Loading } from "@/ui/atoms/Loading";
 import { Variants } from "@/ui/organisms/Variants";
 import { AddToCartButton } from "@/ui/atoms/AddToCartButton";
 import { addProductToCart, getOrCreateCart } from "@/api/cartUtils";
+import { ReviewForm } from "@/ui/organisms/ReviewForm";
 
 export const generateMetadata = async ({
 	params,
@@ -94,6 +95,7 @@ export default async function Product({ params }: { params: { productId: string 
 					</div>
 				</aside>
 			</Suspense>
+			<ReviewForm productId={params.productId} />
 		</>
 	);
 }

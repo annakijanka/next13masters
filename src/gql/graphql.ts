@@ -10862,6 +10862,20 @@ export type ProductsGetTotalCountByCategorySlugQueryVariables = Exact<{
 
 export type ProductsGetTotalCountByCategorySlugQuery = { productsConnection: { aggregate: { count: number } } };
 
+export type ReviewFragment = { headline: string, content: string, rating?: number | null, name: string, email: string };
+
+export type ReviewSubmitMutationVariables = Exact<{
+  headline: Scalars['String']['input'];
+  content: Scalars['String']['input'];
+  rating: Scalars['Int']['input'];
+  name: Scalars['String']['input'];
+  email: Scalars['String']['input'];
+  productId: Scalars['ID']['input'];
+}>;
+
+
+export type ReviewSubmitMutation = { createReview?: { id: string } | null };
+
 export type VariantsGetProductQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -10959,6 +10973,15 @@ export const ProductFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"Product"}) as unknown as TypedDocumentString<ProductFragment, unknown>;
+export const ReviewFragmentDoc = new TypedDocumentString(`
+    fragment Review on Review {
+  headline
+  content
+  rating
+  name
+  email
+}
+    `, {"fragmentName":"Review"}) as unknown as TypedDocumentString<ReviewFragment, unknown>;
 export const CartAddItemDocument = new TypedDocumentString(`
     mutation CartAddItem($total: Int!, $orderId: ID!, $productId: ID!) {
   createOrderItem(
@@ -11260,6 +11283,15 @@ export const ProductsGetTotalCountByCategorySlugDocument = new TypedDocumentStri
   }
 }
     `) as unknown as TypedDocumentString<ProductsGetTotalCountByCategorySlugQuery, ProductsGetTotalCountByCategorySlugQueryVariables>;
+export const ReviewSubmitDocument = new TypedDocumentString(`
+    mutation ReviewSubmit($headline: String!, $content: String!, $rating: Int!, $name: String!, $email: String!, $productId: ID!) {
+  createReview(
+    data: {headline: $headline, content: $content, rating: $rating, name: $name, email: $email, product: {connect: {id: $productId}}}
+  ) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<ReviewSubmitMutation, ReviewSubmitMutationVariables>;
 export const VariantsGetProductDocument = new TypedDocumentString(`
     query VariantsGetProduct {
   productSizeColorVariants {

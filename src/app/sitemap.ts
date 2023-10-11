@@ -1,4 +1,4 @@
-// To be refined in the future
+// TODO: Refine this code for better performance in the future
 
 import { type MetadataRoute } from "next";
 

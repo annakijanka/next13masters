@@ -30,8 +30,13 @@ export const ProductVariants = ({
 			selectedVariant
 		) {
 			currentSearchParams.set(variantType, selectedVariant);
-			const newPath = `${pathname}?${currentSearchParams.toString()}` as Route;
-			router.replace(newPath, { scroll: false });
+			let newPath = pathname;
+
+			if (pathname !== "/cart") {
+				newPath += `?${currentSearchParams.toString()}`;
+			}
+
+			router.replace(newPath as Route, { scroll: false });
 		}
 	}, [
 		variantQueryParam,

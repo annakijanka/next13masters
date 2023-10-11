@@ -85,7 +85,7 @@ export const getProductById = async (productId: string) => {
 		query: ProductGetByIdDocument,
 		variables: { id: productId },
 		next: {
-			revalidate: 1,
+			revalidate: 60 * 60 * 24,
 		},
 	});
 

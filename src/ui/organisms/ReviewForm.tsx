@@ -10,7 +10,7 @@ export const ReviewForm = ({
 	existingReviews,
 }: {
 	productId: string;
-	existingReviews: ReviewFragment[];
+	existingReviews: ReviewFragment[] | undefined;
 }) => {
 	const updateReviews = (reviews: ReviewFragment[], newReview: ReviewFragment) => [
 		...reviews,
@@ -142,14 +142,15 @@ export const ReviewForm = ({
 						<Review review={review} />
 					</div>
 				))}
-				{existingReviews.map((review, index) => (
-					<div
-						className="border-gun-powder/12.5 border-b bg-bridal-heath px-2 py-3 text-sm sm:px-3 sm:py-4"
-						key={index}
-					>
-						<Review review={review} />
-					</div>
-				))}
+				{existingReviews &&
+					existingReviews.map((review, index) => (
+						<div
+							className="border-gun-powder/12.5 border-b bg-bridal-heath px-2 py-3 text-sm sm:px-3 sm:py-4"
+							key={index}
+						>
+							<Review review={review} />
+						</div>
+					))}
 			</div>
 		</div>
 	);

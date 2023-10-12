@@ -87,15 +87,17 @@ export default async function Product({ params }: { params: { productId: string 
 			</article>
 			<Suspense fallback={<Loading />}>
 				<aside>
-					<div className="pb-4 pt-8 sm:pb-16">
+					<div className="pt-8">
 						<h2 className="py-8 text-xl font-extrabold leading-7 tracking-tight text-steel-gray">
 							Top rated
 						</h2>
 						<SuggestedProducts />
 					</div>
+					<div className="pb-4 pt-8 sm:pb-16">
+						<ReviewForm productId={params.productId} />
+					</div>
 				</aside>
 			</Suspense>
-			<ReviewForm productId={params.productId} />
 		</>
 	);
 }

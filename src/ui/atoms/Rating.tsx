@@ -8,7 +8,7 @@ export const Rating = ({ rating }: { rating: number }) => {
 						★
 					</span>
 				) : (
-					<span className="text-brick-red" key={index}>
+					<span className="text-gun-powder opacity-25" key={index}>
 						☆
 					</span>
 				),

@@ -1,7 +1,7 @@
 "use server";
 
 import { executeGraphql } from "./graphqlApi";
-import { ReviewSubmitDocument } from "@/gql/graphql";
+import { ReviewSubmitDocument, ReviewsGetByProductIdDocument } from "@/gql/graphql";
 
 export const submitReview = async (
 	headline: string,
@@ -18,4 +18,18 @@ export const submitReview = async (
 	});
 
 	return graphqlResponse.createReview;
+};
+
+export const getReviewsByProductId = async (productId: string) => {
+	const graphqlResponse = await executeGraphql({
+		query: ReviewsGetByProductIdDocument,
+		variables: {
+			productId: productId,
+		},
+		next: {
+			revalidate: 60 * 60 * 24,
+		},
+	});
+
+	return graphqlResponse.reviews[0];
 };

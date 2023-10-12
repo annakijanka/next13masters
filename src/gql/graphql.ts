@@ -10876,6 +10876,13 @@ export type ReviewSubmitMutationVariables = Exact<{
 
 export type ReviewSubmitMutation = { createReview?: { id: string } | null };
 
+export type ReviewsGetByProductIdQueryVariables = Exact<{
+  productId: Scalars['ID']['input'];
+}>;
+
+
+export type ReviewsGetByProductIdQuery = { reviews: Array<{ headline: string, content: string, rating?: number | null, name: string, email: string }> };
+
 export type VariantsGetProductQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -11292,6 +11299,19 @@ export const ReviewSubmitDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<ReviewSubmitMutation, ReviewSubmitMutationVariables>;
+export const ReviewsGetByProductIdDocument = new TypedDocumentString(`
+    query ReviewsGetByProductId($productId: ID!) {
+  reviews(where: {id: $productId}) {
+    ...Review
+  }
+}
+    fragment Review on Review {
+  headline
+  content
+  rating
+  name
+  email
+}`) as unknown as TypedDocumentString<ReviewsGetByProductIdQuery, ReviewsGetByProductIdQueryVariables>;
 export const VariantsGetProductDocument = new TypedDocumentString(`
     query VariantsGetProduct {
   productSizeColorVariants {

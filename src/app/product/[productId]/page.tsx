@@ -12,6 +12,7 @@ import { Variants } from "@/ui/organisms/Variants";
 import { AddToCartButton } from "@/ui/atoms/AddToCartButton";
 import { addProductToCart, getOrCreateCart } from "@/api/cartUtils";
 import { ReviewForm } from "@/ui/organisms/ReviewForm";
+import { getReviewsByProductId } from "@/api/reviews";
 
 export const generateMetadata = async ({
 	params,
@@ -32,6 +33,7 @@ export const generateMetadata = async ({
 
 export default async function Product({ params }: { params: { productId: string } }) {
 	const product = await getProductById(params.productId);
+	const existingReviews = await getReviewsByProductId(params.productId);
 
 	if (!product) {
 		return notFound();
@@ -94,7 +96,7 @@ export default async function Product({ params }: { params: { productId: string 
 						<SuggestedProducts />
 					</div>
 					<div className="pb-4 pt-8 sm:pb-16">
-						<ReviewForm productId={params.productId} />
+						<ReviewForm productId={params.productId} existingReviews={existingReviews} />
 					</div>
 				</aside>
 			</Suspense>

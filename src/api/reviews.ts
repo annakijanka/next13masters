@@ -27,9 +27,9 @@ export const getReviewsByProductId = async (productId: string) => {
 			productId: productId,
 		},
 		next: {
-			revalidate: 60 * 60 * 24,
+			revalidate: 1,
 		},
 	});
 
-	return graphqlResponse.reviews[0];
+	return graphqlResponse.products[0]?.reviews;
 };

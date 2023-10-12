@@ -1,11 +1,17 @@
 "use client";
 
 import { experimental_useOptimistic as useOptimistic, useState } from "react";
-import { Rating } from "@/ui/atoms/Rating";
+import { Review } from "@/ui/molecules/Review";
 import { submitReview } from "@/api/reviews";
 import { type ReviewFragment } from "@/gql/graphql";
 
-export const ReviewForm = ({ productId }: { productId: string }) => {
+export const ReviewForm = ({
+	productId,
+	existingReviews,
+}: {
+	productId: string;
+	existingReviews: ReviewFragment[];
+}) => {
 	const updateReviews = (reviews: ReviewFragment[], newReview: ReviewFragment) => [
 		...reviews,
 		newReview,
@@ -63,7 +69,7 @@ export const ReviewForm = ({ productId }: { productId: string }) => {
 						<label className="mb-2 block text-sm font-semibold text-steel-gray">
 							Content
 							<textarea
-								className="block h-32 w-full appearance-none rounded-lg border-2 border-bridal-heath bg-bridal-heath px-4 py-2.5 text-base font-normal leading-4 text-steel-gray shadow-none transition duration-300 focus:shadow-md focus:outline-none"
+								className="block h-32 w-full appearance-none rounded-lg border-2 border-bridal-heath bg-bridal-heath px-4 py-2.5 text-base font-normal text-steel-gray shadow-none transition duration-300 focus:shadow-md focus:outline-none"
 								name="content"
 								required
 							></textarea>
@@ -129,14 +135,19 @@ export const ReviewForm = ({ productId }: { productId: string }) => {
 					</p>
 				)}
 				{optimisticReviews.map((review, index) => (
-					<div className="my-2 bg-bridal-heath px-2 py-3 text-sm sm:px-3 sm:py-4" key={index}>
-						<h3 className="text-base font-bold">{review.headline}</h3>
-						<p>{review.content}</p>
-						{review.rating && <Rating rating={review.rating} />}
-						<p>
-							<span className="font-semibold">Reviewed by:</span> {review.name}
-						</p>
-						<p className="italic">{review.email}</p>
+					<div
+						className="my-2 border border-brick-red bg-bridal-heath px-2 py-3 text-sm sm:px-3 sm:py-4"
+						key={index}
+					>
+						<Review review={review} />
+					</div>
+				))}
+				{existingReviews.map((review, index) => (
+					<div
+						className="border-gun-powder/12.5 border-b bg-bridal-heath px-2 py-3 text-sm sm:px-3 sm:py-4"
+						key={index}
+					>
+						<Review review={review} />
 					</div>
 				))}
 			</div>

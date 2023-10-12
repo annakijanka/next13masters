@@ -10881,7 +10881,7 @@ export type ReviewsGetByProductIdQueryVariables = Exact<{
 }>;
 
 
-export type ReviewsGetByProductIdQuery = { reviews: Array<{ headline: string, content: string, rating?: number | null, name: string, email: string }> };
+export type ReviewsGetByProductIdQuery = { products: Array<{ reviews: Array<{ headline: string, content: string, rating?: number | null, name: string, email: string }> }> };
 
 export type VariantsGetProductQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -11301,8 +11301,10 @@ export const ReviewSubmitDocument = new TypedDocumentString(`
     `) as unknown as TypedDocumentString<ReviewSubmitMutation, ReviewSubmitMutationVariables>;
 export const ReviewsGetByProductIdDocument = new TypedDocumentString(`
     query ReviewsGetByProductId($productId: ID!) {
-  reviews(where: {id: $productId}) {
-    ...Review
+  products(where: {id: $productId}) {
+    reviews {
+      ...Review
+    }
   }
 }
     fragment Review on Review {

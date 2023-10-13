@@ -1,10 +1,20 @@
 import { setAverageRating } from "@/api/product";
 import { getProducts } from "@/api/products";
+import { type ProductOrderByInput } from "@/gql/graphql";
 import { ProductListItem } from "@/ui/molecules/ProductListItem";
 
-export const ProductList = async ({ pageNumber, first }: { pageNumber: string; first: number }) => {
+export const ProductList = async ({
+	pageNumber,
+	sort,
+	first,
+}: {
+	pageNumber: string;
+	sort: ProductOrderByInput;
+	first: number;
+}) => {
 	const skip = (parseInt(pageNumber, 10) - 1) * first;
-	const products = await getProducts(first, skip);
+	sort = sort || "createdAt_DESC";
+	const products = await getProducts(first, skip, sort);
 
 	if (!products) {
 		return;

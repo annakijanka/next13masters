@@ -29,7 +29,7 @@ const documents = {
     "fragment ProductDetails on Product {\n  id\n  name\n  description\n  categories(first: 1) {\n    name\n    slug\n  }\n  images(first: 1) {\n    url\n  }\n  price\n}": types.ProductDetailsFragmentDoc,
     "fragment Product on Product {\n  id\n  name\n  categories(first: 1) {\n    name\n    slug\n  }\n  images(first: 1) {\n    url\n  }\n  price\n  reviews {\n    rating\n  }\n}": types.ProductFragmentDoc,
     "query ProductGetById($id: ID!) {\n  product(where: {id: $id}) {\n    ...ProductDetails\n  }\n}": types.ProductGetByIdDocument,
-    "query ProductsGet($first: Int!, $skip: Int!) {\n  products(first: $first, skip: $skip) {\n    ...Product\n  }\n}": types.ProductsGetDocument,
+    "query ProductsGet($first: Int!, $skip: Int!, $orderBy: ProductOrderByInput!) {\n  products(first: $first, skip: $skip, orderBy: $orderBy) {\n    ...Product\n  }\n}": types.ProductsGetDocument,
     "query ProductsGetByCategorySlug($first: Int!, $skip: Int!, $slug: String!) {\n  categories(where: {slug: $slug}) {\n    products(first: $first, skip: $skip) {\n      ...Product\n    }\n  }\n}": types.ProductsGetByCategorySlugDocument,
     "query ProductsGetByCollectionSlug($slug: String!) {\n  collections(where: {slug: $slug}) {\n    products {\n      ...Product\n    }\n  }\n}": types.ProductsGetByCollectionSlugDocument,
     "query ProductsGetSearch($first: Int!, $skip: Int!, $searchTerm: String) {\n  products(\n    first: $first\n    skip: $skip\n    where: {OR: [{name_contains: $searchTerm}, {categories_some: {name_contains: $searchTerm}}]}\n  ) {\n    ...Product\n  }\n}": types.ProductsGetSearchDocument,
@@ -109,7 +109,7 @@ export function graphql(source: "query ProductGetById($id: ID!) {\n  product(whe
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGet($first: Int!, $skip: Int!) {\n  products(first: $first, skip: $skip) {\n    ...Product\n  }\n}"): typeof import('./graphql').ProductsGetDocument;
+export function graphql(source: "query ProductsGet($first: Int!, $skip: Int!, $orderBy: ProductOrderByInput!) {\n  products(first: $first, skip: $skip, orderBy: $orderBy) {\n    ...Product\n  }\n}"): typeof import('./graphql').ProductsGetDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

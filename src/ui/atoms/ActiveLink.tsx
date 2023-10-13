@@ -20,8 +20,13 @@ export const ActiveLink = <T extends Route>({
 }) => {
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
-	const searchTerm = searchParams.get("query");
-	const fullRoute = `${pathname}${searchTerm ? "?query=" + encodeURIComponent(searchTerm) : ""}`;
+	const searchTerm = searchParams.get("query") || searchParams.get("sort");
+	const fullRoute = `${pathname}${
+		searchTerm
+			? `?${searchTerm === searchParams.get("query") ? "query" : "sort"}=` +
+			  encodeURIComponent(searchTerm)
+			: ""
+	}`;
 	let isActive = false;
 
 	if (exact) {

@@ -16,16 +16,19 @@ export const ProductDescription = ({ product }: ProductDescriptionProps) => {
 	return (
 		<div className="mt-2">
 			<div className="flex flex-row justify-between">
-				<h3 className="text-steel-gray font-semibold">{product.name}</h3>
+				<h3 className="font-semibold text-steel-gray">{product.name}</h3>
 				{product.categories[0] && (
-					<p className="text-steel-gray text-sm opacity-70">{product.categories[0].name}</p>
+					<p className="text-sm text-steel-gray opacity-70">{product.categories[0].name}</p>
 				)}
 			</div>
 			<div className="flex flex-row justify-between">
-				<p className="small-caps text-steel-gray text-sm font-medium opacity-80">
+				<p
+					className="small-caps text-sm font-medium text-steel-gray opacity-80"
+					data-testid="product-price"
+				>
 					{formatCurrency(product.price)}
 				</p>
-				<p className="small-caps text-steel-gray text-sm font-medium">
+				<p className="small-caps text-sm font-medium text-steel-gray">
 					{isAverageRatingProduct(product) && product.averageRating > 0 && (
 						<Rating rating={product.averageRating} />
 					)}

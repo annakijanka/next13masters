@@ -1,6 +1,7 @@
 import { executeGraphql } from "./graphqlApi";
 import {
 	ProductGetByIdDocument,
+	type ProductOrderByInput,
 	ProductsGetByCategorySlugDocument,
 	ProductsGetByCollectionSlugDocument,
 	ProductsGetDocument,
@@ -10,10 +11,10 @@ import {
 	ProductsGetSuggestedDocument,
 } from "@/gql/graphql";
 
-export const getProducts = async (first: number, skip: number) => {
+export const getProducts = async (first: number, skip: number, orderBy: ProductOrderByInput) => {
 	const graphqlResponse = await executeGraphql({
 		query: ProductsGetDocument,
-		variables: { first: first, skip: skip },
+		variables: { first: first, skip: skip, orderBy: orderBy },
 		next: {
 			revalidate: 60 * 60 * 24,
 		},

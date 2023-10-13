@@ -3,6 +3,8 @@ import { Suspense } from "react";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { Loading } from "@/ui/atoms/Loading";
 import { ProductsPagination } from "@/ui/organisms/ProductsPagination";
+import { type ProductOrderByInput } from "@/gql/graphql";
+import { SortingButtons } from "@/ui/molecules/SortingButtons";
 
 export const generateMetadata = async ({
 	params,
@@ -16,13 +18,20 @@ export const generateMetadata = async ({
 	};
 };
 
-export default function ProductsPage({ params }: { params: { pageNumber: string } }) {
+export default function ProductsPage({
+	params,
+	searchParams,
+}: {
+	params: { pageNumber: string };
+	searchParams: { sort: ProductOrderByInput };
+}) {
 	const first = 4;
 	return (
 		<>
-			<ProductList pageNumber={params.pageNumber} first={first} />
+			<SortingButtons />
+			<ProductList pageNumber={params.pageNumber} sort={searchParams.sort} first={first} />
 			<Suspense fallback={<Loading />}>
-				<ProductsPagination pageNumber={params.pageNumber} first={first} />
+				<ProductsPagination pageNumber={params.pageNumber} sort={searchParams.sort} first={first} />
 			</Suspense>
 		</>
 	);

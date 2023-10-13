@@ -56,7 +56,7 @@ export default async function Cart() {
 													<ProductCounter itemId={item.id} quantity={item.quantity} />
 												</td>
 												<td className="border-gun-powder/12.5 border-b px-2 py-3 sm:px-3 sm:py-4">
-													{formatCurrency(item.product.price)}
+													{formatCurrency(item.product.price * item.quantity)}
 												</td>
 												<td className="border-gun-powder/12.5 border-b px-2 py-3 sm:px-3 sm:py-4">
 													<RemoveButton itemId={item.id} />

@@ -2,10 +2,12 @@ export const Button = ({
 	formAction,
 	disabled,
 	children,
+	testid,
 }: {
 	formAction: () => Promise<void>;
 	disabled?: boolean;
 	children: React.ReactNode;
+	testid: string;
 }) => {
 	return (
 		<button
@@ -13,6 +15,7 @@ export const Button = ({
 			type="submit"
 			formAction={formAction}
 			disabled={disabled}
+			data-testid={testid}
 		>
 			{children}
 		</button>

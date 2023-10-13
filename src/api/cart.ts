@@ -33,14 +33,20 @@ export const createCart = async () => {
 	return graphqlResponse.createOrder;
 };
 
-export const addCartItem = async (total: number, orderId: string, productId: string) => {
+export const addCartItem = async (
+	total: number,
+	orderId: string,
+	productId: string,
+	updatedQuantity: number,
+	cartItemId: string,
+) => {
 	const graphqlResponse = await executeGraphql({
 		query: CartAddItemDocument,
-		variables: { total, orderId, productId },
+		variables: { total, orderId, productId, updatedQuantity, cartItemId },
 		cache: "no-store",
 	});
 
-	return graphqlResponse.createOrderItem;
+	return graphqlResponse.upsertOrderItem;
 };
 
 export const removeCartItem = async (productId: string) => {

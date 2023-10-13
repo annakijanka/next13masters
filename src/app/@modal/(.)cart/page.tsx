@@ -44,7 +44,7 @@ export default async function CartModal() {
 												<h3 className="font-semibold text-steel-gray">{item.product.name}</h3>
 												<div className="flex justify-between">
 													<span>Quantity: {item.quantity}</span>
-													<span>{formatCurrency(item.total)}</span>
+													<span>{formatCurrency(item.total * item.quantity)}</span>
 												</div>
 											</div>
 										</li>

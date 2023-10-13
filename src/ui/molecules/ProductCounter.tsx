@@ -14,6 +14,7 @@ export const ProductCounter = ({ itemId, quantity }: { itemId: string; quantity:
 	return (
 		<form className="flex">
 			<Button
+				testid="increment"
 				formAction={async () => {
 					setOptimisticQuantity(optimisticQuantity + 1);
 					await changeCartItemQuantity(itemId, optimisticQuantity + 1);
@@ -23,6 +24,7 @@ export const ProductCounter = ({ itemId, quantity }: { itemId: string; quantity:
 			</Button>
 			<Input value={optimisticQuantity} />
 			<Button
+				testid="decrement"
 				disabled={optimisticQuantity === 0 ? true : false}
 				formAction={async () => {
 					setOptimisticQuantity(optimisticQuantity - 1);

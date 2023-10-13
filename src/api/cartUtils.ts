@@ -34,13 +34,24 @@ export const getCartByIdFromCookies = async () => {
 	return null;
 };
 
-export const addProductToCart = async (cartId: string, productId: string) => {
+export const addProductToCart = async (
+	cartId: string,
+	productId: string,
+	updatedQuantity: number,
+	cartItemId: string,
+) => {
 	const product = await getProductById(productId);
 	if (!product) {
 		throw new Error(`Product with id ${productId} not found`);
 	}
 
-	await addCartItem(product.price, cartId, productId);
+	await addCartItem(
+		product.price * updatedQuantity,
+		cartId,
+		productId,
+		updatedQuantity,
+		cartItemId,
+	);
 };
 
 export const handleStripePaymentAction = async () => {

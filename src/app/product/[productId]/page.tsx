@@ -42,7 +42,12 @@ export default async function Product({ params }: { params: { productId: string 
 	async function addProductToCartAction() {
 		"use server";
 		const cart = await getOrCreateCart();
-		await addProductToCart(cart.id, params.productId);
+		const cartItem = cart.orderItems.find((item) => item.product?.id === params.productId);
+		const updatedQuantity = cartItem ? cartItem.quantity + 1 : 1;
+		const orderItemId = cartItem ? cartItem.id : "";
+
+		await addProductToCart(cart.id, params.productId, updatedQuantity, orderItemId);
+
 		revalidateTag("cart");
 	}
 

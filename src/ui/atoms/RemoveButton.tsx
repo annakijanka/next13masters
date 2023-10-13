@@ -2,9 +2,11 @@
 
 import { X } from "lucide-react";
 import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { removeCartItem } from "@/api/cart";
 
 export const RemoveButton = ({ itemId }: { itemId: string }) => {
+	const router = useRouter();
 	const [isPending, startTransition] = useTransition();
 	return (
 		<button
@@ -13,7 +15,8 @@ export const RemoveButton = ({ itemId }: { itemId: string }) => {
 			onClick={() =>
 				startTransition(async () => {
 					await removeCartItem(itemId);
-					window.location.reload();
+					// window.location.reload(); TODO: Refine this code for better performance in the future
+					router.refresh();
 				})
 			}
 			aria-label="Remove"

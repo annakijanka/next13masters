@@ -25,7 +25,7 @@ export const ProductsPagination = async ({
 			totalCount={totalCount}
 			currentPage={pageNumber}
 			perPage={first}
-			query={`?sort=${encodeURIComponent(sort)}`}
+			query={sort ? `?sort=${encodeURIComponent(sort)}` : ""}
 		/>
 	);
 };

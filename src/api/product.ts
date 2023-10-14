@@ -1,24 +1,10 @@
+import { updateProductAverageRating } from "./products";
 import {
 	getProductColorVariants,
 	getProductSizeVariants,
 	getProductVariants,
 } from "@/api/variants";
-import { type ProductFragment } from "@/gql/graphql";
-import { type ProductAverageRating } from "@/ui/types";
-
-export const setAverageRating = (products: ProductFragment[]): ProductAverageRating[] => {
-	return products.map((product) => {
-		const validReviews = product.reviews.filter(
-			(review) => review.rating !== null && review.rating !== undefined,
-		);
-		const totalRating = validReviews.reduce((acc, review) => acc + review.rating!, 0);
-		const averageRating = validReviews.length ? totalRating / validReviews.length : 0;
-		return {
-			...product,
-			averageRating,
-		};
-	});
-};
+import { type ReviewFragment } from "@/gql/graphql";
 
 export const getColorVariants = async (productId: string): Promise<string[]> => {
 	const variants = await getProductColorVariants();
@@ -51,4 +37,23 @@ export const getColorAndSizeVariants = async (
 		colors: [...new Set(filteredVariants.map((variant) => variant.color.toLowerCase()))],
 		sizes: [...new Set(filteredVariants.map((variant) => variant.size.toLowerCase()))],
 	};
+};
+
+export const calculateAverageRating = async (
+	productId: string,
+	reviews: ReviewFragment[] | undefined,
+) => {
+	if (!reviews || reviews.length === 0) {
+		await updateProductAverageRating(productId, 0);
+		return;
+	}
+
+	const validRatings = reviews.filter(
+		(review) => review.rating !== null && review.rating !== undefined,
+	);
+
+	const totalRating = validRatings.reduce((acc, review) => acc + review.rating!, 0);
+	const averageRating = totalRating / validRatings.length;
+
+	await updateProductAverageRating(productId, averageRating);
 };

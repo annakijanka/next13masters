@@ -13,6 +13,7 @@ import { AddToCartButton } from "@/ui/atoms/AddToCartButton";
 import { addProductToCart, getOrCreateCart } from "@/api/cartUtils";
 import { ReviewForm } from "@/ui/organisms/ReviewForm";
 import { getReviewsByProductId } from "@/api/reviews";
+import { calculateAverageRating } from "@/api/product";
 
 export const generateMetadata = async ({
 	params,
@@ -34,6 +35,7 @@ export const generateMetadata = async ({
 export default async function Product({ params }: { params: { productId: string } }) {
 	const product = await getProductById(params.productId);
 	const existingReviews = await getReviewsByProductId(params.productId);
+	await calculateAverageRating(params.productId, existingReviews);
 
 	if (!product) {
 		return notFound();

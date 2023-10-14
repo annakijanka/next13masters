@@ -1,3 +1,5 @@
+"use server";
+
 import { executeGraphql } from "./graphqlApi";
 import {
 	ProductGetByIdDocument,
@@ -8,7 +10,7 @@ import {
 	ProductsGetSearchDocument,
 	ProductsGetSearchTotalCountDocument,
 	ProductsGetSimilarDocument,
-	ProductsGetSuggestedDocument,
+	ProductUpdateAverageRatingDocument,
 } from "@/gql/graphql";
 
 export const getProducts = async (first: number, skip: number, orderBy: ProductOrderByInput) => {
@@ -47,18 +49,6 @@ export const getSimilarProducts = async (categorySlug: string) => {
 	const graphqlResponse = await executeGraphql({
 		query: ProductsGetSimilarDocument,
 		variables: { slug: categorySlug },
-		next: {
-			revalidate: 60 * 60 * 24,
-		},
-	});
-
-	return graphqlResponse.products;
-};
-
-export const getSuggestedProducts = async () => {
-	const graphqlResponse = await executeGraphql({
-		query: ProductsGetSuggestedDocument,
-		variables: undefined,
 		next: {
 			revalidate: 60 * 60 * 24,
 		},
@@ -117,4 +107,14 @@ export const getProductsSearchTotalCount = async (searchTerm: string) => {
 	});
 
 	return graphqlResponse.productsConnection.aggregate.count;
+};
+
+export const updateProductAverageRating = async (productId: string, averageRating: number) => {
+	const graphqlResponse = await executeGraphql({
+		query: ProductUpdateAverageRatingDocument,
+		variables: { productId, averageRating },
+		cache: "no-store",
+	});
+
+	return graphqlResponse.updateProduct;
 };

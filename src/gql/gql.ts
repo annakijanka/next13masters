@@ -27,15 +27,15 @@ const documents = {
     "query CollectionsGet {\n  collections {\n    ...Collection\n  }\n}": types.CollectionsGetDocument,
     "fragment Order on Order {\n  id\n  orderItems {\n    id\n    quantity\n    total\n    product {\n      id\n      name\n      description\n      price\n      images {\n        url\n      }\n    }\n  }\n}": types.OrderFragmentDoc,
     "fragment ProductDetails on Product {\n  id\n  name\n  description\n  categories(first: 1) {\n    name\n    slug\n  }\n  images(first: 1) {\n    url\n  }\n  price\n}": types.ProductDetailsFragmentDoc,
-    "fragment Product on Product {\n  id\n  name\n  categories(first: 1) {\n    name\n    slug\n  }\n  images(first: 1) {\n    url\n  }\n  price\n  reviews {\n    rating\n  }\n}": types.ProductFragmentDoc,
+    "fragment Product on Product {\n  id\n  name\n  categories(first: 1) {\n    name\n    slug\n  }\n  images(first: 1) {\n    url\n  }\n  price\n  averageRating\n}": types.ProductFragmentDoc,
     "query ProductGetById($id: ID!) {\n  product(where: {id: $id}) {\n    ...ProductDetails\n  }\n}": types.ProductGetByIdDocument,
+    "mutation ProductUpdateAverageRating($productId: ID!, $averageRating: Float!) {\n  updateProduct(where: {id: $productId}, data: {averageRating: $averageRating}) {\n    id\n  }\n  publishProduct(where: {id: $productId}) {\n    id\n  }\n}": types.ProductUpdateAverageRatingDocument,
     "query ProductsGet($first: Int!, $skip: Int!, $orderBy: ProductOrderByInput!) {\n  products(first: $first, skip: $skip, orderBy: $orderBy) {\n    ...Product\n  }\n}": types.ProductsGetDocument,
     "query ProductsGetByCategorySlug($first: Int!, $skip: Int!, $slug: String!) {\n  categories(where: {slug: $slug}) {\n    products(first: $first, skip: $skip) {\n      ...Product\n    }\n  }\n}": types.ProductsGetByCategorySlugDocument,
     "query ProductsGetByCollectionSlug($slug: String!) {\n  collections(where: {slug: $slug}) {\n    products {\n      ...Product\n    }\n  }\n}": types.ProductsGetByCollectionSlugDocument,
     "query ProductsGetSearch($first: Int!, $skip: Int!, $searchTerm: String) {\n  products(\n    first: $first\n    skip: $skip\n    where: {OR: [{name_contains: $searchTerm}, {categories_some: {name_contains: $searchTerm}}]}\n  ) {\n    ...Product\n  }\n}": types.ProductsGetSearchDocument,
     "query ProductsGetSearchTotalCount($searchTerm: String) {\n  productsConnection(\n    where: {OR: [{name_contains: $searchTerm}, {categories_some: {name_contains: $searchTerm}}]}\n  ) {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetSearchTotalCountDocument,
     "query ProductsGetSimilar($slug: String!) {\n  products(first: 4, where: {categories_some: {slug: $slug}}) {\n    ...Product\n  }\n}": types.ProductsGetSimilarDocument,
-    "query ProductsGetSuggested {\n  products {\n    ...Product\n  }\n}": types.ProductsGetSuggestedDocument,
     "query ProductsGetTotalCount {\n  productsConnection {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetTotalCountDocument,
     "query ProductsGetTotalCountByCategorySlug($slug: String!) {\n  productsConnection(where: {categories_some: {slug: $slug}}) {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetTotalCountByCategorySlugDocument,
     "fragment Review on Review {\n  headline\n  content\n  rating\n  name\n  email\n}": types.ReviewFragmentDoc,
@@ -101,11 +101,15 @@ export function graphql(source: "fragment ProductDetails on Product {\n  id\n  n
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "fragment Product on Product {\n  id\n  name\n  categories(first: 1) {\n    name\n    slug\n  }\n  images(first: 1) {\n    url\n  }\n  price\n  reviews {\n    rating\n  }\n}"): typeof import('./graphql').ProductFragmentDoc;
+export function graphql(source: "fragment Product on Product {\n  id\n  name\n  categories(first: 1) {\n    name\n    slug\n  }\n  images(first: 1) {\n    url\n  }\n  price\n  averageRating\n}"): typeof import('./graphql').ProductFragmentDoc;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query ProductGetById($id: ID!) {\n  product(where: {id: $id}) {\n    ...ProductDetails\n  }\n}"): typeof import('./graphql').ProductGetByIdDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation ProductUpdateAverageRating($productId: ID!, $averageRating: Float!) {\n  updateProduct(where: {id: $productId}, data: {averageRating: $averageRating}) {\n    id\n  }\n  publishProduct(where: {id: $productId}) {\n    id\n  }\n}"): typeof import('./graphql').ProductUpdateAverageRatingDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -130,10 +134,6 @@ export function graphql(source: "query ProductsGetSearchTotalCount($searchTerm: 
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query ProductsGetSimilar($slug: String!) {\n  products(first: 4, where: {categories_some: {slug: $slug}}) {\n    ...Product\n  }\n}"): typeof import('./graphql').ProductsGetSimilarDocument;
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "query ProductsGetSuggested {\n  products {\n    ...Product\n  }\n}"): typeof import('./graphql').ProductsGetSuggestedDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

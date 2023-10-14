@@ -32,6 +32,27 @@ export const SortingButtons = () => {
 			>
 				<ArrowDownWideNarrow size={16} strokeWidth={2.5} />
 			</Button>
+			<span className="block pl-2 text-sm font-semibold text-steel-gray">Sort by rating:</span>
+			<Button
+				testid="sort-by-rating"
+				formAction={async () => {
+					const queryString = "?sort=averageRating_ASC";
+					const route = `${pathname}${queryString}`;
+					router.push(route as Route, { scroll: false });
+				}}
+			>
+				<ArrowUpNarrowWide size={16} strokeWidth={2.5} />
+			</Button>
+			<Button
+				testid="sort-by-rating"
+				formAction={async () => {
+					const queryString = "?sort=averageRating_DESC";
+					const route = `${pathname}${queryString}`;
+					router.push(route as Route, { scroll: false });
+				}}
+			>
+				<ArrowDownWideNarrow size={16} strokeWidth={2.5} />
+			</Button>
 		</form>
 	);
 };

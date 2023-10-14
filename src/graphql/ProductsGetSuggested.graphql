@@ -1,5 +1,0 @@
-query ProductsGetSuggested {
-	products {
-		...Product
-	}
-}

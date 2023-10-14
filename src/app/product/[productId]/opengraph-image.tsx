@@ -32,7 +32,7 @@ export default async function Image({ params }: { params: { productId: string } 
 				<div tw="flex max-w-sm flex-col" style={{ color: "rgb(255, 252, 247)" }}>
 					<h1 tw="font-extrabold text-6xl mb-1 tracking-tight">{product.name}</h1>
 					<span
-						tw="rounded bg-gun-powder px-2 py-1 text-xs font-semibold uppercase"
+						tw="rounded px-2 py-1 text-xs font-semibold uppercase"
 						style={{ backgroundColor: "rgb(37, 35, 51)", color: "rgb(255, 252, 247)" }}
 					>
 						{product.categories[0]?.name}

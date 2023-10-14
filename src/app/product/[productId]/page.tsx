@@ -98,7 +98,7 @@ export default async function Product({ params }: { params: { productId: string 
 				<aside>
 					<div className="pt-8">
 						<h2 className="py-8 text-xl font-extrabold leading-7 tracking-tight text-steel-gray">
-							Top rated
+							Top rated from Algolia
 						</h2>
 						<SuggestedProducts />
 					</div>

@@ -1,18 +1,12 @@
 import { Rating } from "./Rating";
-import { type ProductAverageRating } from "@/ui/types";
 import { type ProductFragment } from "@/gql/graphql";
 import { formatCurrency } from "@/utils";
 
 type ProductDescriptionProps = {
-	product: ProductFragment | ProductAverageRating;
+	product: ProductFragment;
 };
 
 export const ProductDescription = ({ product }: ProductDescriptionProps) => {
-	const isAverageRatingProduct = (
-		product: ProductFragment | ProductAverageRating,
-	): product is ProductAverageRating => {
-		return "averageRating" in product;
-	};
 	return (
 		<div className="mt-2">
 			<div className="flex flex-row justify-between">
@@ -29,9 +23,7 @@ export const ProductDescription = ({ product }: ProductDescriptionProps) => {
 					{formatCurrency(product.price)}
 				</p>
 				<p className="small-caps text-sm font-medium text-steel-gray">
-					{isAverageRatingProduct(product) && product.averageRating > 0 && (
-						<Rating rating={product.averageRating} />
-					)}
+					{product.averageRating && <Rating rating={product.averageRating} />}
 				</p>
 			</div>
 		</div>

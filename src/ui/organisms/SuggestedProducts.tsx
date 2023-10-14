@@ -1,8 +1,9 @@
-import { getProducts } from "@/api/products";
+import { getSuggestedProducts } from "@/api/getSuggestedProducts";
+import { type ProductFragment } from "@/gql/graphql";
 import { ProductListItem } from "@/ui/molecules/ProductListItem";
 
 export const SuggestedProducts = async () => {
-	const products = await getProducts(4, 0, "averageRating_DESC");
+	const products = await getSuggestedProducts();
 
 	if (!products) {
 		return;
@@ -14,7 +15,9 @@ export const SuggestedProducts = async () => {
 			data-testid="related-products"
 		>
 			{products.map((product) => {
-				return <ProductListItem key={product.id} product={product} />;
+				return (
+					<ProductListItem key={product.objectID} product={product as unknown as ProductFragment} />
+				);
 			})}
 		</ul>
 	);

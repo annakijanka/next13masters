@@ -114,7 +114,7 @@ export const updateProductAverageRating = async (productId: string, averageRatin
 		query: ProductUpdateAverageRatingDocument,
 		variables: { productId, averageRating },
 		next: {
-			revalidate: 60 * 60 * 24,
+			revalidate: 300,
 		},
 	});
 

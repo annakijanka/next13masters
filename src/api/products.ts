@@ -113,7 +113,9 @@ export const updateProductAverageRating = async (productId: string, averageRatin
 	const graphqlResponse = await executeGraphql({
 		query: ProductUpdateAverageRatingDocument,
 		variables: { productId, averageRating },
-		cache: "no-store",
+		next: {
+			revalidate: 60 * 60 * 24,
+		},
 	});
 
 	return graphqlResponse.updateProduct;

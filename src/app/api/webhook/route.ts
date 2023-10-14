@@ -16,12 +16,12 @@ export async function POST(request: NextRequest): Promise<Response> {
 		const productId: string = body.data.id;
 		console.log(`Revalidating /product/${productId}`);
 		revalidatePath(`/product/${productId}`);
-		console.log(`Revalidating /collections/pop-of-color`);
-		revalidatePath(`/collections/pop-of-color`);
-		console.log(`Revalidating /collections/beach-vibe`);
-		revalidatePath(`/collections/beach-vibe`);
-		console.log(`Revalidating /collections/new-products`);
-		revalidatePath(`/collections/new-products`);
+		// console.log(`Revalidating /collections/pop-of-color`); TODO: Refine this code for better performance in the future
+		// revalidatePath(`/collections/pop-of-color`);
+		// console.log(`Revalidating /collections/beach-vibe`);
+		// revalidatePath(`/collections/beach-vibe`);
+		// console.log(`Revalidating /collections/new-products`);
+		// revalidatePath(`/collections/new-products`);
 		return new Response(null, { status: 204 });
 	} else {
 		return new Response(null, { status: 400 });

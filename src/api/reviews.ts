@@ -27,7 +27,7 @@ export const getReviewsByProductId = async (productId: string) => {
 			productId: productId,
 		},
 		next: {
-			revalidate: 1,
+			revalidate: 60 * 60 * 24,
 		},
 	});
 

@@ -23,7 +23,9 @@ export const ProductDescription = ({ product }: ProductDescriptionProps) => {
 					{formatCurrency(product.price)}
 				</p>
 				<p className="small-caps text-sm font-medium text-steel-gray">
-					{product.averageRating && <Rating rating={product.averageRating} />}
+					{product.averageRating !== undefined &&
+						product.averageRating !== null &&
+						product.averageRating !== 0 && <Rating rating={product.averageRating} />}
 				</p>
 			</div>
 		</div>

@@ -10825,6 +10825,13 @@ export type CollectionsGetQuery = { collections: Array<{ id: string, name: strin
 
 export type OrderFragment = { id: string, orderItems: Array<{ id: string, quantity: number, total: number, product?: { id: string, name: string, description: string, price: number, images: Array<{ url: string }> } | null }> };
 
+export type OrdersGetByEmailQueryVariables = Exact<{
+  email: Scalars['String']['input'];
+}>;
+
+
+export type OrdersGetByEmailQuery = { orders: Array<{ id: string, orderItems: Array<{ id: string, quantity: number, total: number, product?: { id: string, name: string, description: string, price: number, images: Array<{ url: string }> } | null }> }> };
+
 export type ProductDetailsFragment = { id: string, name: string, description: string, price: number, categories: Array<{ name: string, slug: string }>, images: Array<{ url: string }> };
 
 export type ProductFragment = { id: string, name: string, price: number, averageRating?: number | null, categories: Array<{ name: string, slug: string }>, images: Array<{ url: string }> };
@@ -11149,6 +11156,29 @@ export const CollectionsGetDocument = new TypedDocumentString(`
   }
   slug
 }`) as unknown as TypedDocumentString<CollectionsGetQuery, CollectionsGetQueryVariables>;
+export const OrdersGetByEmailDocument = new TypedDocumentString(`
+    query OrdersGetByEmail($email: String!) {
+  orders(where: {email: $email}) {
+    ...Order
+  }
+}
+    fragment Order on Order {
+  id
+  orderItems {
+    id
+    quantity
+    total
+    product {
+      id
+      name
+      description
+      price
+      images {
+        url
+      }
+    }
+  }
+}`) as unknown as TypedDocumentString<OrdersGetByEmailQuery, OrdersGetByEmailQueryVariables>;
 export const ProductGetByIdDocument = new TypedDocumentString(`
     query ProductGetById($id: ID!) {
   product(where: {id: $id}) {

@@ -7,6 +7,7 @@ import {
 	CartGetByIdDocument,
 	CartItemChangeQuantityDocument,
 	CartRemoveItemDocument,
+	OrdersGetByEmailDocument,
 } from "@/gql/graphql";
 
 export const getCartById = async (cartId: string) => {
@@ -70,4 +71,14 @@ export const changeCartItemQuantity = async (itemId: string, quantity: number) =
 	});
 
 	return graphqlResponse.updateOrderItem;
+};
+
+export const getOrdersByEmail = async (email: string) => {
+	const graphqlResponse = await executeGraphql({
+		query: OrdersGetByEmailDocument,
+		variables: { email: email },
+		cache: "no-store",
+	});
+
+	return graphqlResponse.orders;
 };

@@ -1,6 +1,7 @@
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import NextImage from "next/image";
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { CategoryLinks } from "./CategoryLinks";
 import { SearchBar } from "@/ui/molecules/SearchBar";
 import Logotype from "pub/logotype.png";
@@ -30,7 +31,7 @@ export const Navbar = async () => {
 				<div className="ml-auto h-12 lg:ml-4 lg:h-16">
 					<Link
 						href="/cart"
-						className="flex h-full w-16 items-center justify-center border-b-4 border-transparent px-2 text-center text-sm font-medium text-gun-powder hover:border-brick-red"
+						className="flex h-full w-14 items-center justify-center border-b-4 border-transparent px-2 text-center text-sm font-medium text-gun-powder hover:border-brick-red sm:w-16"
 					>
 						<ShoppingCart strokeWidth={2.5} />
 						<div className="w-4">
@@ -38,6 +39,16 @@ export const Navbar = async () => {
 							<span className="sr-only">items in your cart, view</span>
 						</div>
 					</Link>
+				</div>
+				<div className="flex h-full w-14 items-center justify-center border-b-4 border-transparent px-2 text-center text-sm font-medium text-gun-powder hover:border-brick-red sm:w-16">
+					<SignedIn>
+						<UserButton />
+					</SignedIn>
+					<SignedOut>
+						<SignInButton>
+							<button className="h-full">Sign in</button>
+						</SignInButton>
+					</SignedOut>
 				</div>
 			</div>
 		</>

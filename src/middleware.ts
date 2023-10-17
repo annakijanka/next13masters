@@ -2,21 +2,16 @@ import { authMiddleware } from "@clerk/nextjs";
 
 export default authMiddleware({
 	publicRoutes: [
-		/\//,
-		/\/privacy-policy/,
-		/\/return-policy/,
-		/\/terms-of-service/,
-		/\/cart/,
-		/\/cart\/(.*)/,
-		/\/categories/,
-		/\/categories\/(.*)/,
-		/\/collections/,
-		/\/collections\/(.*)/,
-		/\/product/,
-		/\/product\/(.*)/,
-		/\/products/,
-		/\/products\/(.*)/,
-		/\/search/,
+		/^\/$/,
+		/^\/privacy-policy\/$/,
+		/^\/return-policy\/$/,
+		/^\/terms-of-service\/$/,
+		/^\/cart\/.*$/,
+		/^\/categories\/.*$/,
+		/^\/collections\/.*$/,
+		/^\/product\/.*$/,
+		/^\/products\/.*$/,
+		/^\/search\/.*$/,
 	],
 });
 

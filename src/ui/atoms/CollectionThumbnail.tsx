@@ -20,7 +20,7 @@ export const CollectionThumbnail = ({
 				hasAnimation ? " transition-transform duration-300 hover:scale-[1.04]" : ""
 			}`}
 		>
-			<NextImage className="max-h-full max-w-full" src={src} alt={alt} width={640} height={427} />
+			<NextImage className="max-h-full max-w-full" src={src} alt={alt} width={384} height={256} />
 		</div>
 	);
 };

@@ -16,8 +16,8 @@ export const ProductListItem = ({ product }: ProductListItemProps) => {
 						src={product.images[0]?.url}
 						alt={product.name}
 						hasAnimation={true}
-						width={420}
-						height={420}
+						width={280}
+						height={280}
 					/>
 					<ProductDescription product={product} />
 				</article>

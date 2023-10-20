@@ -6,8 +6,8 @@ export const ProductThumbnail = ({
 	src,
 	alt,
 	hasAnimation = false,
-	width = 640,
-	height = 640,
+	width = 600,
+	height = 600,
 }: {
 	src?: string | StaticImport;
 	alt: string;

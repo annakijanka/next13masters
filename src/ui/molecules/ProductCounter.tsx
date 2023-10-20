@@ -1,7 +1,6 @@
 "use client";
 
 import { experimental_useOptimistic as useOptimistic } from "react";
-import { Input } from "@/ui/atoms/Input";
 import { Button } from "@/ui/atoms/Button";
 import { changeCartItemQuantity } from "@/api/cart";
 
@@ -22,7 +21,9 @@ export const ProductCounter = ({ itemId, quantity }: { itemId: string; quantity:
 			>
 				+
 			</Button>
-			<Input value={optimisticQuantity} />
+			<span className="w-8 appearance-none text-center focus:outline-none" data-testid="quantity">
+				{optimisticQuantity}
+			</span>
 			<Button
 				testid="decrement"
 				disabled={optimisticQuantity === 0 ? true : false}

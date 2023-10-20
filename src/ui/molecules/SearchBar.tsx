@@ -1,10 +1,8 @@
 "use client";
 
 import { type ChangeEvent, type FormEvent, useState, useRef } from "react";
-import { useRouter } from "next/navigation";
 
 export const SearchBar = () => {
-	const router = useRouter();
 	const [query, setQuery] = useState<string>("");
 	const timerRef = useRef<number | null>(null);
 
@@ -14,13 +12,13 @@ export const SearchBar = () => {
 			clearTimeout(timerRef.current);
 		}
 		timerRef.current = window.setTimeout(() => {
-			router.push(`/search?query=${encodeURIComponent(e.target.value)}`);
+			window.location.href = `/search?query=${encodeURIComponent(e.target.value)}`;
 		}, 500);
 	};
 
 	const handleSearch = (e: FormEvent) => {
 		e.preventDefault();
-		router.push(`/search?query=${encodeURIComponent(query)}`);
+		window.location.href = `/search?query=${encodeURIComponent(query)}`;
 	};
 
 	return (

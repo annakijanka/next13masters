@@ -10,7 +10,7 @@ export const getProductColorVariants = async () => {
 		query: VariantsGetProductColorDocument,
 		variables: undefined,
 		next: {
-			revalidate: 1,
+			revalidate: 300,
 		},
 	});
 
@@ -22,7 +22,7 @@ export const getProductSizeVariants = async () => {
 		query: VariantsGetProductSizeDocument,
 		variables: undefined,
 		next: {
-			revalidate: 1,
+			revalidate: 300,
 		},
 	});
 
@@ -34,7 +34,7 @@ export const getProductVariants = async () => {
 		query: VariantsGetProductDocument,
 		variables: undefined,
 		next: {
-			revalidate: 1,
+			revalidate: 300,
 		},
 	});
 

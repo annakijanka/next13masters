@@ -21,7 +21,7 @@ export const ProductCounter = ({ itemId, quantity }: { itemId: string; quantity:
 			>
 				+
 			</Button>
-			<span className="w-8 appearance-none text-center focus:outline-none" data-testid="quantity">
+			<span className="flex w-8 items-center justify-center" data-testid="quantity">
 				{optimisticQuantity}
 			</span>
 			<Button

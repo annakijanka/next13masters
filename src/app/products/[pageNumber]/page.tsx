@@ -4,7 +4,7 @@ import { ProductList } from "@/ui/organisms/ProductList";
 import { Loading } from "@/ui/atoms/Loading";
 import { ProductsPagination } from "@/ui/organisms/ProductsPagination";
 import { type ProductOrderByInput } from "@/gql/graphql";
-import { SortingButtons } from "@/ui/molecules/SortingButtons";
+import { SortingSelect } from "@/ui/molecules/SortingSelect";
 
 export const generateMetadata = async ({
 	params,
@@ -28,7 +28,7 @@ export default function ProductsPage({
 	const first = 4;
 	return (
 		<>
-			<SortingButtons />
+			<SortingSelect />
 			<ProductList pageNumber={params.pageNumber} sort={searchParams.sort} first={first} />
 			<Suspense fallback={<Loading />}>
 				<ProductsPagination pageNumber={params.pageNumber} sort={searchParams.sort} first={first} />
